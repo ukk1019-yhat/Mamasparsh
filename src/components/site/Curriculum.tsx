@@ -91,6 +91,17 @@ const differenceSections: Section[] = [
     ],
   },
   {
+    id: "friday-life-skills",
+    icon: Sun,
+    title: "Friday Life Skills Program",
+    summary: "Every Friday is dedicated to essential life skills beyond the classroom.",
+    content: [
+      "Through hands-on activities such as food preparation, gardening, caring for their environment, organizing belongings, independent eating, creative projects, and practical daily tasks, children develop confidence, responsibility, problem-solving abilities, independence, teamwork, and self-care habits.",
+      "Rooted in our Waldorf-inspired philosophy, these meaningful experiences help children become capable, resilient, and responsible individuals while fostering a sense of purpose and joy in everyday life.",
+      "Because at Mamasparsh, we believe education is not just about learning facts — it's about learning life.",
+    ],
+  },
+  {
     id: "holistic",
     icon: Palette,
     title: "Holistic Growth Beyond Academics",
