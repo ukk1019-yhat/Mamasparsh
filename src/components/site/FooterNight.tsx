@@ -49,7 +49,7 @@ export function FooterNight() {
         </div>
 
         <div className="mt-10 border-t border-star/15 py-6 font-body text-sm text-star/60">
-          © {new Date().getFullYear()} MamaSparsh Preschool · Made with <Heart size={14} className="inline-block mx-0.5 text-red-400" /> in the Panda World
+          © {new Date().getFullYear()} MamaSparsh Preschool · Made with <Heart size={14} className="inline-block mx-0.5 text-red-400" /> by Edu Alt Tech
         </div>
       </div>
     </footer>
