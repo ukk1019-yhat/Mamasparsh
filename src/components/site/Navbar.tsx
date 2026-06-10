@@ -6,6 +6,7 @@ import { MagneticButton } from "./MagneticButton";
 const links = [
   { label: "Panda World", href: "#learn" },
   { label: "Adventures", href: "#adventures" },
+  { label: "Curriculum", href: "#curriculum" },
   { label: "Why Us", href: "#why" },
   { label: "A Day", href: "#day" },
   { label: "Gallery", href: "#gallery" },
