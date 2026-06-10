@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+<<<<<<< HEAD
+import { Menu, X, PawPrint, Sprout } from "lucide-react";
+=======
 import { Menu, X } from "lucide-react";
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import { MagneticButton } from "./MagneticButton";
 
 const links = [
@@ -35,8 +39,13 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 md:px-8">
         <a href="#home" className="flex items-center gap-2.5">
+<<<<<<< HEAD
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
+            <PawPrint size={22} />
+=======
           <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-2xl shadow-soft">
             🐼
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
           </span>
           <span className="font-display text-xl font-extrabold leading-none text-foreground">
             MamaSparsh
@@ -61,7 +70,11 @@ export function Navbar() {
 
         <div className="hidden lg:block">
           <MagneticButton as="a" href="#contact" variant="primary" className="px-6 py-2.5 text-sm">
+<<<<<<< HEAD
+            <Sprout size={16} /> Book a Tour
+=======
             Book a Tour 🌱
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
           </MagneticButton>
         </div>
 
@@ -100,7 +113,11 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="block rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground"
                 >
+<<<<<<< HEAD
+                  <Sprout size={16} /> Book a Tour
+=======
                   Book a Tour 🌱
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                 </a>
               </li>
             </ul>

@@ -1,6 +1,10 @@
 import { useRef } from "react";
 import { motion } from "motion/react";
+<<<<<<< HEAD
+import { ShieldCheck, Heart, Baby, Palette, Sprout, Users, Blocks, Handshake, Sparkles } from "lucide-react";
+=======
 import { ShieldCheck, Heart, Baby, Palette, Sprout, Users, Blocks, Handshake } from "lucide-react";
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import { Reveal } from "./Reveal";
 
 const features = [
@@ -56,7 +60,11 @@ export function WhyChoose() {
         <div className="mb-14 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
+<<<<<<< HEAD
+              <Heart size={16} /> Why Parents Choose Us
+=======
               💚 Why Parents Choose Us
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               A Place Built on Trust & Warmth

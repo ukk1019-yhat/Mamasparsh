@@ -1,4 +1,8 @@
 import { motion } from "motion/react";
+<<<<<<< HEAD
+import { Moon, Heart } from "lucide-react";
+=======
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import sleeping from "@/assets/panda-sleeping.png";
 
 export function FooterNight() {
@@ -32,7 +36,11 @@ export function FooterNight() {
           loading="lazy"
           className="mx-auto w-48 animate-float-soft drop-shadow-2xl md:w-60"
         />
+<<<<<<< HEAD
+        <p className="mt-4 font-display text-sm font-bold tracking-widest text-star/80">GOODNIGHT, LITTLE PANDAS <Moon size={14} className="inline-block ml-1" /></p>
+=======
         <p className="mt-4 font-display text-sm font-bold tracking-widest text-star/80">GOODNIGHT, LITTLE PANDAS 🌙</p>
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
         <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-extrabold leading-snug text-star md:text-4xl">
           Every Child Deserves a Mother's Touch.
           <br />
@@ -48,7 +56,11 @@ export function FooterNight() {
         </div>
 
         <div className="mt-10 border-t border-star/15 py-6 font-body text-sm text-star/60">
+<<<<<<< HEAD
+          © {new Date().getFullYear()} MamaSparsh Preschool · Made with <Heart size={14} className="inline-block mx-0.5 text-red-400" /> in the Panda World
+=======
           © {new Date().getFullYear()} MamaSparsh Preschool · Made with 💚 in the Panda World
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
         </div>
       </div>
     </footer>

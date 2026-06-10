@@ -88,7 +88,15 @@ export function AmbientLayer() {
 
 /** Decorative drifting leaves used inside specific sections. */
 export function DriftingLeaves({ count = 8 }: { count?: number }) {
+<<<<<<< HEAD
+  const leafSvgs = [
+    `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2C8 6 4 12 4 16C4 20 8 22 12 22C16 22 20 20 20 16C20 12 16 6 12 2Z"/><path d="M12 13L7 18"/><path d="M12 13L17 18"/><path d="M12 13V22"/></svg>`,
+    `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 3C7 7 3 14 3 18C3 21 7 22 12 22C17 22 21 21 21 18C21 14 17 7 12 3Z"/><path d="M12 14L8 17"/><path d="M12 14L16 17"/></svg>`,
+    `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 4C7 8 4 13 4 17C4 20 7 21 12 21C17 21 20 20 20 17C20 13 17 8 12 4Z"/><path d="M12 14L9 16.5"/><path d="M12 14L15 16.5"/></svg>`,
+  ];
+=======
   const leaves = ["🍃", "🌿", "🍂"];
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       {Array.from({ length: count }).map((_, i) => {
@@ -107,7 +115,11 @@ export function DriftingLeaves({ count = 8 }: { count?: number }) {
               opacity: 0.55,
             }}
           >
+<<<<<<< HEAD
+            <span dangerouslySetInnerHTML={{ __html: leafSvgs[i % leafSvgs.length] }} />
+=======
             {leaves[i % leaves.length]}
+>>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
           </span>
         );
       })}
