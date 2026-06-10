@@ -302,3 +302,9 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.group:hover [style*="marquee"] { animation-play-state: paused; }
