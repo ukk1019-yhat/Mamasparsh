@@ -73,49 +73,52 @@ export function Hero() {
         />
       ))}
 
-      {/* Panda family */}
-      <motion.div
-        style={{ y: pandaY }}
-        className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center"
-      >
-        <motion.img
-          initial={{ opacity: 0, y: -160, scale: 0.8 }}
-          animate={{ opacity: 1, y: 40, scale: 1 }}
-          transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          src={pandaFamily}
-          alt="The MamaSparsh panda family — reading, writing, painting and dancing"
-          width={1536}
-          height={1024}
-          className="w-[min(85vw,650px)] animate-float-soft drop-shadow-2xl"
-        />
-      </motion.div>
-
-      {/* Content */}
-      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col items-center justify-center px-5 pb-40 pt-72 text-center md:pb-52">
-        <motion.div style={{ y: textY, opacity: fade }} className="flex flex-col items-center">
-          <h1 className="font-display text-5xl font-extrabold leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
-            <span className="block">Welcome to</span>
-            <span className="text-gradient">MamaSparsh</span>
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="mt-5 max-w-xl font-body text-lg font-medium text-foreground/75 md:text-xl"
-          >
-            A Mother's Touch for Every Little Dream.
-          </motion.p>
-
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <MagneticButton as="a" href="#contact" variant="primary">
-              <CalendarHeart size={20} /> Book a School Tour
-            </MagneticButton>
-            <MagneticButton variant="ghost" onClick={() => setStoryOpen(true)}>
-              <Play size={18} /> Watch Our Story
-            </MagneticButton>
-          </div>
+      {/* Side-by-side layout */}
+      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col items-center justify-center px-5 md:flex-row md:gap-8 lg:gap-16">
+        {/* Panda family - left */}
+        <motion.div
+          style={{ y: pandaY }}
+          className="z-10 flex w-full justify-center md:w-1/2"
+        >
+          <motion.img
+            initial={{ opacity: 0, x: -160, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            src={pandaFamily}
+            alt="The MamaSparsh panda family — reading, writing, painting and dancing"
+            width={1536}
+            height={1024}
+            className="w-[min(85vw,500px)] animate-float-soft drop-shadow-2xl"
+          />
         </motion.div>
+
+        {/* Content - right */}
+        <div className="flex w-full flex-col items-center md:w-1/2 md:items-start md:text-left">
+          <motion.div style={{ y: textY, opacity: fade }} className="flex flex-col items-center md:items-start">
+            <h1 className="font-display text-5xl font-extrabold leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+              <span className="block">Welcome to</span>
+              <span className="text-gradient">MamaSparsh</span>
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="mt-5 max-w-xl font-body text-lg font-medium text-foreground/75 md:text-xl"
+            >
+              A Mother's Touch for Every Little Dream.
+            </motion.p>
+
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+              <MagneticButton as="a" href="#contact" variant="primary">
+                <CalendarHeart size={20} /> Book a School Tour
+              </MagneticButton>
+              <MagneticButton variant="ghost" onClick={() => setStoryOpen(true)}>
+                <Play size={18} /> Watch Our Story
+              </MagneticButton>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Scroll cue */}
