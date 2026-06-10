@@ -42,7 +42,7 @@ function TiltCard({ feature, i }: { feature: (typeof features)[number]; i: numbe
         <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
           <Icon size={26} />
         </span>
-        <h3 className="mt-4 font-display text-xl font-800 text-foreground">{feature.title}</h3>
+        <h3 className="mt-4 font-display text-xl font-extrabold text-foreground">{feature.title}</h3>
         <p className="mt-2 font-body text-foreground/70">{feature.text}</p>
       </div>
     </Reveal>
@@ -55,10 +55,10 @@ export function WhyChoose() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-14 text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-700 text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
               💚 Why Parents Choose Us
             </span>
-            <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               A Place Built on Trust & Warmth
             </h2>
           </Reveal>

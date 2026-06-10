@@ -32,8 +32,8 @@ export function FooterNight() {
           loading="lazy"
           className="mx-auto w-48 animate-float-soft drop-shadow-2xl md:w-60"
         />
-        <p className="mt-4 font-display text-sm font-700 tracking-widest text-star/80">GOODNIGHT, LITTLE PANDAS 🌙</p>
-        <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-800 leading-snug text-star md:text-4xl">
+        <p className="mt-4 font-display text-sm font-bold tracking-widest text-star/80">GOODNIGHT, LITTLE PANDAS 🌙</p>
+        <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-extrabold leading-snug text-star md:text-4xl">
           Every Child Deserves a Mother's Touch.
           <br />
           Welcome to MamaSparsh.

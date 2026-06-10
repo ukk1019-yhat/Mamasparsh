@@ -16,7 +16,7 @@ function Bubble({ t }: { t: (typeof testimonials)[number] }) {
       <div className="mt-4 flex items-center gap-3">
         <span className="grid h-11 w-11 place-items-center rounded-full bg-gradient-blush text-xl">{t.emoji}</span>
         <div>
-          <p className="font-display font-800 text-foreground">{t.name}</p>
+          <p className="font-display font-extrabold text-foreground">{t.name}</p>
           <p className="font-body text-sm text-primary">Parent · {t.child}</p>
         </div>
       </div>
@@ -30,10 +30,10 @@ export function Testimonials() {
     <section id="testimonials" className="relative overflow-hidden bg-secondary/30 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5 text-center">
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-700 text-primary shadow-soft">
+          <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft">
             💬 Parent Testimonials
           </span>
-          <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+          <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
             What MamaSparsh Means to Our Families
           </h2>
         </Reveal>

@@ -23,10 +23,10 @@ export function Admissions() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-16 text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-700 text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
               🐾 Admissions Journey
             </span>
-            <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Five Little Steps to Join Us
             </h2>
           </Reveal>
@@ -50,8 +50,8 @@ export function Admissions() {
               <Reveal key={s.n} delay={i * 0.08}>
                 <div className="rounded-3xl border border-border bg-card p-5 text-center shadow-soft">
                   <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-accent text-2xl">{s.emoji}</span>
-                  <p className="mt-3 font-display text-sm font-700 text-primary">STEP {s.n}</p>
-                  <h3 className="font-display text-lg font-800 text-foreground">{s.title}</h3>
+                  <p className="mt-3 font-display text-sm font-bold text-primary">STEP {s.n}</p>
+                  <h3 className="font-display text-lg font-extrabold text-foreground">{s.title}</h3>
                   <p className="mt-1 font-body text-sm text-foreground/70">{s.text}</p>
                 </div>
               </Reveal>
@@ -66,8 +66,8 @@ export function Admissions() {
               <div className="flex items-center gap-4 rounded-3xl border border-border bg-card p-4 shadow-soft">
                 <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-accent text-2xl">{s.emoji}</span>
                 <div>
-                  <p className="font-display text-xs font-700 text-primary">STEP {s.n}</p>
-                  <h3 className="font-display text-lg font-800 text-foreground">{s.title}</h3>
+                  <p className="font-display text-xs font-bold text-primary">STEP {s.n}</p>
+                  <h3 className="font-display text-lg font-extrabold text-foreground">{s.title}</h3>
                   <p className="font-body text-sm text-foreground/70">{s.text}</p>
                 </div>
               </div>

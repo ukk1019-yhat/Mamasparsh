@@ -26,11 +26,11 @@ export function LearnDifferently() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-16 text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-700 text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
               🐼 Our Little Pandas
             </span>
           </Reveal>
-          <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+          <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
             <TextReveal text="Our Little Pandas Learn Differently" />
           </h2>
           <Reveal delay={0.2}>
@@ -64,7 +64,7 @@ export function LearnDifferently() {
                 </Reveal>
                 <Reveal delay={0.15} className="flex-1 text-center md:text-left">
                   <span className="text-5xl">{p.emoji}</span>
-                  <h3 className="mt-3 font-display text-3xl font-800 text-foreground md:text-4xl">
+                  <h3 className="mt-3 font-display text-3xl font-extrabold text-foreground md:text-4xl">
                     {p.title}
                   </h3>
                   <p className="mt-3 max-w-md font-body text-lg text-foreground/70 md:mx-0 mx-auto">

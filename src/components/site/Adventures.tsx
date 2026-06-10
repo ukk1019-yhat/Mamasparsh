@@ -30,10 +30,10 @@ export function Adventures() {
     <section id="adventures" className="relative overflow-hidden bg-gradient-bamboo py-24 text-primary-foreground md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 font-display text-sm font-700">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 font-display text-sm font-bold">
             🎬 MamaSparsh Adventures
           </span>
-          <h2 className="mt-4 font-display text-4xl font-800 leading-tight md:text-6xl">
+          <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight md:text-6xl">
             A Day in the Life of Our Little Pandas
           </h2>
           <p className="mt-3 max-w-xl font-body text-lg text-primary-foreground/85">
@@ -60,13 +60,13 @@ export function Adventures() {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-[3000ms] ease-out group-hover:scale-125"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent" />
-            <span className="absolute right-3 top-3 rounded-full bg-white/85 px-3 py-1 font-display text-xs font-700 text-night">
+            <span className="absolute right-3 top-3 rounded-full bg-white/85 px-3 py-1 font-display text-xs font-bold text-night">
               {r.tag}
             </span>
             <span className="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/85 text-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               ▶️
             </span>
-            <span className="absolute inset-x-0 bottom-0 p-4 text-left font-display text-lg font-800 text-white">
+            <span className="absolute inset-x-0 bottom-0 p-4 text-left font-display text-lg font-extrabold text-white">
               {r.title}
             </span>
           </motion.button>
@@ -99,7 +99,7 @@ export function Adventures() {
                 <img src={reels[active].img} alt={reels[active].title} className="h-full w-full animate-[float-soft_8s_ease-in-out_infinite] object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-night/80 to-transparent" />
                 <div className="absolute bottom-0 p-5 text-white">
-                  <p className="font-display text-2xl font-800">{reels[active].title}</p>
+                  <p className="font-display text-2xl font-extrabold">{reels[active].title}</p>
                   <p className="font-body text-white/80">A magical MamaSparsh moment 🐾</p>
                 </div>
               </div>

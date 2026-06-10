@@ -54,7 +54,7 @@ export function MagneticButton({
     y.set(0);
   };
 
-  const sharedClass = `inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-base font-700 transition-shadow duration-300 ${styles[variant]} ${className}`;
+  const sharedClass = `inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-base font-bold transition-shadow duration-300 ${styles[variant]} ${className}`;
 
   if (as === "a") {
     return (

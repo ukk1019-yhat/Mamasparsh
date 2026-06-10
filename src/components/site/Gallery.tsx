@@ -25,10 +25,10 @@ export function Gallery() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-12 text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-700 text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
               📸 Photo Gallery
             </span>
-            <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Moments Worth Framing
             </h2>
           </Reveal>
@@ -48,7 +48,7 @@ export function Gallery() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-night/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <span className="absolute bottom-3 left-3 translate-y-2 font-display text-sm font-800 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="absolute bottom-3 left-3 translate-y-2 font-display text-sm font-extrabold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   {p.cat}
                 </span>
               </button>

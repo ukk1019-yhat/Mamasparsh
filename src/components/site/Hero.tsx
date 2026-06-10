@@ -76,12 +76,12 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-5 inline-flex items-center gap-2 rounded-full bg-card/70 px-4 py-1.5 font-display text-sm font-700 text-primary shadow-soft backdrop-blur"
+            className="mb-5 inline-flex items-center gap-2 rounded-full bg-card/70 px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft backdrop-blur"
           >
             🐾 The MamaSparsh Panda World
           </motion.span>
 
-          <h1 className="font-display text-5xl font-800 leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-display text-5xl font-extrabold leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
             <span className="block">Welcome to</span>
             <span className="text-gradient">MamaSparsh</span>
           </h1>
@@ -90,7 +90,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-5 max-w-xl font-body text-lg font-500 text-foreground/75 md:text-xl"
+            className="mt-5 max-w-xl font-body text-lg font-medium text-foreground/75 md:text-xl"
           >
             A Mother's Touch for Every Little Dream.
           </motion.p>
@@ -126,7 +126,7 @@ export function Hero() {
       {/* Scroll cue */}
       <motion.div
         style={{ opacity: fade }}
-        className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 font-display text-xs font-700 tracking-widest text-foreground/60"
+        className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 font-display text-xs font-bold tracking-widest text-foreground/60"
       >
         <span className="animate-float-soft inline-block">SCROLL TO EXPLORE ↓</span>
       </motion.div>
@@ -171,14 +171,14 @@ function StoryModal({ onClose }: { onClose: () => void }) {
           </div>
         </div>
         <div className="p-6 text-center">
-          <h3 className="font-display text-2xl font-800 text-foreground">Our Little Story 🐼</h3>
+          <h3 className="font-display text-2xl font-extrabold text-foreground">Our Little Story 🐼</h3>
           <p className="mt-2 font-body text-foreground/70">
             Every day at MamaSparsh begins with a hug and ends with a happy heart. Our pandas read,
             paint, sing and grow — wrapped in a mother's warmth.
           </p>
           <button
             onClick={onClose}
-            className="mt-5 rounded-full bg-gradient-bamboo px-6 py-2.5 font-display font-700 text-primary-foreground"
+            className="mt-5 rounded-full bg-gradient-bamboo px-6 py-2.5 font-display font-bold text-primary-foreground"
           >
             Close
           </button>

@@ -18,10 +18,10 @@ export function Contact() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-12 text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-700 text-primary shadow-soft">
+            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft">
               ✉️ Contact Us
             </span>
-            <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Let's Begin Your Child's Journey
             </h2>
           </Reveal>
@@ -37,7 +37,7 @@ export function Contact() {
               <input type="email" required placeholder="Email address" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
               <input placeholder="Child's age" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
               <textarea rows={4} placeholder="Tell us about your little one 🐼" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
-              <button type="submit" className="mt-5 w-full rounded-full bg-gradient-bamboo px-6 py-3.5 font-display text-lg font-800 text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">
+              <button type="submit" className="mt-5 w-full rounded-full bg-gradient-bamboo px-6 py-3.5 font-display text-lg font-extrabold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">
                 {sent ? "Thank you! We'll be in touch 💚" : "Send Inquiry"}
               </button>
             </form>
@@ -73,7 +73,7 @@ export function Contact() {
                 href="https://wa.me/919999999999"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 rounded-3xl bg-primary px-6 py-4 font-display text-lg font-800 text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]"
+                className="flex items-center justify-center gap-2 rounded-3xl bg-primary px-6 py-4 font-display text-lg font-extrabold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]"
               >
                 <MessageCircle size={22} /> Chat on WhatsApp
               </a>

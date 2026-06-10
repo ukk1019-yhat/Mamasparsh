@@ -22,10 +22,10 @@ export function DayTimeline() {
       <div className="mx-auto max-w-4xl px-5">
         <div className="mb-16 text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-700 text-primary shadow-soft">
+            <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft">
               ⏰ A Day at MamaSparsh
             </span>
-            <h2 className="mt-4 font-display text-4xl font-800 leading-tight text-foreground md:text-6xl">
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Follow Our Panda Through the Day
             </h2>
           </Reveal>
@@ -56,10 +56,10 @@ export function DayTimeline() {
                   <span className="absolute -left-[3.05rem] top-6 grid h-9 w-9 place-items-center rounded-full bg-accent text-lg shadow-soft md:-left-[3.9rem]">
                     {s.emoji}
                   </span>
-                  <span className="font-display text-sm font-700 uppercase tracking-wider text-primary">
+                  <span className="font-display text-sm font-bold uppercase tracking-wider text-primary">
                     {s.time}
                   </span>
-                  <h3 className="mt-1 font-display text-2xl font-800 text-foreground">{s.title}</h3>
+                  <h3 className="mt-1 font-display text-2xl font-extrabold text-foreground">{s.title}</h3>
                   <p className="mt-1 font-body text-foreground/70">{s.text}</p>
                 </div>
               </Reveal>

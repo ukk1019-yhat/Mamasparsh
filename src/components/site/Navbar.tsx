@@ -38,9 +38,9 @@ export function Navbar() {
           <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-2xl shadow-soft">
             🐼
           </span>
-          <span className="font-display text-xl font-800 leading-none text-foreground">
+          <span className="font-display text-xl font-extrabold leading-none text-foreground">
             MamaSparsh
-            <span className="block text-[0.62rem] font-600 tracking-[0.22em] text-primary">
+            <span className="block text-[0.62rem] font-semibold tracking-[0.22em] text-primary">
               PRESCHOOL
             </span>
           </span>
@@ -51,7 +51,7 @@ export function Navbar() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="story-link font-display text-[0.95rem] font-600 text-foreground/80 transition-colors hover:text-primary"
+                className="story-link font-display text-[0.95rem] font-semibold text-foreground/80 transition-colors hover:text-primary"
               >
                 {l.label}
               </a>
@@ -88,7 +88,7 @@ export function Navbar() {
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-xl px-3 py-2.5 font-display font-600 text-foreground/85 hover:bg-muted"
+                    className="block rounded-xl px-3 py-2.5 font-display font-semibold text-foreground/85 hover:bg-muted"
                   >
                     {l.label}
                   </a>
@@ -98,7 +98,7 @@ export function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setOpen(false)}
-                  className="block rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-700 text-primary-foreground"
+                  className="block rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground"
                 >
                   Book a Tour 🌱
                 </a>
