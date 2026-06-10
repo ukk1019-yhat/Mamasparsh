@@ -253,6 +253,13 @@ function AccordionCard({ section, index }: { section: Section; index: number }) 
                     ))}
                   </ul>
                 )}
+                <a
+                  href="/curriculum"
+                  onClick={(e) => e.stopPropagation()}
+                  className="mt-4 inline-flex items-center gap-1.5 font-display text-sm font-bold text-primary transition-colors hover:text-primary/80"
+                >
+                  Show more <ChevronDown size={14} className="-rotate-90" />
+                </a>
               </div>
             </motion.div>
           )}
