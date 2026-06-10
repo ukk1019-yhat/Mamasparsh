@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, PawPrint, Sprout } from "lucide-react";
+import { Menu, X, Sprout } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
+import logoSrc from "@/assets/logo.png";
 
 const links = [
   { label: "Panda World", href: "#learn" },
   { label: "Adventures", href: "#adventures" },
+  { label: "Curriculum", href: "/curriculum" },
   { label: "Why Us", href: "#why" },
   { label: "A Day", href: "#day" },
   { label: "Gallery", href: "#gallery" },
@@ -35,15 +37,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 md:px-8">
         <a href="#home" className="flex items-center gap-2.5">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
-            <PawPrint size={22} />
-          </span>
-          <span className="font-display text-xl font-extrabold leading-none text-foreground">
-            MamaSparsh
-            <span className="block text-[0.62rem] font-semibold tracking-[0.22em] text-primary">
-              PRESCHOOL
-            </span>
-          </span>
+          <img src={logoSrc} alt="MamaSparsh logo" className="h-11 w-auto" />
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">

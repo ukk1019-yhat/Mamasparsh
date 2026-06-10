@@ -5,6 +5,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { LearnDifferently } from "@/components/site/LearnDifferently";
 import { Adventures } from "@/components/site/Adventures";
+import { Curriculum } from "@/components/site/Curriculum";
 import { WhyChoose } from "@/components/site/WhyChoose";
 import { DayTimeline } from "@/components/site/DayTimeline";
 import { Gallery } from "@/components/site/Gallery";
@@ -42,6 +43,7 @@ function Index() {
         <Hero />
         <LearnDifferently />
         <Adventures />
+        <Curriculum />
         <WhyChoose />
         <DayTimeline />
         <Gallery />

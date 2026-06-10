@@ -9,7 +9,7 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
-    confetti({ particleCount: 140, spread: 80, origin: { y: 0.7 }, colors: ["#6cba8a", "#f5c451", "#e89aa6", "#ffffff"] });
+    confetti({ particleCount: 140, spread: 80, origin: { y: 0.7 }, colors: ["#F2483B", "#8854B8", "#FABA31", "#1AB193", "#ffffff"] });
     setTimeout(() => setSent(false), 4000);
   };
 
