@@ -54,21 +54,38 @@ export function MagneticButton({
     y.set(0);
   };
 
-  const Comp = motion[as] as typeof motion.button;
+  const sharedClass = `inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-base font-700 transition-shadow duration-300 ${styles[variant]} ${className}`;
+
+  if (as === "a") {
+    return (
+      <motion.a
+        ref={ref as never}
+        href={href}
+        onClick={onClick}
+        onMouseMove={handleMove}
+        onMouseLeave={reset}
+        style={{ x: sx, y: sy }}
+        whileTap={{ scale: 0.94 }}
+        className={sharedClass}
+      >
+        {children}
+      </motion.a>
+    );
+  }
 
   return (
-    <Comp
+    <motion.button
       ref={ref as never}
-      href={href}
-      type={as === "button" ? type : undefined}
+      type={type}
       onClick={onClick}
       onMouseMove={handleMove}
       onMouseLeave={reset}
       style={{ x: sx, y: sy }}
       whileTap={{ scale: 0.94 }}
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-base font-700 transition-shadow duration-300 ${styles[variant]} ${className}`}
+      className={sharedClass}
     >
       {children}
-    </Comp>
+    </motion.button>
   );
 }
+
