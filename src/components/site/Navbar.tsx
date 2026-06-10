@@ -37,7 +37,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 md:px-8">
         <a href="#home" className="flex items-center gap-2.5">
-          <img src={logoSrc} alt="MamaSparsh logo" className="h-11 w-auto" />
+          <img src={logoSrc} alt="MamaSparsh logo" className="h-14 w-auto md:h-16" />
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">
