@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-<<<<<<< HEAD
 import { X, Camera } from "lucide-react";
-=======
-import { X } from "lucide-react";
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import { Reveal } from "./Reveal";
 import classroom from "@/assets/scene-classroom.jpg";
 import celebration from "@/assets/scene-celebration.jpg";
@@ -30,11 +26,7 @@ export function Gallery() {
         <div className="mb-12 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
-<<<<<<< HEAD
               <Camera size={16} /> Photo Gallery
-=======
-              📸 Photo Gallery
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Moments Worth Framing

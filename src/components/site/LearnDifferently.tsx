@@ -1,8 +1,5 @@
 import { motion } from "motion/react";
-<<<<<<< HEAD
 import { BookOpen, Pencil, Palette, Music, Music2, FlaskConical, Goal, Sprout, PawPrint } from "lucide-react";
-=======
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import { Reveal, TextReveal } from "./Reveal";
 import reads from "@/assets/panda-reads.png";
 import writes from "@/assets/panda-writes.png";
@@ -12,7 +9,6 @@ import sings from "@/assets/panda-sings.png";
 import explores from "@/assets/panda-explores.png";
 import plays from "@/assets/panda-plays.png";
 import grows from "@/assets/panda-grows.png";
-<<<<<<< HEAD
 import type { LucideIcon } from "lucide-react";
 
 const pandas: { img: string; icon: LucideIcon; title: string; text: string; tint: string }[] = [
@@ -24,18 +20,6 @@ const pandas: { img: string; icon: LucideIcon; title: string; text: string; tint
   { img: explores, icon: FlaskConical, title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40" },
   { img: plays, icon: Goal, title: "Panda Plays", text: "Growing through teamwork, fair play and outdoor fun.", tint: "from-primary/30" },
   { img: grows, icon: Sprout, title: "Panda Grows", text: "Learning responsibility and a love for nature's care.", tint: "from-secondary/50" },
-=======
-
-const pandas = [
-  { img: reads, emoji: "📚", title: "Panda Reads", text: "Building literacy and imagination, one storybook at a time.", tint: "from-sky/40" },
-  { img: writes, emoji: "✏️", title: "Panda Writes", text: "Developing communication and creativity through playful words.", tint: "from-accent/40" },
-  { img: paints, emoji: "🎨", title: "Panda Paints", text: "Expressing big imagination through colour and art.", tint: "from-secondary/50" },
-  { img: dances, emoji: "💃", title: "Panda Dances", text: "Building confidence and joy through movement.", tint: "from-primary/30" },
-  { img: sings, emoji: "🎵", title: "Panda Sings", text: "Exploring rhythm, melody and the music of language.", tint: "from-accent/40" },
-  { img: explores, emoji: "🔬", title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40" },
-  { img: plays, emoji: "⚽", title: "Panda Plays", text: "Growing through teamwork, fair play and outdoor fun.", tint: "from-primary/30" },
-  { img: grows, emoji: "🌱", title: "Panda Grows", text: "Learning responsibility and a love for nature's care.", tint: "from-secondary/50" },
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 ];
 
 export function LearnDifferently() {
@@ -45,11 +29,7 @@ export function LearnDifferently() {
         <div className="mb-16 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
-<<<<<<< HEAD
               <PawPrint size={16} /> Our Little Pandas
-=======
-              🐼 Our Little Pandas
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             </span>
           </Reveal>
           <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
@@ -64,10 +44,7 @@ export function LearnDifferently() {
 
         <div className="space-y-20 md:space-y-28">
           {pandas.map((p, i) => {
-<<<<<<< HEAD
             const Icon = p.icon;
-=======
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             const flip = i % 2 === 1;
             return (
               <div
@@ -89,11 +66,7 @@ export function LearnDifferently() {
                   </div>
                 </Reveal>
                 <Reveal delay={0.15} className="flex-1 text-center md:text-left">
-<<<<<<< HEAD
                   <Icon size={48} strokeWidth={1.5} className="inline-block text-primary" />
-=======
-                  <span className="text-5xl">{p.emoji}</span>
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                   <h3 className="mt-3 font-display text-3xl font-extrabold text-foreground md:text-4xl">
                     {p.title}
                   </h3>

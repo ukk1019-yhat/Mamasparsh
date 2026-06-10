@@ -1,10 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-<<<<<<< HEAD
 import { X, Clapperboard, Play } from "lucide-react";
-=======
-import { X } from "lucide-react";
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import { Reveal } from "./Reveal";
 import classroom from "@/assets/scene-classroom.jpg";
 import celebration from "@/assets/scene-celebration.jpg";
@@ -35,11 +31,7 @@ export function Adventures() {
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 font-display text-sm font-bold">
-<<<<<<< HEAD
             <Clapperboard size={16} /> MamaSparsh Adventures
-=======
-            🎬 MamaSparsh Adventures
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
           </span>
           <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight md:text-6xl">
             A Day in the Life of Our Little Pandas
@@ -71,13 +63,8 @@ export function Adventures() {
             <span className="absolute right-3 top-3 rounded-full bg-white/85 px-3 py-1 font-display text-xs font-bold text-night">
               {r.tag}
             </span>
-<<<<<<< HEAD
             <span className="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/85 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <Play size={22} className="text-night ml-0.5" fill="currentColor" />
-=======
-            <span className="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/85 text-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              ▶️
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             </span>
             <span className="absolute inset-x-0 bottom-0 p-4 text-left font-display text-lg font-extrabold text-white">
               {r.title}
@@ -113,11 +100,7 @@ export function Adventures() {
                 <div className="absolute inset-0 bg-gradient-to-t from-night/80 to-transparent" />
                 <div className="absolute bottom-0 p-5 text-white">
                   <p className="font-display text-2xl font-extrabold">{reels[active].title}</p>
-<<<<<<< HEAD
                   <p className="font-body text-white/80">A magical MamaSparsh moment</p>
-=======
-                  <p className="font-body text-white/80">A magical MamaSparsh moment 🐾</p>
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                 </div>
               </div>
             </motion.div>

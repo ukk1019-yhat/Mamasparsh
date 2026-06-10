@@ -1,10 +1,6 @@
 import { useState } from "react";
 import confetti from "canvas-confetti";
-<<<<<<< HEAD
 import { MapPin, Phone, Mail, MessageCircle, Heart } from "lucide-react";
-=======
-import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 import { Reveal } from "./Reveal";
 
 export function Contact() {
@@ -23,11 +19,7 @@ export function Contact() {
         <div className="mb-12 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft">
-<<<<<<< HEAD
               <Mail size={16} /> Contact Us
-=======
-              ✉️ Contact Us
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Let's Begin Your Child's Journey
@@ -44,15 +36,9 @@ export function Contact() {
               </div>
               <input type="email" required placeholder="Email address" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
               <input placeholder="Child's age" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
-<<<<<<< HEAD
               <textarea rows={4} placeholder="Tell us about your little one" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
               <button type="submit" className="mt-5 w-full rounded-full bg-gradient-bamboo px-6 py-3.5 font-display text-lg font-extrabold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">
                 {sent ? <span className="inline-flex items-center gap-2"><Heart size={18} /> Thank you! We'll be in touch</span> : "Send Inquiry"}
-=======
-              <textarea rows={4} placeholder="Tell us about your little one 🐼" className="mt-4 w-full rounded-2xl border border-border bg-background px-4 py-3 font-body outline-none focus:ring-2 focus:ring-primary" />
-              <button type="submit" className="mt-5 w-full rounded-full bg-gradient-bamboo px-6 py-3.5 font-display text-lg font-extrabold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">
-                {sent ? "Thank you! We'll be in touch 💚" : "Send Inquiry"}
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
               </button>
             </form>
           </Reveal>
@@ -60,15 +46,9 @@ export function Contact() {
           <Reveal delay={0.15}>
             <div className="flex h-full flex-col gap-4">
               <div className="grid gap-3 rounded-3xl border border-border bg-card p-6 shadow-soft">
-<<<<<<< HEAD
                 <a href="tel:+918309236742" className="flex items-center gap-3 font-body text-foreground/80 hover:text-primary">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground"><Phone size={20} /></span>
                   +91 83092 36742
-=======
-                <a href="tel:+919999999999" className="flex items-center gap-3 font-body text-foreground/80 hover:text-primary">
-                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground"><Phone size={20} /></span>
-                  +91 99999 99999
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                 </a>
                 <a href="mailto:hello@mamasparsh.com" className="flex items-center gap-3 font-body text-foreground/80 hover:text-primary">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-blush text-secondary-foreground"><Mail size={20} /></span>
@@ -76,33 +56,21 @@ export function Contact() {
                 </a>
                 <div className="flex items-center gap-3 font-body text-foreground/80">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-accent text-accent-foreground"><MapPin size={20} /></span>
-<<<<<<< HEAD
                   69722A, Opposite Boat Club Park Road, Srinivasa Nagar, Vegella Pappaya Street, Nagamallithota Junction, Kakinada-533003, Andhra Pradesh
-=======
-                  12 Bamboo Lane, Garden City
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                 </div>
               </div>
 
               <div className="overflow-hidden rounded-3xl border border-border shadow-soft">
                 <iframe
                   title="MamaSparsh location"
-<<<<<<< HEAD
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1!2d82.2397592!3d16.9887039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3829497f29910d%3A0x9a4f6887ffc75b02!2sMamasparsh%20Premium%20international%20playschool%20powered%20by%20Dreamtime!5e0!3m2!1sen!2sin!4v1"
-=======
-                  src="https://www.google.com/maps?q=garden+city&output=embed"
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                   className="h-56 w-full"
                   loading="lazy"
                 />
               </div>
 
               <a
-<<<<<<< HEAD
                 href="https://wa.me/918309236742"
-=======
-                href="https://wa.me/919999999999"
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center gap-2 rounded-3xl bg-primary px-6 py-4 font-display text-lg font-extrabold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]"

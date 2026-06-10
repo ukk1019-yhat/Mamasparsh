@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-<<<<<<< HEAD
 import { Sunrise, BookOpen, Bird, Palette, Moon, Clock } from "lucide-react";
 import { Reveal } from "./Reveal";
 import mascot from "@/assets/panda-mascot.png";
@@ -12,17 +11,6 @@ const steps: { time: string; title: string; text: string; icon: LucideIcon }[] =
   { time: "Noon", title: "Outdoor Exploration", text: "Fresh air, gardens, butterflies and friendly play.", icon: Bird },
   { time: "Afternoon", title: "Creative Arts", text: "Paint, music, dance and joyful imagination.", icon: Palette },
   { time: "Evening", title: "Reflection & Story Time", text: "Cozy tales and a happy goodbye till tomorrow.", icon: Moon },
-=======
-import { Reveal } from "./Reveal";
-import mascot from "@/assets/panda-mascot.png";
-
-const steps = [
-  { time: "Morning", title: "Welcome Circle", text: "Hugs, songs and a warm hello to start the day.", emoji: "🌅" },
-  { time: "Mid Morning", title: "Learning & Discovery", text: "Stories, letters, numbers and big curious questions.", emoji: "📚" },
-  { time: "Noon", title: "Outdoor Exploration", text: "Fresh air, gardens, butterflies and friendly play.", emoji: "🦋" },
-  { time: "Afternoon", title: "Creative Arts", text: "Paint, music, dance and joyful imagination.", emoji: "🎨" },
-  { time: "Evening", title: "Reflection & Story Time", text: "Cozy tales and a happy goodbye till tomorrow.", emoji: "🌙" },
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
 ];
 
 export function DayTimeline() {
@@ -37,11 +25,7 @@ export function DayTimeline() {
         <div className="mb-16 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft">
-<<<<<<< HEAD
               <Clock size={16} /> A Day at MamaSparsh
-=======
-              ⏰ A Day at MamaSparsh
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
               Follow Our Panda Through the Day
@@ -68,7 +52,6 @@ export function DayTimeline() {
           />
 
           <div className="space-y-12">
-<<<<<<< HEAD
             {steps.map((s, i) => {
               const Icon = s.icon;
               return (
@@ -86,22 +69,6 @@ export function DayTimeline() {
                 </Reveal>
               );
             })}
-=======
-            {steps.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.05}>
-                <div className="relative rounded-3xl border border-border bg-card p-6 shadow-soft">
-                  <span className="absolute -left-[3.05rem] top-6 grid h-9 w-9 place-items-center rounded-full bg-accent text-lg shadow-soft md:-left-[3.9rem]">
-                    {s.emoji}
-                  </span>
-                  <span className="font-display text-sm font-bold uppercase tracking-wider text-primary">
-                    {s.time}
-                  </span>
-                  <h3 className="mt-1 font-display text-2xl font-extrabold text-foreground">{s.title}</h3>
-                  <p className="mt-1 font-body text-foreground/70">{s.text}</p>
-                </div>
-              </Reveal>
-            ))}
->>>>>>> b8161265997a66ba5d9c6e31636ac1d09c89deae
           </div>
         </div>
       </div>
