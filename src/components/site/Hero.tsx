@@ -20,7 +20,7 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
-  const pandaY = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
+  const pandaY = useTransform(scrollYProgress, [0, 1], ["35%", "5%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -70,7 +70,7 @@ export function Hero() {
       ))}
 
       {/* Content */}
-      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col items-center justify-center px-5 pb-20 pt-28 text-center">
+      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col items-center justify-center px-5 pb-40 pt-28 text-center md:pb-52">
         <motion.div style={{ y: textY, opacity: fade }} className="flex flex-col items-center">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -112,14 +112,14 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center"
       >
         <motion.img
-          initial={{ opacity: 0, y: 80, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 160, scale: 0.8 }}
+          animate={{ opacity: 1, y: 80, scale: 1 }}
           transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           src={pandaFamily}
           alt="The MamaSparsh panda family — reading, writing, painting and dancing"
           width={1536}
           height={1024}
-          className="w-[min(92vw,820px)] animate-float-soft drop-shadow-2xl"
+          className="w-[min(85vw,650px)] animate-float-soft drop-shadow-2xl"
         />
       </motion.div>
 
