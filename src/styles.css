@@ -7,6 +7,7 @@
 /*
  * MamaSparsh Preschool — "The Panda World" design system.
  * Warmth of a mother's touch + playful panda charm + nature-inspired learning.
+ * Colours derived from the MamaSparsh logo: coral, purple, teal, blue & gold.
  * All colors use oklch.
  */
 
@@ -71,94 +72,96 @@
 :root {
   --radius: 1.25rem;
 
+  /* Dark teal/navy from logo — main text */
   --background: oklch(0.985 0.014 95);
-  --foreground: oklch(0.32 0.04 55);
+  --foreground: oklch(0.28 0.06 225);
 
   --card: oklch(0.995 0.008 95);
-  --card-foreground: oklch(0.32 0.04 55);
+  --card-foreground: oklch(0.28 0.06 225);
   --popover: oklch(0.995 0.008 95);
-  --popover-foreground: oklch(0.32 0.04 55);
+  --popover-foreground: oklch(0.28 0.06 225);
 
-  /* Bamboo green — nature, learning, trust */
-  --primary: oklch(0.6 0.13 150);
+  /* Coral red from logo — primary CTA, accents */
+  --primary: oklch(0.58 0.2 30);
   --primary-foreground: oklch(0.99 0.01 95);
 
-  /* Warm blush pink — a mother's warmth */
-  --secondary: oklch(0.9 0.06 25);
-  --secondary-foreground: oklch(0.4 0.09 25);
+  /* Purple from logo — secondary elements */
+  --secondary: oklch(0.48 0.16 295);
+  --secondary-foreground: oklch(0.99 0.01 95);
 
-  --muted: oklch(0.95 0.02 95);
-  --muted-foreground: oklch(0.52 0.04 60);
+  --muted: oklch(0.95 0.02 145);
+  --muted-foreground: oklch(0.5 0.04 225);
 
-  /* Sun gold — joy, curiosity */
-  --accent: oklch(0.86 0.13 80);
-  --accent-foreground: oklch(0.35 0.06 60);
+  /* Gold/yellow from logo — joy, curiosity */
+  --accent: oklch(0.78 0.15 85);
+  --accent-foreground: oklch(0.28 0.06 225);
 
   --destructive: oklch(0.62 0.2 25);
   --destructive-foreground: oklch(0.99 0.01 95);
 
-  --border: oklch(0.9 0.025 80);
-  --input: oklch(0.9 0.025 80);
-  --ring: oklch(0.6 0.13 150);
+  --border: oklch(0.88 0.025 145);
+  --input: oklch(0.88 0.025 145);
+  --ring: oklch(0.58 0.2 30);
 
-  /* Named brand tokens */
-  --bamboo: oklch(0.6 0.13 150);
-  --bamboo-deep: oklch(0.45 0.1 155);
-  --blush: oklch(0.82 0.09 22);
-  --sun: oklch(0.86 0.13 80);
-  --sky: oklch(0.85 0.07 230);
-  --cream: oklch(0.985 0.014 95);
-  --night: oklch(0.28 0.06 270);
+  /* Named brand tokens from logo */
+  --bamboo: oklch(0.63 0.14 175);
+  --bamboo-deep: oklch(0.48 0.12 175);
+  --blush: oklch(0.48 0.16 295);
+  --sun: oklch(0.78 0.15 85);
+  --sky: oklch(0.52 0.15 260);
+  --cream: oklch(0.88 0.03 145);
+  --night: oklch(0.28 0.06 225);
   --star: oklch(0.92 0.1 95);
 
-  /* Gradients */
-  --gradient-hero: linear-gradient(180deg, oklch(0.93 0.05 230) 0%, oklch(0.96 0.04 130) 55%, oklch(0.985 0.014 95) 100%);
-  --gradient-sun: radial-gradient(circle at 50% 0%, oklch(0.92 0.12 90 / 0.7), transparent 60%);
-  --gradient-bamboo: linear-gradient(135deg, oklch(0.66 0.14 150), oklch(0.5 0.11 155));
-  --gradient-blush: linear-gradient(135deg, oklch(0.88 0.08 25), oklch(0.82 0.1 12));
-  --gradient-night: linear-gradient(180deg, oklch(0.78 0.12 55) 0%, oklch(0.55 0.13 25) 28%, oklch(0.34 0.1 285) 65%, oklch(0.2 0.06 275) 100%);
-  --gradient-text: linear-gradient(120deg, oklch(0.6 0.13 150), oklch(0.7 0.13 80), oklch(0.7 0.12 20));
+  /* Gradients — logo-inspired */
+  --gradient-hero: linear-gradient(180deg, oklch(0.85 0.07 260) 0%, oklch(0.93 0.05 175) 55%, oklch(0.985 0.014 95) 100%);
+  --gradient-sun: radial-gradient(circle at 50% 0%, oklch(0.78 0.15 85 / 0.35), transparent 60%);
+  --gradient-bamboo: linear-gradient(135deg, oklch(0.63 0.14 175), oklch(0.48 0.12 175));
+  --gradient-blush: linear-gradient(135deg, oklch(0.48 0.16 295), oklch(0.55 0.15 295));
+  --gradient-ember: linear-gradient(135deg, oklch(0.58 0.2 30), oklch(0.78 0.15 85));
+  --gradient-night: linear-gradient(180deg, oklch(0.78 0.15 85) 0%, oklch(0.55 0.2 35) 28%, oklch(0.34 0.15 285) 65%, oklch(0.2 0.06 225) 100%);
+  --gradient-text: linear-gradient(120deg, oklch(0.58 0.2 30), oklch(0.78 0.15 85), oklch(0.48 0.16 295));
 
   /* Shadows */
-  --shadow-soft: 0 10px 30px -12px oklch(0.5 0.08 60 / 0.28);
-  --shadow-lift: 0 24px 60px -18px oklch(0.5 0.1 60 / 0.35);
-  --shadow-glow: 0 0 50px -8px oklch(0.78 0.13 90 / 0.55);
+  --shadow-soft: 0 10px 30px -12px oklch(0.28 0.06 225 / 0.15);
+  --shadow-lift: 0 24px 60px -18px oklch(0.28 0.06 225 / 0.2);
+  --shadow-glow: 0 0 50px -8px oklch(0.58 0.2 30 / 0.3);
 
-  --chart-1: oklch(0.6 0.13 150);
-  --chart-2: oklch(0.82 0.1 22);
-  --chart-3: oklch(0.86 0.13 80);
-  --chart-4: oklch(0.6 0.1 230);
-  --chart-5: oklch(0.7 0.14 320);
+  --chart-1: oklch(0.58 0.2 30);
+  --chart-2: oklch(0.48 0.16 295);
+  --chart-3: oklch(0.78 0.15 85);
+  --chart-4: oklch(0.52 0.15 260);
+  --chart-5: oklch(0.63 0.14 175);
 
   --sidebar: oklch(0.985 0.014 95);
-  --sidebar-foreground: oklch(0.32 0.04 55);
-  --sidebar-primary: oklch(0.6 0.13 150);
+  --sidebar-foreground: oklch(0.28 0.06 225);
+  --sidebar-primary: oklch(0.58 0.2 30);
   --sidebar-primary-foreground: oklch(0.99 0.01 95);
-  --sidebar-accent: oklch(0.95 0.02 95);
-  --sidebar-accent-foreground: oklch(0.32 0.04 55);
-  --sidebar-border: oklch(0.9 0.025 80);
-  --sidebar-ring: oklch(0.6 0.13 150);
+  --sidebar-accent: oklch(0.95 0.02 145);
+  --sidebar-accent-foreground: oklch(0.28 0.06 225);
+  --sidebar-border: oklch(0.88 0.025 145);
+  --sidebar-ring: oklch(0.58 0.2 30);
 }
 
 .dark {
-  --background: oklch(0.24 0.05 270);
+  --background: oklch(0.2 0.06 225);
   --foreground: oklch(0.96 0.02 95);
-  --card: oklch(0.3 0.05 270);
+  --card: oklch(0.26 0.06 225);
   --card-foreground: oklch(0.96 0.02 95);
-  --popover: oklch(0.3 0.05 270);
+  --popover: oklch(0.26 0.06 225);
   --popover-foreground: oklch(0.96 0.02 95);
-  --primary: oklch(0.7 0.13 150);
-  --primary-foreground: oklch(0.2 0.04 270);
-  --secondary: oklch(0.4 0.07 25);
+  --primary: oklch(0.65 0.18 30);
+  --primary-foreground: oklch(0.2 0.06 225);
+  --secondary: oklch(0.55 0.16 295);
   --secondary-foreground: oklch(0.96 0.02 95);
-  --muted: oklch(0.34 0.04 270);
-  --muted-foreground: oklch(0.78 0.03 90);
-  --accent: oklch(0.8 0.12 80);
-  --accent-foreground: oklch(0.2 0.04 270);
+  --muted: oklch(0.3 0.04 225);
+  --muted-foreground: oklch(0.78 0.03 95);
+  --accent: oklch(0.78 0.15 85);
+  --accent-foreground: oklch(0.2 0.06 225);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.7 0.13 150);
-  --sidebar: oklch(0.3 0.05 270);
+  --ring: oklch(0.65 0.18 30);
+  --sidebar: oklch(0.26 0.06 225);
   --sidebar-foreground: oklch(0.96 0.02 95);
   --sidebar-border: oklch(1 0 0 / 12%);
 }
@@ -212,6 +215,9 @@
 }
 @utility bg-gradient-blush {
   background-image: var(--gradient-blush);
+}
+@utility bg-gradient-ember {
+  background-image: var(--gradient-ember);
 }
 @utility bg-gradient-night {
   background-image: var(--gradient-night);

@@ -76,7 +76,7 @@ export function AmbientLayer() {
         className="absolute left-0 top-0 h-[320px] w-[320px] rounded-full opacity-60 blur-3xl"
         style={{
           background:
-            "radial-gradient(circle, oklch(0.88 0.13 90 / 0.55), oklch(0.8 0.12 150 / 0.18) 45%, transparent 70%)",
+            "radial-gradient(circle, oklch(0.78 0.15 85 / 0.45), oklch(0.58 0.2 30 / 0.15) 45%, transparent 70%)",
         }}
       />
       <div ref={leafRef} className="absolute left-0 top-0 text-2xl drop-shadow">

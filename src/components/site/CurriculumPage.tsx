@@ -2,10 +2,10 @@ import { motion } from "motion/react";
 import {
   Apple, Wheat, Droplets, Leaf, UtensilsCrossed, Mic, Palette, Heart, Sparkles,
   BookOpen, Music, Trees, Clock, Hand, Sun, Users, GraduationCap, ChevronRight,
-  PawPrint,
 } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
+import logoSrc from "@/assets/logo.png";
 
 interface Section {
   icon: typeof Apple;
@@ -205,13 +205,7 @@ export function CurriculumPage() {
       <nav className="fixed inset-x-0 top-0 z-50 bg-card/85 shadow-soft backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 md:px-8">
           <a href="/" className="flex items-center gap-2.5">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
-              <PawPrint size={22} />
-            </span>
-            <span className="font-display text-xl font-extrabold leading-none text-foreground">
-              MamaSparsh
-              <span className="block text-[0.62rem] font-semibold tracking-[0.22em] text-primary">PRESCHOOL</span>
-            </span>
+            <img src={logoSrc} alt="MamaSparsh logo" className="h-11 w-auto" />
           </a>
           <MagneticButton as="a" href="/" variant="primary" className="px-6 py-2.5 text-sm">
             <ChevronRight size={16} className="rotate-180" /> Back Home
