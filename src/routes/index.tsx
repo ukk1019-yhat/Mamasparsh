@@ -1,29 +1,55 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SmoothScroll } from "@/components/site/SmoothScroll";
+import { AmbientLayer } from "@/components/site/AmbientLayer";
+import { Navbar } from "@/components/site/Navbar";
+import { Hero } from "@/components/site/Hero";
+import { LearnDifferently } from "@/components/site/LearnDifferently";
+import { Adventures } from "@/components/site/Adventures";
+import { WhyChoose } from "@/components/site/WhyChoose";
+import { DayTimeline } from "@/components/site/DayTimeline";
+import { Gallery } from "@/components/site/Gallery";
+import { Testimonials } from "@/components/site/Testimonials";
+import { Admissions } from "@/components/site/Admissions";
+import { Contact } from "@/components/site/Contact";
+import { FooterNight } from "@/components/site/FooterNight";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "MamaSparsh Preschool — A Mother's Touch for Every Little Dream" },
+      {
+        name: "description",
+        content:
+          "Step into the MamaSparsh Panda World — a premium, nurturing preschool where children read, write, paint, dance, explore and grow through nature-inspired, child-centric learning.",
+      },
+      { property: "og:title", content: "MamaSparsh Preschool — The Panda World" },
+      {
+        property: "og:description",
+        content: "A mother's touch for every little dream. Premium, nature-inspired early learning.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <SmoothScroll />
+      <AmbientLayer />
+      <Navbar />
+      <main>
+        <Hero />
+        <LearnDifferently />
+        <Adventures />
+        <WhyChoose />
+        <DayTimeline />
+        <Gallery />
+        <Testimonials />
+        <Admissions />
+        <Contact />
+      </main>
+      <FooterNight />
+    </>
   );
 }
