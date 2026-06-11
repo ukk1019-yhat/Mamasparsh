@@ -42,7 +42,7 @@ export function Adventures() {
   if (videos.length === 0) return null;
 
   return (
-    <section id="adventures" className="relative overflow-hidden bg-gradient-bamboo py-24 text-primary-foreground md:py-32">
+    <section id="adventures" className="relative scroll-mt-24 overflow-hidden bg-gradient-bamboo py-24 text-primary-foreground md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 font-display text-sm font-bold">

@@ -51,7 +51,7 @@ function TiltCard({ feature, i }: { feature: (typeof features)[number]; i: numbe
 
 export function WhyChoose() {
   return (
-    <section id="why" className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section id="why" className="relative scroll-mt-24 overflow-hidden bg-background py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-14 text-center">
           <Reveal>

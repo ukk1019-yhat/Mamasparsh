@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { withCache } from "./cache";
 
 const FOLDER_ID = "1VMgV3jCp1-T4iigb0975yud6BJ4yTt-Y";
 
@@ -7,7 +8,7 @@ type GalleryImage = {
   name: string;
 };
 
-export const getGalleryImages = createServerFn({ method: "GET" }).handler(async () => {
+async function fetchGalleryImages(): Promise<GalleryImage[]> {
   const url = `https://drive.google.com/drive/folders/${FOLDER_ID}?hl=en`;
   const res = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0" },
@@ -20,10 +21,13 @@ export const getGalleryImages = createServerFn({ method: "GET" }).handler(async 
     ids.push({ id: match[1], name: match[1] });
   }
   const seen = new Set<string>();
-  const unique = ids.filter((img) => {
+  return ids.filter((img) => {
     if (seen.has(img.id)) return false;
     seen.add(img.id);
     return true;
   });
-  return unique;
+}
+
+export const getGalleryImages = createServerFn({ method: "GET" }).handler(async () => {
+  return withCache("gallery", 5 * 60 * 1000, fetchGalleryImages);
 });

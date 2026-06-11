@@ -14,7 +14,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-muted/60 py-24 md:py-32">
+    <section id="contact" className="relative scroll-mt-24 overflow-hidden bg-muted/60 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-12 text-center">
           <Reveal>

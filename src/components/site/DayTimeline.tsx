@@ -20,7 +20,7 @@ export function DayTimeline() {
   const mascotTop = useTransform(scrollYProgress, [0, 1], ["0%", "92%"]);
 
   return (
-    <section id="day" className="relative overflow-hidden bg-muted/60 py-24 md:py-32">
+    <section id="day" className="relative scroll-mt-24 overflow-hidden bg-muted/60 py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-5">
         <div className="mb-16 text-center">
           <Reveal>

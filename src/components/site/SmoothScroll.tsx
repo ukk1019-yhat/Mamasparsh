@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-/**
- * Lenis smooth scrolling. Client-only; safely no-ops during SSR.
- */
 export function SmoothScroll() {
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -23,9 +20,23 @@ export function SmoothScroll() {
     };
     raf = requestAnimationFrame(loop);
 
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[href^='#']");
+      if (!anchor) return;
+      const id = anchor.getAttribute("href")?.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el, { offset: -90 });
+    };
+
+    document.addEventListener("click", handleClick);
+
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      document.removeEventListener("click", handleClick);
     };
   }, []);
 

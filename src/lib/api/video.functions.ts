@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { withCache } from "./cache";
 
 const FOLDER_ID = "1Vc41YaVAPcLC2FpC7zgm4GhHp67NrC3E";
 
@@ -6,7 +7,7 @@ export type VideoItem = {
   id: string;
 };
 
-export const getVideos = createServerFn({ method: "GET" }).handler(async () => {
+async function fetchVideos(): Promise<VideoItem[]> {
   const url = `https://drive.google.com/drive/folders/${FOLDER_ID}?hl=en`;
   const res = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0" },
@@ -19,10 +20,13 @@ export const getVideos = createServerFn({ method: "GET" }).handler(async () => {
     ids.push({ id: match[1] });
   }
   const seen = new Set<string>();
-  const unique = ids.filter((item) => {
+  return ids.filter((item) => {
     if (seen.has(item.id)) return false;
     seen.add(item.id);
     return true;
   });
-  return unique;
+}
+
+export const getVideos = createServerFn({ method: "GET" }).handler(async () => {
+  return withCache("videos", 5 * 60 * 1000, fetchVideos);
 });
