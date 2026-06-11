@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sprout } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
+import { scrollToSection } from "./SmoothScroll";
 import logoSrc from "@/assets/logo.png";
 
 const links = [
@@ -44,12 +45,22 @@ export function Navbar() {
         <ul className="hidden items-center gap-7 lg:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a
-                href={l.href}
-                className="story-link font-display text-[0.95rem] font-semibold text-foreground/80 transition-colors hover:text-primary"
-              >
-                {l.label}
-              </a>
+              {l.href.startsWith("#") ? (
+                <a
+                  href={l.href}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(l.href.slice(1)); }}
+                  className="story-link font-display text-[0.95rem] font-semibold text-foreground/80 transition-colors hover:text-primary"
+                >
+                  {l.label}
+                </a>
+              ) : (
+                <a
+                  href={l.href}
+                  className="story-link font-display text-[0.95rem] font-semibold text-foreground/80 transition-colors hover:text-primary"
+                >
+                  {l.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -80,13 +91,23 @@ export function Navbar() {
             <ul className="flex flex-col gap-1 px-6 py-4">
               {links.map((l) => (
                 <li key={l.href}>
-                  <a
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-xl px-3 py-2.5 font-display font-semibold text-foreground/85 hover:bg-muted"
-                  >
-                    {l.label}
-                  </a>
+                  {l.href.startsWith("#") ? (
+                    <a
+                      href={l.href}
+                      onClick={(e) => { e.preventDefault(); setOpen(false); scrollToSection(l.href.slice(1)); }}
+                      className="block rounded-xl px-3 py-2.5 font-display font-semibold text-foreground/85 hover:bg-muted"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <a
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-xl px-3 py-2.5 font-display font-semibold text-foreground/85 hover:bg-muted"
+                    >
+                      {l.label}
+                    </a>
+                  )}
                 </li>
               ))}
               <li className="pt-2">

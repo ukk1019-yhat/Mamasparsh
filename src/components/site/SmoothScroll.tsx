@@ -13,6 +13,8 @@ export function SmoothScroll() {
       smoothWheel: true,
     });
 
+    (window as unknown as Record<string, unknown>).__lenis = lenis;
+
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -36,9 +38,20 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      delete (window as unknown as Record<string, unknown>).__lenis;
       document.removeEventListener("click", handleClick);
     };
   }, []);
 
   return null;
+}
+
+export function scrollToSection(id: string) {
+  const lenis = (window as unknown as Record<string, unknown>).__lenis as Lenis | undefined;
+  const el = document.getElementById(id);
+  if (lenis && el) {
+    lenis.scrollTo(el, { offset: -90 });
+  } else if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
