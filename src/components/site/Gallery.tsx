@@ -11,7 +11,7 @@ type GalleryImage = {
 };
 
 function thumbUrl(id: string) {
-  return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 }
 function fullUrl(id: string) {
   return `https://drive.google.com/uc?export=download&id=${id}`;
@@ -25,7 +25,7 @@ export function Gallery() {
     getGalleryImages().then(setAllImages);
   }, []);
 
-  const photos = allImages.slice(0, 6);
+  const photos = allImages.slice(0, 9);
 
   if (allImages.length === 0) return null;
 
@@ -43,12 +43,12 @@ export function Gallery() {
           </Reveal>
         </div>
 
-        <div className="grid auto-rows-[200px] grid-cols-2 gap-4 md:grid-cols-3">
+        <div className="grid auto-rows-[300px] grid-cols-2 gap-4 md:grid-cols-3">
           {photos.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 3) * 0.08} className={i === 0 || i === 3 ? "row-span-2" : ""}>
+            <Reveal key={p.id} delay={(i % 3) * 0.08} className={i === 0 || i === 3 || i === 6 ? "row-span-2" : ""}>
               <button
                 onClick={() => setActive(i)}
-                className={`group relative h-full w-full overflow-hidden rounded-3xl shadow-soft ${i === 0 || i === 3 ? "row-span-2" : ""}`}
+                className={`group relative h-full w-full overflow-hidden rounded-3xl shadow-soft ${i === 0 || i === 3 || i === 6 ? "row-span-2" : ""}`}
               >
                 <img
                   src={thumbUrl(p.id)}

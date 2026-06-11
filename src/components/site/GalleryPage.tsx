@@ -11,7 +11,7 @@ type GalleryImage = {
 };
 
 function thumbUrl(id: string) {
-  return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 }
 function fullUrl(id: string) {
   return `https://drive.google.com/uc?export=download&id=${id}`;
@@ -31,7 +31,7 @@ export function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-6xl px-5 py-8">
+      <div className="mx-auto max-w-7xl px-5 py-8">
         <div className="mb-8 flex items-center gap-3">
           <Link
             to="/"
@@ -54,12 +54,12 @@ export function GalleryPage() {
             <Loader2 size={32} className="animate-spin text-primary" />
           </div>
         ) : (
-          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
             {allImages.map((p, i) => (
               <Reveal key={p.id} delay={(i % 5) * 0.06}>
                 <button
                   onClick={() => setActive(i)}
-                  className="group relative mb-4 w-full overflow-hidden rounded-3xl shadow-soft"
+                  className="group relative mb-6 w-full overflow-hidden rounded-3xl shadow-soft"
                 >
                   <img
                     src={thumbUrl(p.id)}
