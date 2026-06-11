@@ -105,7 +105,7 @@ export function Hero() {
             </motion.p>
 
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
-              <MagneticButton as="a" href="#contact" variant="primary">
+              <MagneticButton as="a" href="https://calendly.com/umakrishnakanthchokkapu15/30min" target="_blank" variant="primary">
                 <CalendarHeart size={20} /> Book a School Tour
               </MagneticButton>
               <MagneticButton variant="ghost" onClick={() => setStoryOpen(true)}>

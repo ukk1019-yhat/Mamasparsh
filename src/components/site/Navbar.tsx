@@ -54,7 +54,7 @@ export function Navbar() {
         </ul>
 
         <div className="hidden lg:block">
-          <MagneticButton as="a" href="#contact" variant="primary" className="px-6 py-2.5 text-sm">
+          <MagneticButton as="a" href="https://calendly.com/umakrishnakanthchokkapu15/30min" target="_blank" variant="primary" className="px-6 py-2.5 text-sm">
             <Sprout size={16} /> Book a Tour
           </MagneticButton>
         </div>
@@ -90,7 +90,8 @@ export function Navbar() {
               ))}
               <li className="pt-2">
                 <a
-                  href="#contact"
+                  href="https://calendly.com/umakrishnakanthchokkapu15/30min"
+                  target="_blank"
                   onClick={() => setOpen(false)}
                   className="block rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground"
                 >
