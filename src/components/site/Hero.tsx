@@ -149,29 +149,22 @@ function StoryModal({ onClose }: { onClose: () => void }) {
         exit={{ scale: 0.85, y: 30 }}
         transition={{ type: "spring", stiffness: 220, damping: 22 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-card shadow-lift"
+        className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-black shadow-lift"
       >
-        <div className="relative aspect-video bg-gradient-bamboo">
-          <img
-            src={pandaFamily}
-            alt="MamaSparsh story"
-            className="absolute inset-0 h-full w-full object-contain p-8 animate-float-soft"
+        <div className="relative aspect-video">
+          <iframe
+            src="https://www.youtube.com/embed/BkrgkslnD9g?autoplay=1&rel=0"
+            title="MamaSparsh Story"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
           />
-          <div className="absolute inset-0 grid place-items-center">
-            <span className="grid h-20 w-20 place-items-center rounded-full bg-card/90 shadow-glow animate-float-tiny">
-              <Play size={32} className="text-primary ml-0.5" fill="currentColor" />
-            </span>
-          </div>
         </div>
-        <div className="p-6 text-center">
-          <h3 className="font-display text-2xl font-extrabold text-foreground">Our Little Story</h3>
-          <p className="mt-2 font-body text-foreground/70">
-            Every day at MamaSparsh begins with a hug and ends with a happy heart. Our pandas read,
-            paint, sing and grow — wrapped in a mother's warmth.
-          </p>
+        <div className="flex items-center justify-between bg-card px-6 py-4">
+          <h3 className="font-display text-xl font-extrabold text-foreground">Our Little Story</h3>
           <button
             onClick={onClose}
-            className="mt-5 rounded-full bg-gradient-bamboo px-6 py-2.5 font-display font-bold text-primary-foreground"
+            className="rounded-full bg-gradient-bamboo px-5 py-2 font-display font-bold text-primary-foreground text-sm"
           >
             Close
           </button>
