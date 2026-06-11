@@ -36,7 +36,9 @@ const programs: Program[] = [
     title: "Early Years 2",
     age: "3 Years +",
     schedule: "5 Days a week (Mon - Fri) · 9:15 AM to 12:45 PM IST",
-    body: [],
+    body: [
+      "Our early years 2 program focuses on introducing your little one to their first alphabets and numbers. With basic educational and play based activities aimed at developing respect, a basic understanding of the importance of mother nature along with the impact one can make from an early age we aspire to grow and nurture empathetic and kind individuals.",
+    ],
   },
   {
     icon: Sparkles,
