@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
+import { Route as AdventuresRouteImport } from './routes/adventures'
 import { Route as IndexRouteImport } from './routes/index'
 
 const GalleryRoute = GalleryRouteImport.update({
@@ -23,6 +24,11 @@ const CurriculumRoute = CurriculumRouteImport.update({
   path: '/curriculum',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdventuresRoute = AdventuresRouteImport.update({
+  id: '/adventures',
+  path: '/adventures',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,34 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/curriculum' | '/gallery'
+  fullPaths: '/' | '/adventures' | '/curriculum' | '/gallery'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/curriculum' | '/gallery'
-  id: '__root__' | '/' | '/curriculum' | '/gallery'
+  to: '/' | '/adventures' | '/curriculum' | '/gallery'
+  id: '__root__' | '/' | '/adventures' | '/curriculum' | '/gallery'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdventuresRoute: typeof AdventuresRoute
   CurriculumRoute: typeof CurriculumRoute
   GalleryRoute: typeof GalleryRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CurriculumRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/adventures': {
+      id: '/adventures'
+      path: '/adventures'
+      fullPath: '/adventures'
+      preLoaderRoute: typeof AdventuresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdventuresRoute: AdventuresRoute,
   CurriculumRoute: CurriculumRoute,
   GalleryRoute: GalleryRoute,
 }
