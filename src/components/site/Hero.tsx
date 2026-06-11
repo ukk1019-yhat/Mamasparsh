@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { Play, CalendarHeart, PawPrint } from "lucide-react";
+import { Play, CalendarHeart } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
+import { Butterfly } from "./Butterfly";
 import bambooBg from "@/assets/bamboo-forest-bg.jpg";
 import pandaFamily from "@/assets/hero-panda-family.png";
 
@@ -42,24 +43,18 @@ export function Hero() {
       <Cloud className="left-[-15%] top-[26%] h-16 w-40" delay={9} dur={62} />
       <Cloud className="left-[-12%] top-[8%] h-20 w-48" delay={20} dur={70} />
 
-      {/* Butterflies + particles */}
-      {Array.from({ length: 3 }).map((_, i) => (
-        <span
-          key={i}
-          className="absolute"
-          style={{
-            left: `${15 + i * 28}%`,
-            top: `${30 + (i % 2) * 18}%`,
-            animation: `float-tiny ${4 + i}s ease-in-out ${i * 0.8}s infinite`,
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary/60">
-            <path d="M12 4C14 2 18 3 19 6C20 9 17 11 12 12C7 11 4 9 5 6C6 3 10 2 12 4Z" />
-            <path d="M12 12C14 13 17 15 16 18C15 21 11 21 9 19C7 17 8 14 12 12Z" opacity="0.7" />
-            <path d="M12 12C10 10 8 7 9 5C10 3 13 3 15 5C17 7 15 10 12 12Z" opacity="0.5" />
-          </svg>
-        </span>
-      ))}
+      {/* Flying butterflies */}
+      <Butterfly variant="drift" size={20} color="text-primary/50" style={{ top: "15%", left: "0%", animationDelay: "0s" }} />
+      <Butterfly variant="drift" size={16} color="text-accent/50" style={{ top: "35%", left: "0%", animationDelay: "5s" }} />
+      <Butterfly variant="drift" size={22} color="text-sky/50" style={{ top: "55%", left: "0%", animationDelay: "10s" }} />
+      <Butterfly variant="drift" size={18} color="text-primary/40" style={{ top: "72%", left: "0%", animationDelay: "3s" }} />
+      <Butterfly variant="drift" size={14} color="text-accent/40" style={{ top: "25%", left: "0%", animationDelay: "8s" }} />
+
+      <Butterfly variant="figure8" size={22} color="text-accent/40" className="z-10" style={{ top: "20%", left: "12%" }} />
+      <Butterfly variant="hover" size={18} color="text-primary/40" className="z-10" style={{ top: "60%", left: "8%" }} />
+      <Butterfly variant="figure8" size={16} color="text-sky/40" className="z-10" style={{ top: "40%", left: "85%" }} />
+      <Butterfly variant="hover" size={20} color="text-accent/40" className="z-10" style={{ top: "70%", left: "78%" }} />
+      <Butterfly variant="figure8" size={14} color="text-primary/30" className="z-10" style={{ top: "28%", left: "88%" }} />
       {Array.from({ length: 22 }).map((_, i) => (
         <span
           key={i}
