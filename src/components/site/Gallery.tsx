@@ -10,6 +10,9 @@ const photos = [
   { id: "1coPqtFF88Xtb2JgPLSkqA9srkmDeu-Jd" },
   { id: "1ENiD9sxVMwbkW2VDwY8GJ73pUehWQ8P0" },
   { id: "15t1vf46WwtpVLImOa6zeT3iJklznk-o2" },
+  { id: "1Nw-5SwGkPZ_j4dxl-fE0882BnAM_DBQw" },
+  { id: "1Np6iDOAPPo8GXcAxsYJjy71Si4-IyHqc" },
+  { id: "16Q4kW9zgHAHKGhiOHEFjy1GR-ro_7xbK" },
 ];
 
 function thumbUrl(id: string) {
