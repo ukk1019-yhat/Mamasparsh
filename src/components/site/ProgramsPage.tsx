@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import {
   Baby, Users, Sparkles, BookOpen, GraduationCap, ChevronRight,
   ArrowLeft, ArrowRight, Image as ImageIcon,
@@ -6,9 +5,6 @@ import {
 import { Reveal } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
 import logoSrc from "@/assets/logo.png";
-import sings from "@/assets/panda-sings.png";
-import grows from "@/assets/panda-grows.png";
-import plays from "@/assets/panda-plays.png";
 
 interface Program {
   icon: typeof Baby;
@@ -173,25 +169,6 @@ export function ProgramsPage() {
         {/* Header */}
         <section className="relative overflow-hidden pb-8 pt-16 md:pt-24">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
-          {/* Floating pandas */}
-          <motion.img
-            src={sings} alt="" width={120} height={120} loading="lazy"
-            className="pointer-events-none absolute left-[8%] top-12 w-20 opacity-30 md:w-28 md:opacity-40"
-            animate={{ y: [0, -20, 0], x: [0, 10, 0], rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.img
-            src={grows} alt="" width={120} height={120} loading="lazy"
-            className="pointer-events-none absolute right-[10%] top-20 w-16 opacity-25 md:w-24 md:opacity-35"
-            animate={{ y: [0, -25, 0], x: [0, -8, 0], rotate: [0, -4, 4, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          />
-          <motion.img
-            src={plays} alt="" width={120} height={120} loading="lazy"
-            className="pointer-events-none absolute left-[20%] top-60 w-14 opacity-20 md:left-[15%] md:top-80 md:w-20 md:opacity-30"
-            animate={{ y: [0, -18, 0], x: [0, 15, 0], rotate: [0, 6, -6, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          />
           <div className="mx-auto max-w-4xl px-5 text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
