@@ -37,38 +37,18 @@ async function fetchGalleryImages(): Promise<GalleryImage[]> {
 
   const images: GalleryImage[] = [];
 
-  const extractors = [
-    // aria-label on file entries
-    () => {
-      const r = /data-id="([a-zA-Z0-9_-]{25,})"[^>]*?aria-label="([^"]+)"/g;
-      const results: GalleryImage[] = [];
-      let m;
-      while ((m = r.exec(html)) !== null) results.push({ id: m[1], name: m[2] });
-      return results;
-    },
-    // data-id + data-target="file" + nearby name span
-    () => {
-      const r = /data-id="([a-zA-Z0-9_-]{25,})"[^>]*?data-target="file"[^>]*?>[\s\S]*?<span[^>]*>([^<]+)<\/span>/g;
-      const results: GalleryImage[] = [];
-      let m;
-      while ((m = r.exec(html)) !== null) results.push({ id: m[1], name: m[2].trim() });
-      return results;
-    },
-    // bare data-id (last resort)
-    () => {
-      const r = /data-id="([a-zA-Z0-9_-]{25,})"/g;
-      const results: GalleryImage[] = [];
-      let m;
-      while ((m = r.exec(html)) !== null) results.push({ id: m[1], name: m[1] });
-      return results;
-    },
-  ];
+  const r =
+    /tr[^>]*?data-id="([a-zA-Z0-9_-]{25,})"[^>]*?>[\s\S]*?JxSEve[^>]*?aria-label="([^"]+)"/g;
+  let m;
+  while ((m = r.exec(html)) !== null) {
+    const name = m[2].replace(/\s+(?:Image|Document|Video|Folder|PDF)\s+Shared$/, "");
+    images.push({ id: m[1], name });
+  }
 
-  for (const extract of extractors) {
-    const extracted = extract();
-    if (extracted.length > 0) {
-      images.push(...extracted);
-      break;
+  if (images.length === 0) {
+    const fallbackR = /data-id="([a-zA-Z0-9_-]{25,})"/g;
+    while ((m = fallbackR.exec(html)) !== null) {
+      images.push({ id: m[1], name: m[1] });
     }
   }
 
