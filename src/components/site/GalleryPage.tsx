@@ -14,19 +14,25 @@ function thumbUrl(id: string) {
   return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 }
 function fullUrl(id: string) {
-  return `https://drive.google.com/uc?export=download&id=${id}`;
+  return `https://drive.google.com/uc?export=view&id=${id}`;
 }
 
 export function GalleryPage() {
   const [allImages, setAllImages] = useState<GalleryImage[]>([]);
   const [active, setActive] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [errored, setErrored] = useState(false);
 
   useEffect(() => {
-    getGalleryImages().then((images) => {
-      setAllImages(images);
-      setLoading(false);
-    });
+    getGalleryImages()
+      .then((images) => {
+        setAllImages(images);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        setErrored(true);
+      });
   }, []);
 
   return (
@@ -53,6 +59,12 @@ export function GalleryPage() {
           <div className="flex items-center justify-center py-24">
             <Loader2 size={32} className="animate-spin text-primary" />
           </div>
+        ) : errored ? (
+          <div className="py-24 text-center">
+            <p className="text-muted-foreground">
+              Unable to load gallery. Please try again later.
+            </p>
+          </div>
         ) : (
           <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
             {allImages.map((p, i) => (
@@ -61,12 +73,13 @@ export function GalleryPage() {
                   onClick={() => setActive(i)}
                   className="group relative mb-6 w-full overflow-hidden rounded-3xl shadow-soft"
                 >
-                  <img
-                    src={thumbUrl(p.id)}
-                    alt={p.name}
-                    loading="lazy"
-                    className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                <img
+                  src={thumbUrl(p.id)}
+                  alt={p.name}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
                   <div className="absolute inset-0 bg-gradient-to-t from-night/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </button>
               </Reveal>
@@ -94,6 +107,7 @@ export function GalleryPage() {
               onClick={(e) => e.stopPropagation()}
               src={fullUrl(allImages[active].id)}
               alt={allImages[active].name}
+              referrerPolicy="no-referrer"
               className="max-h-[82vh] w-auto rounded-3xl shadow-lift"
             />
           </motion.div>

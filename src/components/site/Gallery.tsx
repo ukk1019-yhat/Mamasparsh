@@ -14,20 +14,23 @@ function thumbUrl(id: string) {
   return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 }
 function fullUrl(id: string) {
-  return `https://drive.google.com/uc?export=download&id=${id}`;
+  return `https://drive.google.com/uc?export=view&id=${id}`;
 }
 
 export function Gallery() {
   const [allImages, setAllImages] = useState<GalleryImage[]>([]);
   const [active, setActive] = useState<number | null>(null);
+  const [errored, setErrored] = useState(false);
 
   useEffect(() => {
-    getGalleryImages().then(setAllImages);
+    getGalleryImages().then(setAllImages).catch(() => setErrored(true));
   }, []);
 
   const photos = allImages.slice(0, 9);
 
-  if (allImages.length === 0) return null;
+  if (allImages.length === 0 && !errored) return null;
+
+  if (errored && allImages.length === 0) return null;
 
   return (
     <section id="gallery" className="relative scroll-mt-24 overflow-hidden bg-background py-24 md:py-32">
@@ -54,6 +57,7 @@ export function Gallery() {
                   src={thumbUrl(p.id)}
                   alt={p.name}
                   loading="lazy"
+                  referrerPolicy="no-referrer"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-night/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -93,6 +97,7 @@ export function Gallery() {
               onClick={(e) => e.stopPropagation()}
               src={fullUrl(photos[active].id)}
               alt={photos[active].name}
+              referrerPolicy="no-referrer"
               className="max-h-[82vh] w-auto rounded-3xl shadow-lift"
             />
           </motion.div>
