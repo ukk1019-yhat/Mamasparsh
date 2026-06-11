@@ -1,27 +1,21 @@
 import { motion } from "motion/react";
-import { BookOpen, Pencil, Palette, Music, Music2, FlaskConical, Goal, Sprout, PawPrint, ArrowRight } from "lucide-react";
+import { BookOpen, Pencil, Palette, Music, FlaskConical, PawPrint, ArrowRight } from "lucide-react";
 import { Reveal, TextReveal } from "./Reveal";
 import reads from "@/assets/panda-reads.png";
 import writes from "@/assets/panda-writes.png";
 import paints from "@/assets/panda-paints.png";
 import dances from "@/assets/panda-dances.png";
-import sings from "@/assets/panda-sings.png";
 import explores from "@/assets/panda-explores.png";
-import plays from "@/assets/panda-plays.png";
-import grows from "@/assets/panda-grows.png";
 import type { LucideIcon } from "lucide-react";
 
 interface Panda { img: string; icon: LucideIcon; title: string; text: string; tint: string; program: string; programHref: string; age: string; }
 
 const pandas: Panda[] = [
-  { img: reads, icon: BookOpen, title: "Panda Reads", text: "Building literacy and imagination, one storybook at a time.", tint: "from-sky/40", program: "Early Years 4", programHref: "/programs#program-3", age: "5+" },
-  { img: writes, icon: Pencil, title: "Panda Writes", text: "Developing communication and creativity through playful words.", tint: "from-accent/40", program: "Early Years 3", programHref: "/programs#program-2", age: "4+" },
   { img: paints, icon: Palette, title: "Panda Paints", text: "Expressing big imagination through colour and art.", tint: "from-secondary/50", program: "Early Years 1", programHref: "/programs#program-0", age: "2+" },
   { img: dances, icon: Music, title: "Panda Dances", text: "Building confidence and joy through movement.", tint: "from-primary/30", program: "Early Years 2", programHref: "/programs#program-1", age: "3+" },
-  { img: sings, icon: Music2, title: "Panda Sings", text: "Exploring rhythm, melody and the music of language.", tint: "from-accent/40", program: "Early Years 1", programHref: "/programs#program-0", age: "2+" },
+  { img: writes, icon: Pencil, title: "Panda Writes", text: "Developing communication and creativity through playful words.", tint: "from-accent/40", program: "Early Years 3", programHref: "/programs#program-2", age: "4+" },
+  { img: reads, icon: BookOpen, title: "Panda Reads", text: "Building literacy and imagination, one storybook at a time.", tint: "from-sky/40", program: "Early Years 4", programHref: "/programs#program-3", age: "5+" },
   { img: explores, icon: FlaskConical, title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40", program: "Grades", programHref: "/programs#program-4", age: "6+" },
-  { img: plays, icon: Goal, title: "Panda Plays", text: "Growing through teamwork, fair play and outdoor fun.", tint: "from-primary/30", program: "Early Years 3", programHref: "/programs#program-2", age: "4+" },
-  { img: grows, icon: Sprout, title: "Panda Grows", text: "Learning responsibility and a love for nature's care.", tint: "from-secondary/50", program: "Early Years 2", programHref: "/programs#program-1", age: "3+" },
 ];
 
 export function LearnDifferently() {
