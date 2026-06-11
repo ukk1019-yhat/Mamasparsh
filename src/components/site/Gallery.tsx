@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Camera, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
-import { getGalleryImages } from "@/lib/api/gallery.functions";
 
-type GalleryImage = {
-  id: string;
-  name: string;
-};
+const photos = [
+  { id: "1U6CssoC60zYuKM4nfh6wXAfWcvUI-AR3" },
+  { id: "1IKcPCAyHNqiC2eX0ZS0ymZKA5B0uOHUG" },
+  { id: "1coPqtFF88Xtb2JgPLSkqA9srkmDeu-Jd" },
+  { id: "1ENiD9sxVMwbkW2VDwY8GJ73pUehWQ8P0" },
+  { id: "15t1vf46WwtpVLImOa6zeT3iJklznk-o2" },
+];
 
 function thumbUrl(id: string) {
   return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
@@ -18,19 +20,7 @@ function fullUrl(id: string) {
 }
 
 export function Gallery() {
-  const [allImages, setAllImages] = useState<GalleryImage[]>([]);
   const [active, setActive] = useState<number | null>(null);
-  const [errored, setErrored] = useState(false);
-
-  useEffect(() => {
-    getGalleryImages().then(setAllImages).catch(() => setErrored(true));
-  }, []);
-
-  const photos = allImages.slice(0, 9);
-
-  if (allImages.length === 0 && !errored) return null;
-
-  if (errored && allImages.length === 0) return null;
 
   return (
     <section id="gallery" className="relative scroll-mt-24 overflow-hidden bg-background py-24 md:py-32">
@@ -48,14 +38,14 @@ export function Gallery() {
 
         <div className="grid auto-rows-[300px] grid-cols-2 gap-4 md:grid-cols-3">
           {photos.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 3) * 0.08} className={i === 0 || i === 3 || i === 6 ? "row-span-2" : ""}>
+            <Reveal key={p.id} delay={(i % 3) * 0.08} className={i === 0 || i === 3 ? "row-span-2" : ""}>
               <button
                 onClick={() => setActive(i)}
-                className={`group relative h-full w-full overflow-hidden rounded-3xl shadow-soft ${i === 0 || i === 3 || i === 6 ? "row-span-2" : ""}`}
+                className={`group relative h-full w-full overflow-hidden rounded-3xl shadow-soft ${i === 0 || i === 3 ? "row-span-2" : ""}`}
               >
                 <img
                   src={thumbUrl(p.id)}
-                  alt={p.name}
+                  alt=""
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -96,7 +86,7 @@ export function Gallery() {
               exit={{ scale: 0.85 }}
               onClick={(e) => e.stopPropagation()}
               src={fullUrl(photos[active].id)}
-              alt={photos[active].name}
+              alt=""
               referrerPolicy="no-referrer"
               className="max-h-[82vh] w-auto rounded-3xl shadow-lift"
             />
