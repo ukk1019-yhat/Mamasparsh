@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as AdventuresRouteImport } from './routes/adventures'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ProgramsRoute = ProgramsRouteImport.update({
+  id: '/programs',
+  path: '/programs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
+  '/programs': typeof ProgramsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
+  '/programs': typeof ProgramsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,20 @@ export interface FileRoutesById {
   '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
+  '/programs': typeof ProgramsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adventures' | '/curriculum' | '/gallery'
+  fullPaths: '/' | '/adventures' | '/curriculum' | '/gallery' | '/programs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/adventures' | '/curriculum' | '/gallery'
-  id: '__root__' | '/' | '/adventures' | '/curriculum' | '/gallery'
+  to: '/' | '/adventures' | '/curriculum' | '/gallery' | '/programs'
+  id:
+    | '__root__'
+    | '/'
+    | '/adventures'
+    | '/curriculum'
+    | '/gallery'
+    | '/programs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +82,18 @@ export interface RootRouteChildren {
   AdventuresRoute: typeof AdventuresRoute
   CurriculumRoute: typeof CurriculumRoute
   GalleryRoute: typeof GalleryRoute
+  ProgramsRoute: typeof ProgramsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/programs': {
+      id: '/programs'
+      path: '/programs'
+      fullPath: '/programs'
+      preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -107,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdventuresRoute: AdventuresRoute,
   CurriculumRoute: CurriculumRoute,
   GalleryRoute: GalleryRoute,
+  ProgramsRoute: ProgramsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -6,6 +6,7 @@ import logoSrc from "@/assets/logo.png";
 
 const links = [
   { label: "Panda World", href: "#learn" },
+  { label: "Programs", href: "/programs" },
   { label: "Adventures", href: "#adventures" },
   { label: "Curriculum", href: "/curriculum" },
   { label: "Why Us", href: "#why" },

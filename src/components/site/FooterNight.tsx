@@ -42,6 +42,7 @@ export function FooterNight() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 font-body text-star/80">
           <a href="#learn" className="hover:text-star">Panda World</a>
+          <a href="/programs" className="hover:text-star">Programs</a>
           <a href="#adventures" className="hover:text-star">Adventures</a>
           <a href="/curriculum" className="hover:text-star">Curriculum</a>
           <a href="#why" className="hover:text-star">Why Us</a>

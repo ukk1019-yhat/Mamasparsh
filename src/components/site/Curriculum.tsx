@@ -19,6 +19,7 @@ import {
   Users,
   GraduationCap,
   ChevronDown,
+  Baby,
 } from "lucide-react";
 import { Reveal } from "./Reveal";
 
@@ -317,6 +318,69 @@ export function Curriculum() {
             </motion.div>
           </div>
         </Reveal>
+
+        {/* Programs */}
+        <div className="mb-20">
+          <div className="mb-12 text-center">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
+                <Baby size={16} /> Our Programs
+              </span>
+              <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
+                Early Years & Beyond
+              </h2>
+              <p className="mx-auto mt-4 max-w-3xl font-body text-lg text-foreground/70 leading-relaxed">
+                At an age where children are ever enthusiastic and inquisitive, early childhood education helps channelise their energy in the right direction and provides them a safe platform for self-expression. Research suggests a strong early childhood education moulds a child's academic success by introducing them to various academic facets such as basic numeracy and literacy along with preparing them for later school life.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: Baby, title: "Early Years 1", age: "2 Years +", schedule: "5 Days a week (Mon - Fri) · 9:30 AM to 12:30 PM IST",
+                desc: "Through our early years 1 program we introduce children to fun activities such as art and crafts along with other specially curated enjoyable team-based activities that sow the first seeds of collaboration and team play in your little one. With basic educational activity aimed at developing a love for learning and preparing for their later educational years we make sure your little one is having a great time growing up!",
+              },
+              {
+                icon: Users, title: "Early Years 2", age: "3 Years +", schedule: "5 Days a week (Mon - Fri) · 9:15 AM to 12:45 PM IST",
+                desc: "",
+              },
+              {
+                icon: Sparkles, title: "Early Years 3", age: "4 Years +", schedule: "5 Days a week (Mon - Fri) · 9:00 AM to 3:00 PM IST",
+                desc: "Through our Early Years 3 program, we provide a holistic foundation for your little one to develop into an intelligent and independent young individual at our preschool for 4-year-olds in Kakinada. We encourage children to ask questions and think critically. With team-based activities aimed at instilling a logical approach to solving problems, we help prepare children for their future school life.",
+              },
+              {
+                icon: BookOpen, title: "Early Years 4", age: "5 Years +", schedule: "5 Days a week (Mon - Fri) · 9:00 AM to 3:00 PM IST",
+                desc: "Through our Early Years 4 program, we help bridge your child's educational needs to help them enter into any mainstream curriculum from grade 1 onwards. With a focus on experiential learning along with other co-curriculum activities that introduce the child to various facets of school life, we are one of the best preschools for 5-year-olds in Kakinada. Practising an interdisciplinary approach, we make learning engaging and allow your little one to discover their interests and develop an open-minded approach towards challenges.",
+              },
+              {
+                icon: GraduationCap, title: "Grades (IGCSE)", age: "Grade 1 onwards", schedule: "Cambridge Primary + Reggio Emilia",
+                desc: "At our school, from Grade 1 onwards, we offer a thoughtfully designed curriculum that blends the child-led, inquiry-driven philosophy of Reggio Emilia with the academic structure of the Cambridge Primary Curriculum (IGCSE).",
+              },
+            ].map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <Reveal delay={i * 0.05} key={p.title}>
+                  <div className="group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow">
+                    <div className="flex items-start gap-4">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-bamboo text-primary-foreground shadow-sm">
+                        <Icon size={24} />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-display text-lg font-extrabold text-foreground">{p.title}</h3>
+                        <p className="font-body text-sm font-bold text-accent">{p.age}</p>
+                      </div>
+                    </div>
+                    <p className="mt-3 font-body text-sm text-foreground/60">{p.schedule}</p>
+                    {p.desc && (
+                      <p className="mt-3 font-body text-sm text-foreground/70 leading-relaxed line-clamp-3">{p.desc}</p>
+                    )}
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Waldorf Curriculum */}
         <div className="mb-12 text-center">

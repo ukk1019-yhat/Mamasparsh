@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import {
   Apple, Wheat, Droplets, Leaf, UtensilsCrossed, Mic, Palette, Heart, Sparkles,
-  BookOpen, Music, Trees, Clock, Hand, Sun, Users, GraduationCap, ChevronRight,
+  BookOpen, Music, Trees, Clock, Hand, Sun, Users, GraduationCap, ChevronRight, Baby,
 } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
@@ -258,6 +258,101 @@ export function CurriculumPage() {
                 </p>
               </div>
             </Reveal>
+          </div>
+        </section>
+
+        {/* Programs */}
+        <section className="py-12 md:py-20">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="mb-14 text-center">
+              <Reveal>
+                <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
+                  <Baby size={16} /> Our Programs
+                </span>
+                <h2 className="mt-4 font-display text-5xl font-extrabold leading-tight text-foreground md:text-7xl">
+                  Early Years & Beyond
+                </h2>
+                <p className="mx-auto mt-4 max-w-4xl font-body text-lg text-foreground/70 leading-relaxed">
+                  At an age where children are ever enthusiastic and inquisitive, early childhood education helps channelise their energy in the right direction and provides them a safe platform for self-expression. Research suggests a strong early childhood education moulds a child's academic success by introducing them to various academic facets such as basic numeracy and literacy along with preparing them for later school life.
+                </p>
+              </Reveal>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {[
+                {
+                  icon: Baby, title: "Early Years 1", age: "2 Years +", schedule: "5 Days a week (Mon - Fri) · 9:30 AM to 12:30 PM IST",
+                  body: [
+                    "Through our early years 1 program we introduce children to fun activities such as art and crafts along with other specially curated enjoyable team-based activities that sow the first seeds of collaboration and team play in your little one.",
+                    "With basic educational activity aimed at developing a love for learning and preparing for their later educational years we make sure your little one is having a great time growing up!",
+                  ],
+                },
+                {
+                  icon: Users, title: "Early Years 2", age: "3 Years +", schedule: "5 Days a week (Mon - Fri) · 9:15 AM to 12:45 PM IST",
+                  body: [],
+                },
+                {
+                  icon: Sparkles, title: "Early Years 3", age: "4 Years +", schedule: "5 Days a week (Mon - Fri) · 9:00 AM to 3:00 PM IST",
+                  body: [
+                    "Through our Early Years 3 program, we provide a holistic foundation for your little one to develop into an intelligent and independent young individual at our preschool for 4-year-olds in Kakinada. We encourage children to ask questions and think critically. With team-based activities aimed at instilling a logical approach to solving problems, we help prepare children for their future school life.",
+                  ],
+                },
+                {
+                  icon: BookOpen, title: "Early Years 4", age: "5 Years +", schedule: "5 Days a week (Mon - Fri) · 9:00 AM to 3:00 PM IST",
+                  body: [
+                    "Through our Early Years 4 program, we help bridge your child's educational needs to help them enter into any mainstream curriculum from grade 1 onwards.",
+                    "With a focus on experiential learning along with other co-curriculum activities that introduce the child to various facets of school life, we are one of the best preschools for 5-year-olds in Kakinada. Practising an interdisciplinary approach, we make learning engaging and allow your little one to discover their interests and develop an open-minded approach towards challenges.",
+                  ],
+                },
+                {
+                  icon: GraduationCap, title: "Grades (IGCSE)", age: "Grade 1 onwards", schedule: "Cambridge Primary + Reggio Emilia",
+                  body: [
+                    "At our school, from Grade 1 onwards, we offer a thoughtfully designed curriculum that blends the child-led, inquiry-driven philosophy of Reggio Emilia with the academic structure of the Cambridge Primary Curriculum (IGCSE). This approach not only nurtures curiosity and creativity but also provides a clear academic pathway leading up to the internationally recognized Cambridge IGCSE in the higher grades.",
+                    "While Cambridge Primary ensures a solid grounding in core subjects like English, Mathematics, and Science, the Reggio-inspired environment encourages students to explore, question, and collaborate — making learning both meaningful and joyful.",
+                  ],
+                  bullets: [
+                    "Develop strong academic skills alongside independent thinking",
+                    "Engage in projects and real-world problem-solving",
+                    "Foster academic strength alongside creativity",
+                    "Cultivate skills like problem-solving, research, and teamwork",
+                    "Build a seamless and natural progression from early years into Cambridge IGCSE",
+                  ],
+                },
+              ].map((p, i) => {
+                const Icon = p.icon;
+                return (
+                  <Reveal delay={i * 0.04} key={p.title}>
+                    <div className="group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow md:p-8">
+                      <div className="flex items-start gap-4">
+                        <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
+                          <Icon size={28} />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-display text-xl font-extrabold text-foreground md:text-2xl">{p.title}</h3>
+                          <p className="font-body font-bold text-accent">{p.age}</p>
+                          <p className="font-body text-sm text-foreground/60">{p.schedule}</p>
+                        </div>
+                      </div>
+                      <div className="mt-5 space-y-3 pl-0 md:pl-[4.5rem]">
+                        {(p.body.length > 0 ? p.body : ["Details coming soon."]).map((line, j) => (
+                          <p key={j} className="font-body text-foreground/80 leading-relaxed">{line}</p>
+                        ))}
+                        {"bullets" in p && p.bullets && (
+                          <ul className="mt-4 space-y-2">
+                            {p.bullets.map((b, j) => (
+                              <li key={j} className="flex items-start gap-3 font-body text-foreground/70">
+                                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </section>
 
