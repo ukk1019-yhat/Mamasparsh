@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { BookOpen, Pencil, Palette, Music, Music2, FlaskConical, Goal, Sprout, PawPrint } from "lucide-react";
+import { BookOpen, Pencil, Palette, Music, Music2, FlaskConical, Goal, Sprout, PawPrint, ArrowRight } from "lucide-react";
 import { Reveal, TextReveal } from "./Reveal";
 import reads from "@/assets/panda-reads.png";
 import writes from "@/assets/panda-writes.png";
@@ -11,15 +11,17 @@ import plays from "@/assets/panda-plays.png";
 import grows from "@/assets/panda-grows.png";
 import type { LucideIcon } from "lucide-react";
 
-const pandas: { img: string; icon: LucideIcon; title: string; text: string; tint: string }[] = [
-  { img: reads, icon: BookOpen, title: "Panda Reads", text: "Building literacy and imagination, one storybook at a time.", tint: "from-sky/40" },
-  { img: writes, icon: Pencil, title: "Panda Writes", text: "Developing communication and creativity through playful words.", tint: "from-accent/40" },
-  { img: paints, icon: Palette, title: "Panda Paints", text: "Expressing big imagination through colour and art.", tint: "from-secondary/50" },
-  { img: dances, icon: Music, title: "Panda Dances", text: "Building confidence and joy through movement.", tint: "from-primary/30" },
-  { img: sings, icon: Music2, title: "Panda Sings", text: "Exploring rhythm, melody and the music of language.", tint: "from-accent/40" },
-  { img: explores, icon: FlaskConical, title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40" },
-  { img: plays, icon: Goal, title: "Panda Plays", text: "Growing through teamwork, fair play and outdoor fun.", tint: "from-primary/30" },
-  { img: grows, icon: Sprout, title: "Panda Grows", text: "Learning responsibility and a love for nature's care.", tint: "from-secondary/50" },
+interface Panda { img: string; icon: LucideIcon; title: string; text: string; tint: string; program: string; programHref: string; age: string; }
+
+const pandas: Panda[] = [
+  { img: reads, icon: BookOpen, title: "Panda Reads", text: "Building literacy and imagination, one storybook at a time.", tint: "from-sky/40", program: "Early Years 4", programHref: "/programs#program-3", age: "5+" },
+  { img: writes, icon: Pencil, title: "Panda Writes", text: "Developing communication and creativity through playful words.", tint: "from-accent/40", program: "Early Years 3", programHref: "/programs#program-2", age: "4+" },
+  { img: paints, icon: Palette, title: "Panda Paints", text: "Expressing big imagination through colour and art.", tint: "from-secondary/50", program: "Early Years 1", programHref: "/programs#program-0", age: "2+" },
+  { img: dances, icon: Music, title: "Panda Dances", text: "Building confidence and joy through movement.", tint: "from-primary/30", program: "Early Years 2", programHref: "/programs#program-1", age: "3+" },
+  { img: sings, icon: Music2, title: "Panda Sings", text: "Exploring rhythm, melody and the music of language.", tint: "from-accent/40", program: "Early Years 1", programHref: "/programs#program-0", age: "2+" },
+  { img: explores, icon: FlaskConical, title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40", program: "Grades", programHref: "/programs#program-4", age: "6+" },
+  { img: plays, icon: Goal, title: "Panda Plays", text: "Growing through teamwork, fair play and outdoor fun.", tint: "from-primary/30", program: "Early Years 3", programHref: "/programs#program-2", age: "4+" },
+  { img: grows, icon: Sprout, title: "Panda Grows", text: "Learning responsibility and a love for nature's care.", tint: "from-secondary/50", program: "Early Years 2", programHref: "/programs#program-1", age: "3+" },
 ];
 
 export function LearnDifferently() {
@@ -47,12 +49,17 @@ export function LearnDifferently() {
             const Icon = p.icon;
             const flip = i % 2 === 1;
             return (
-              <div
+              <a
                 key={p.title}
-                className={`flex flex-col items-center gap-8 md:gap-14 ${flip ? "md:flex-row-reverse" : "md:flex-row"}`}
+                href={p.programHref}
+                className={`flex flex-col items-center gap-8 md:gap-14 group ${flip ? "md:flex-row-reverse" : "md:flex-row"}`}
               >
-                <Reveal y={60} className="flex-1">
-                  <div className={`relative grid place-items-center rounded-[2.5rem] bg-gradient-to-b ${p.tint} to-transparent p-6`}>
+                <Reveal y={60} className="flex-1 w-full">
+                  <div className={`relative grid place-items-center rounded-[2.5rem] bg-gradient-to-b ${p.tint} to-transparent p-6 transition-shadow duration-500 group-hover:shadow-glow`}>
+                    <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-foreground/10 backdrop-blur-md px-3 py-1 font-display text-xs font-bold text-foreground/70">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                      Ages {p.age}
+                    </span>
                     <motion.img
                       whileHover={{ scale: 1.06, rotate: flip ? -3 : 3 }}
                       transition={{ type: "spring", stiffness: 200, damping: 14 }}
@@ -73,8 +80,11 @@ export function LearnDifferently() {
                   <p className="mt-3 max-w-md font-body text-lg text-foreground/70 md:mx-0 mx-auto">
                     {p.text}
                   </p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-4 py-1.5 font-display text-sm font-bold text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                    {p.program} <ArrowRight size={14} />
+                  </span>
                 </Reveal>
-              </div>
+              </a>
             );
           })}
         </div>
