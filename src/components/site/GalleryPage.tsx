@@ -14,7 +14,7 @@ function thumbUrl(id: string) {
   return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
 }
 function fullUrl(id: string) {
-  return `https://drive.google.com/uc?export=view&id=${id}`;
+  return `https://lh3.googleusercontent.com/d/${id}`;
 }
 
 export function GalleryPage() {
