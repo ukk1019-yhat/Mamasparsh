@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { withCache } from "./cache";
+import { listFolderFiles } from "./drive";
 
 const FOLDER_ID = "1VMgV3jCp1-T4iigb0975yud6BJ4yTt-Y";
 
@@ -8,7 +9,7 @@ type GalleryImage = {
   name: string;
 };
 
-async function fetchGalleryImages(): Promise<GalleryImage[]> {
+async function scrapeFolder(): Promise<GalleryImage[]> {
   const urls = [
     `https://drive.google.com/drive/folders/${FOLDER_ID}`,
     `https://drive.google.com/drive/folders/${FOLDER_ID}?hl=en`,
@@ -58,6 +59,20 @@ async function fetchGalleryImages(): Promise<GalleryImage[]> {
     seen.add(img.id);
     return true;
   });
+}
+
+async function fetchGalleryImages(): Promise<GalleryImage[]> {
+  const refreshToken = process.env.GOOGLE_DRIVE_REFRESH_TOKEN;
+
+  if (refreshToken) {
+    try {
+      return await listFolderFiles(refreshToken);
+    } catch {
+      return scrapeFolder();
+    }
+  }
+
+  return scrapeFolder();
 }
 
 export const getGalleryImages = createServerFn({ method: "GET" }).handler(async () => {
