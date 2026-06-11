@@ -205,7 +205,7 @@ export function CurriculumPage() {
       <nav className="fixed inset-x-0 top-0 z-50 bg-card/85 shadow-soft backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 md:px-8">
           <a href="/" className="flex items-center gap-2.5">
-            <img src={logoSrc} alt="MamaSparsh logo" className="h-14 w-auto md:h-16" />
+            <img src={logoSrc} alt="MamaSparsh logo" className="h-18 w-auto" />
           </a>
           <MagneticButton as="a" href="/" variant="primary" className="px-6 py-2.5 text-sm">
             <ChevronRight size={16} className="rotate-180" /> Back Home
