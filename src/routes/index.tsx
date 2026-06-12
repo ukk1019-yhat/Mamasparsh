@@ -13,22 +13,26 @@ import { Testimonials } from "@/components/site/Testimonials";
 import { Admissions } from "@/components/site/Admissions";
 import { Contact } from "@/components/site/Contact";
 import { FooterNight } from "@/components/site/FooterNight";
+import { canonical } from "@/lib/seo";
+
+const routeMeta = {
+  path: "/",
+  title: "MamaSparsh Preschool — A Mother's Touch for Every Little Dream",
+  desc: "Step into the MamaSparsh Panda World — a premium, nurturing preschool where children read, write, paint, dance, explore and grow through nature-inspired, child-centric learning in Kakinada.",
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "MamaSparsh Preschool — A Mother's Touch for Every Little Dream" },
-      {
-        name: "description",
-        content:
-          "Step into the MamaSparsh Panda World — a premium, nurturing preschool where children read, write, paint, dance, explore and grow through nature-inspired, child-centric learning.",
-      },
-      { property: "og:title", content: "MamaSparsh Preschool — The Panda World" },
-      {
-        property: "og:description",
-        content: "A mother's touch for every little dream. Premium, nature-inspired early learning.",
-      },
+      { title: routeMeta.title },
+      { name: "description", content: routeMeta.desc },
+      { property: "og:title", content: routeMeta.title },
+      { property: "og:description", content: routeMeta.desc },
+      { property: "og:url", content: canonical(routeMeta.path) },
+      { name: "twitter:title", content: routeMeta.title },
+      { name: "twitter:description", content: routeMeta.desc },
     ],
+    links: [{ rel: "canonical", href: canonical(routeMeta.path) }],
   }),
   component: Index,
 });

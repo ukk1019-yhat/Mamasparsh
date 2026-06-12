@@ -13,6 +13,9 @@ import { motion, useScroll } from "motion/react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingDecorations } from "@/components/site/FloatingDecorations";
+import { SITE, canonical, jsonLdScripts } from "@/lib/seo";
+
+const GLOBAL_SCRIPTS = jsonLdScripts("/");
 
 function NotFoundComponent() {
   return (
@@ -87,19 +90,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "MamaSparsh Preschool" },
       { name: "theme-color", content: "#f4e9c9" },
+      { name: "robots", content: "index, follow" },
+      { name: "keywords", content: "MamaSparsh, preschool, Kakinada, early childhood education, daycare, nursery, kindergarten, Waldorf, Reggio Emilia, best preschool in Kakinada" },
       { property: "og:title", content: "MamaSparsh Preschool — The Panda World" },
       {
         property: "og:description",
         content: "A mother's touch for every little dream. Premium, nature-inspired early learning.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: canonical("/") },
+      { property: "og:site_name", content: SITE.name },
+      { property: "og:locale", content: "en_IN" },
+      { property: "og:image", content: `${SITE.domain}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@MamaSparsh" },
+      { name: "twitter:site", content: SITE.twitter },
     ],
     links: [
       { rel: "icon", href: "/favicon.png" },
+      { rel: "canonical", href: canonical("/") },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "preconnect", href: "https://lh3.googleusercontent.com", crossOrigin: "anonymous" },
+      { rel: "preconnect", href: "https://drive.google.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap",
@@ -121,6 +135,9 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {GLOBAL_SCRIPTS.map((script, i) => (
+          <script key={i} type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: script }} />
+        ))}
       </head>
       <body>
         {children}

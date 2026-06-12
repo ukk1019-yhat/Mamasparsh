@@ -1,16 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProgramsPage } from "@/components/site/ProgramsPage";
+import { SITE, canonical } from "@/lib/seo";
+
+const routeMeta = {
+  path: "/programs",
+  title: "Programs — MamaSparsh Preschool",
+  desc: "Explore MamaSparsh's Early Years programs (ages 2-5) in Kakinada. Reggio Emilia inspired curriculum with a focus on holistic development, creative exploration, and school readiness.",
+};
 
 export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
-      { title: "Programs — MamaSparsh Preschool" },
-      {
-        name: "description",
-        content:
-          "Explore MamaSparsh's Early Years programs (2-5 years) and Cambridge IGCSE Grade programs in Kakinada.",
-      },
+      { title: routeMeta.title },
+      { name: "description", content: routeMeta.desc },
+      { name: "robots", content: "index, follow" },
+      { name: "keywords", content: "MamaSparsh programs, preschool programs Kakinada, Early Years, Reggio Emilia, nursery, kindergarten, daycare Kakinada" },
+      { property: "og:title", content: routeMeta.title },
+      { property: "og:description", content: routeMeta.desc },
+      { property: "og:url", content: canonical(routeMeta.path) },
+      { property: "og:image", content: `${SITE.domain}/og-image.jpg` },
+      { name: "twitter:title", content: routeMeta.title },
+      { name: "twitter:description", content: routeMeta.desc },
     ],
+    links: [{ rel: "canonical", href: canonical(routeMeta.path) }],
   }),
   component: ProgramsPage,
 });
