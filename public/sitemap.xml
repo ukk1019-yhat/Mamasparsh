@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mamasparshschool.in/</loc>
+    <loc>https://www.mamasparshschool.in/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mamasparshschool.in/programs</loc>
+    <loc>https://www.mamasparshschool.in/programs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mamasparshschool.in/curriculum</loc>
+    <loc>https://www.mamasparshschool.in/curriculum</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mamasparshschool.in/gallery</loc>
+    <loc>https://www.mamasparshschool.in/gallery</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://mamasparshschool.in/adventures</loc>
+    <loc>https://www.mamasparshschool.in/adventures</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Mama Sparsh School",
   shortName: "MamaSparsh",
-  domain: "https://mamasparshschool.in",
+  domain: "https://www.mamasparshschool.in",
   tagline: "A Mother's Touch for Every Little Dream",
   email: "umakrishnakanthchokkapu15@gmail.com",
   phone: "+91-1234567890",

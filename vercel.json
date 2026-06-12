@@ -1,5 +1,18 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mamasparshschool.in"
+        }
+      ],
+      "destination": "https://www.mamasparshschool.in/$1",
+      "permanent": true
+    }
+  ]
 }
