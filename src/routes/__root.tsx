@@ -91,6 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "MamaSparsh Preschool" },
       { name: "theme-color", content: "#f4e9c9" },
       { name: "robots", content: "index, follow" },
+      { name: "google-site-verification", content: "xPwjKyXDlmQUknxgCFWnR62koxR-vRMojbM4N6au3_s" },
       { name: "keywords", content: "MamaSparsh, preschool, Kakinada, early childhood education, daycare, nursery, kindergarten, Waldorf, Reggio Emilia, best preschool in Kakinada" },
       { property: "og:title", content: "MamaSparsh Preschool — The Panda World" },
       {
