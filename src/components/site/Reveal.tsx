@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { motion } from "motion/react";
 
-type RevealEffect = "fade" | "scale" | "flip" | "clip";
+type RevealEffect = "fade" | "scale" | "flip";
 
 interface RevealProps {
   children: ReactNode;
@@ -16,14 +16,12 @@ const variants: Record<RevealEffect, object> = {
   fade: { opacity: 0, y: 36 },
   scale: { opacity: 0, scale: 0.85, y: 24 },
   flip: { opacity: 0, rotateX: 15, y: 30 },
-  clip: { opacity: 0, clipPath: "inset(0 0 100% 0)", y: 0 },
 };
 
 const whileInView: Record<RevealEffect, object> = {
   fade: { opacity: 1, y: 0 },
   scale: { opacity: 1, scale: 1, y: 0 },
   flip: { opacity: 1, rotateX: 0, y: 0 },
-  clip: { opacity: 1, clipPath: "inset(0 0 0 0)", y: 0 },
 };
 
 /** Scroll-triggered reveal with multiple animation effects. */
@@ -43,7 +41,6 @@ export function Reveal({
       viewport={{ once, amount: 0.25 }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
-      style={effect === "clip" ? { transformOrigin: "top" } : undefined}
     >
       {children}
     </motion.div>

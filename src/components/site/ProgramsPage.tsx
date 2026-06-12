@@ -183,7 +183,7 @@ export function ProgramsPage() {
         {/* CTA */}
         <section className="py-16">
           <div className="mx-auto max-w-3xl px-5 text-center">
-            <Reveal effect="clip">
+            <Reveal effect="scale">
               <div className="rounded-3xl bg-muted/50 p-8 md:p-12">
                 <h2 className="font-display text-3xl font-extrabold text-foreground md:text-4xl">
                   <GradientText text="Ready to Begin the Journey?" />

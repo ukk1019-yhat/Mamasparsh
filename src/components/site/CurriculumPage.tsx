@@ -265,7 +265,7 @@ export function CurriculumPage() {
         <section className="py-12 md:py-20">
           <div className="mx-auto max-w-6xl px-5">
             <div className="mb-14 text-center">
-              <Reveal effect="clip">
+              <Reveal effect="scale">
                 <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                   <Baby size={16} /> Our Programs
                 </span>

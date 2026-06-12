@@ -322,7 +322,7 @@ export function Curriculum() {
         {/* Programs */}
         <div className="mb-20">
           <div className="mb-12 text-center">
-            <Reveal effect="clip">
+            <Reveal effect="scale">
               <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                 <Baby size={16} /> Our Programs
               </span>
@@ -355,7 +355,7 @@ export function Curriculum() {
               },
             ].map((p, i) => {
               const Icon = p.icon;
-              const effects = ["fade", "scale", "flip", "clip"] as const;
+              const effects = ["fade", "scale", "flip", "scale"] as const;
               return (
                 <Reveal delay={i * 0.05} effect={effects[i % effects.length]} key={p.title}>
                   <div className="card-lift group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow">

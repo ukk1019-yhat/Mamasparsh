@@ -31,7 +31,7 @@ function TiltCard({ feature, i }: { feature: (typeof features)[number]; i: numbe
   };
 
   return (
-    <Reveal delay={(i % 4) * 0.08} effect={i % 3 === 0 ? "scale" : i % 3 === 1 ? "flip" : "clip"}>
+    <Reveal delay={(i % 4) * 0.08} effect={i % 2 === 0 ? "scale" : "fade"}>
       <div
         ref={ref}
         onMouseMove={onMove}
