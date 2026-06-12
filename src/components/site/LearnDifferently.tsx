@@ -15,7 +15,7 @@ const pandas: Panda[] = [
   { img: dances, icon: Music, title: "Panda Dances", text: "Building confidence and joy through movement.", tint: "from-primary/30", program: "Early Years 2", programHref: "/programs#program-1", age: "3+" },
   { img: writes, icon: Pencil, title: "Panda Writes", text: "Developing communication and creativity through playful words.", tint: "from-accent/40", program: "Early Years 3", programHref: "/programs#program-2", age: "4+" },
   { img: reads, icon: BookOpen, title: "Panda Reads", text: "Building literacy and imagination, one storybook at a time.", tint: "from-sky/40", program: "Early Years 4", programHref: "/programs#program-3", age: "5+" },
-  { img: explores, icon: FlaskConical, title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40", program: "Grades", programHref: "/programs#program-4", age: "6+" },
+  { img: explores, icon: FlaskConical, title: "Panda Explores", text: "Learning STEM through hands-on discovery and wonder.", tint: "from-sky/40", program: "Curriculum", programHref: "/curriculum", age: "6+" },
 ];
 
 export function LearnDifferently() {
