@@ -353,10 +353,6 @@ export function Curriculum() {
                 icon: BookOpen, title: "Early Years 4", age: "5 Years +", schedule: "5 Days a week (Mon - Fri) · 9:00 AM to 3:00 PM IST",
                 desc: "Through our Early Years 4 program, we help bridge your child's educational needs to help them enter into any mainstream curriculum from grade 1 onwards. With a focus on experiential learning along with other co-curriculum activities that introduce the child to various facets of school life, we are one of the best preschools for 5-year-olds in Kakinada. Practising an interdisciplinary approach, we make learning engaging and allow your little one to discover their interests and develop an open-minded approach towards challenges.",
               },
-              {
-                icon: GraduationCap, title: "Grades (IGCSE)", age: "Grade 1 onwards", schedule: "Cambridge Primary + Reggio Emilia",
-                desc: "At our school, from Grade 1 onwards, we offer a thoughtfully designed curriculum that blends the child-led, inquiry-driven philosophy of Reggio Emilia with the academic structure of the Cambridge Primary Curriculum (IGCSE).",
-              },
             ].map((p, i) => {
               const Icon = p.icon;
               return (
