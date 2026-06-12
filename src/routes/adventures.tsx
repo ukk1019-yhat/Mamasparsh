@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AdventuresPage } from "@/components/site/AdventuresPage";
-import { SITE, canonical } from "@/lib/seo";
+import { SITE, OG_IMAGE, canonical, jsonLdScripts } from "@/lib/seo";
 
 const routeMeta = {
   path: "/adventures",
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/adventures")({
       { property: "og:title", content: routeMeta.title },
       { property: "og:description", content: routeMeta.desc },
       { property: "og:url", content: canonical(routeMeta.path) },
-      { property: "og:image", content: `${SITE.domain}/og-image.jpg` },
+      { property: "og:image", content: OG_IMAGE },
       { name: "twitter:title", content: routeMeta.title },
       { name: "twitter:description", content: routeMeta.desc },
     ],

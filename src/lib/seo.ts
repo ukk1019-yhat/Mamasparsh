@@ -14,7 +14,7 @@ export const SITE = {
   twitter: "@MamaSparsh",
 } as const;
 
-export const OG_IMAGE = `${SITE.domain}/og-image.jpg`;
+export const OG_IMAGE = `${SITE.domain}/og-image.png`;
 
 export const ROUTES = [
   { path: "/", title: "MamaSparsh Preschool — A Mother's Touch for Every Little Dream", desc: "Step into the MamaSparsh Panda World — a premium, nurturing preschool where children read, write, paint, dance, explore and grow through nature-inspired, child-centric learning in Kakinada." },

@@ -13,7 +13,7 @@ import { motion, useScroll } from "motion/react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingDecorations } from "@/components/site/FloatingDecorations";
-import { SITE, canonical, jsonLdScripts } from "@/lib/seo";
+import { SITE, OG_IMAGE, canonical, jsonLdScripts } from "@/lib/seo";
 
 const GLOBAL_SCRIPTS = jsonLdScripts("/");
 
@@ -101,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:url", content: canonical("/") },
       { property: "og:site_name", content: SITE.name },
       { property: "og:locale", content: "en_IN" },
-      { property: "og:image", content: `${SITE.domain}/og-image.jpg` },
+      { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
