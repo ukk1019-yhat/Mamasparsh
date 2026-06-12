@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion } from "motion/react";
 import { ShieldCheck, Heart, Baby, Palette, Sprout, Users, Blocks, Handshake, Sparkles } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 
 const features = [
   { icon: ShieldCheck, title: "Safe & Secure Campus", text: "CCTV, gated access and caring supervision at every step." },
@@ -31,7 +31,7 @@ function TiltCard({ feature, i }: { feature: (typeof features)[number]; i: numbe
   };
 
   return (
-    <Reveal delay={(i % 4) * 0.08}>
+    <Reveal delay={(i % 4) * 0.08} effect={i % 3 === 0 ? "scale" : i % 3 === 1 ? "flip" : "clip"}>
       <div
         ref={ref}
         onMouseMove={onMove}
@@ -59,7 +59,7 @@ export function WhyChoose() {
               <Heart size={16} /> Why Parents Choose Us
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-              A Place Built on Trust & Warmth
+              <GradientText text="A Place Built on Trust & Warmth" />
             </h2>
           </Reveal>
         </div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowLeft, Loader2 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import { getGalleryImages } from "@/lib/api/gallery.functions";
 
 type GalleryImage = {
@@ -46,10 +46,10 @@ export function GalleryPage() {
             <ArrowLeft size={20} />
           </Link>
           <h1 className="font-display text-3xl font-extrabold text-foreground">
-            Photo Gallery
+            <GradientText text="Photo Gallery" />
           </h1>
         </div>
-        <Reveal>
+        <Reveal effect="scale">
           <p className="mb-8 text-muted-foreground">
             A collection of precious moments from MamaSparsh Preschool.
           </p>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Clapperboard, Play, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import { getVideos, type VideoItem } from "@/lib/api/video.functions";
 
 function videoUrl(id: string) {
@@ -44,12 +44,12 @@ export function Adventures() {
   return (
     <section id="adventures" className="relative scroll-mt-24 overflow-hidden bg-gradient-bamboo py-24 text-primary-foreground md:py-32">
       <div className="mx-auto max-w-6xl px-5">
-        <Reveal>
+        <Reveal effect="scale">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 font-display text-sm font-bold">
             <Clapperboard size={16} /> MamaSparsh Adventures
           </span>
           <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight md:text-6xl">
-            A Day in the Life of Our Little Pandas
+            <GradientText text="A Day in the Life of Our Little Pandas" from="from-white" via="via-primary-foreground/80" to="to-white" />
           </h2>
           <p className="mt-3 max-w-xl font-body text-lg text-primary-foreground/85">
             Swipe through the reels — hover to preview, tap to play full screen.

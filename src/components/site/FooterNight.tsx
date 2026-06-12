@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Moon, Heart } from "lucide-react";
+import { GradientText } from "./Reveal";
 import sleeping from "@/assets/panda-sleeping.png";
 
 export function FooterNight() {
@@ -35,9 +36,7 @@ export function FooterNight() {
         />
         <p className="mt-4 font-display text-sm font-bold tracking-widest text-star/80">GOODNIGHT, LITTLE PANDAS <Moon size={14} className="inline-block ml-1" /></p>
         <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-extrabold leading-snug text-star md:text-4xl">
-          Every Child Deserves a Mother's Touch.
-          <br />
-          Welcome to MamaSparsh.
+          <GradientText text="Every Child Deserves a Mother's Touch. Welcome to MamaSparsh." from="from-star" via="via-white" to="to-star" />
         </h2>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 font-body text-star/80">

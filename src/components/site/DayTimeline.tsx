@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Sunrise, BookOpen, Bird, Palette, Moon, Clock } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import mascot from "@/assets/panda-mascot.png";
 import type { LucideIcon } from "lucide-react";
 
@@ -23,12 +23,12 @@ export function DayTimeline() {
     <section id="day" className="relative scroll-mt-24 overflow-hidden bg-muted/60 py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-5">
         <div className="mb-16 text-center">
-          <Reveal>
+          <Reveal effect="scale">
             <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-1.5 font-display text-sm font-bold text-primary shadow-soft">
               <Clock size={16} /> A Day at MamaSparsh
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-              Follow Our Panda Through the Day
+              <GradientText text="Follow Our Panda Through the Day" />
             </h2>
           </Reveal>
         </div>

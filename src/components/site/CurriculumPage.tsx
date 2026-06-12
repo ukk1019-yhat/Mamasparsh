@@ -3,7 +3,7 @@ import {
   Apple, Wheat, Droplets, Leaf, UtensilsCrossed, Mic, Palette, Heart, Sparkles,
   BookOpen, Music, Trees, Clock, Hand, Sun, Users, GraduationCap, ChevronRight, Baby,
 } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
 import logoSrc from "@/assets/logo.png";
 
@@ -167,7 +167,7 @@ const waldorfSections: Section[] = [
 function FullCard({ section, index }: { section: Section; index: number }) {
   const Icon = section.icon;
   return (
-    <Reveal delay={index * 0.04}>
+    <Reveal delay={index * 0.04} effect={index % 2 === 0 ? "scale" : "flip"}>
       <div className="group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow md:p-8">
         <div className="flex items-start gap-4">
           <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
@@ -218,12 +218,12 @@ export function CurriculumPage() {
         <section className="relative overflow-hidden pb-8 pt-16 md:pt-24">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
           <div className="mx-auto max-w-4xl px-5 text-center">
-            <Reveal>
+            <Reveal effect="scale">
               <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                 <Sparkles size={16} /> The Mamasparsh Difference
               </span>
               <h1 className="mt-4 font-display text-5xl font-extrabold leading-tight text-foreground md:text-7xl">
-                Where Childhood Blossoms
+                <GradientText text="Where Childhood Blossoms" />
               </h1>
               <p className="mx-auto mt-4 max-w-3xl font-body text-lg text-foreground/70 leading-relaxed md:text-xl">
                 At Mamasparsh, we believe childhood is not just about learning letters and numbers — it's about nurturing healthy habits, confidence, independence, and joyful experiences that last a lifetime.
@@ -246,10 +246,10 @@ export function CurriculumPage() {
         {/* Promise */}
         <section className="py-12 md:py-20">
           <div className="mx-auto max-w-3xl px-5">
-            <Reveal>
+            <Reveal effect="scale">
               <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 p-10 text-center shadow-soft md:p-16">
                 <Heart size={48} className="mx-auto text-primary" fill="currentColor" />
-                <h2 className="mt-5 font-display text-4xl font-extrabold text-foreground md:text-5xl">Our Promise</h2>
+                <h2 className="mt-5 font-display text-4xl font-extrabold text-foreground md:text-5xl"><GradientText text="Our Promise" /></h2>
                 <p className="mx-auto mt-4 max-w-xl font-body text-lg font-medium text-foreground/80">
                   Healthy Bodies. Confident Voices. Independent Minds. Happy Hearts.
                 </p>
@@ -265,12 +265,12 @@ export function CurriculumPage() {
         <section className="py-12 md:py-20">
           <div className="mx-auto max-w-6xl px-5">
             <div className="mb-14 text-center">
-              <Reveal>
+              <Reveal effect="clip">
                 <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                   <Baby size={16} /> Our Programs
                 </span>
                 <h2 className="mt-4 font-display text-5xl font-extrabold leading-tight text-foreground md:text-7xl">
-                  Early Years & Beyond
+                  <GradientText text="Early Years & Beyond" />
                 </h2>
                 <p className="mx-auto mt-4 max-w-4xl font-body text-lg text-foreground/70 leading-relaxed">
                   At an age where children are ever enthusiastic and inquisitive, early childhood education helps channelise their energy in the right direction and provides them a safe platform for self-expression. Research suggests a strong early childhood education moulds a child's academic success by introducing them to various academic facets such as basic numeracy and literacy along with preparing them for later school life.
@@ -346,12 +346,12 @@ export function CurriculumPage() {
         <section className="py-12 md:py-20">
           <div className="mx-auto max-w-5xl px-5">
             <div className="mb-14 text-center">
-              <Reveal>
+              <Reveal effect="flip">
                 <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                   <Trees size={16} /> Kakinada's First Waldorf-Inspired Curriculum
                 </span>
                 <h2 className="mt-4 font-display text-5xl font-extrabold leading-tight text-foreground md:text-7xl">
-                  Head, Heart & Hands
+                  <GradientText text="Head, Heart & Hands" />
                 </h2>
                 <p className="mx-auto mt-4 max-w-3xl font-body text-lg text-foreground/70 leading-relaxed">
                   At Mamasparsh, we proudly introduce Kakinada's First Waldorf-Inspired Curriculum, thoughtfully designed to nurture the intellectual, emotional, physical, and creative development of every child.
@@ -372,7 +372,7 @@ export function CurriculumPage() {
         {/* Footer */}
         <section className="py-16">
           <div className="mx-auto max-w-3xl px-5 text-center">
-            <Reveal>
+            <Reveal effect="scale">
               <div className="rounded-3xl bg-muted/50 p-8 md:p-12">
                 <p className="font-display text-xl font-bold italic text-foreground/50 md:text-2xl">
                   "Nurturing Head, Heart, and Hands through joyful learning, creative exploration, meaningful experiences, and a deep respect for childhood."

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Calendar, GraduationCap, Home, PartyPopper, PawPrint, Sprout } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
 import mascot from "@/assets/panda-mascot.png";
 import type { LucideIcon } from "lucide-react";
@@ -29,7 +29,7 @@ export function Admissions() {
               <PawPrint size={16} /> Admissions Journey
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-              Five Little Steps to Join Us
+              <GradientText text="Five Little Steps to Join Us" />
             </h2>
           </Reveal>
         </div>

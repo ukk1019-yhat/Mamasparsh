@@ -1,7 +1,7 @@
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { MapPin, Phone, Mail, MessageCircle, Heart } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
@@ -22,7 +22,7 @@ export function Contact() {
               <Mail size={16} /> Contact Us
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-              Let's Begin Your Child's Journey
+              <GradientText text="Let's Begin Your Child's Journey" />
             </h2>
           </Reveal>
         </div>

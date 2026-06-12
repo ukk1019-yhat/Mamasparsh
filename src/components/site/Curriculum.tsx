@@ -21,7 +21,7 @@ import {
   ChevronDown,
   Baby,
 } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 
 interface Section {
   id: string;
@@ -203,7 +203,7 @@ function AccordionCard({ section, index }: { section: Section; index: number }) 
   const Icon = section.icon;
 
   return (
-    <Reveal delay={index * 0.05}>
+    <Reveal delay={index * 0.05} effect={index % 2 === 0 ? "scale" : "flip"}>
       <div
         className={`group cursor-pointer overflow-hidden rounded-2xl border transition-all duration-500 ${
           open
@@ -278,12 +278,12 @@ export function Curriculum() {
       <div className="mx-auto max-w-6xl px-5">
         {/* Header */}
         <div className="mb-16 text-center">
-          <Reveal>
+          <Reveal effect="scale">
             <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
               <Sparkles size={16} /> The Mamasparsh Difference
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-              Where Childhood Blossoms
+              <GradientText text="Where Childhood Blossoms" />
             </h2>
             <p className="mx-auto mt-4 max-w-3xl font-body text-lg text-foreground/70 leading-relaxed md:text-xl">
               At Mamasparsh, we believe childhood is not just about learning letters and numbers — it's about nurturing healthy habits, confidence, independence, and joyful experiences that last a lifetime.
@@ -322,12 +322,12 @@ export function Curriculum() {
         {/* Programs */}
         <div className="mb-20">
           <div className="mb-12 text-center">
-            <Reveal>
+            <Reveal effect="clip">
               <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                 <Baby size={16} /> Our Programs
               </span>
               <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-                Early Years & Beyond
+                <GradientText text="Early Years & Beyond" />
               </h2>
               <p className="mx-auto mt-4 max-w-3xl font-body text-lg text-foreground/70 leading-relaxed">
                 At an age where children are ever enthusiastic and inquisitive, early childhood education helps channelise their energy in the right direction and provides them a safe platform for self-expression. Research suggests a strong early childhood education moulds a child's academic success by introducing them to various academic facets such as basic numeracy and literacy along with preparing them for later school life.
@@ -355,9 +355,10 @@ export function Curriculum() {
               },
             ].map((p, i) => {
               const Icon = p.icon;
+              const effects = ["fade", "scale", "flip", "clip"] as const;
               return (
-                <Reveal delay={i * 0.05} key={p.title}>
-                  <div className="group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow">
+                <Reveal delay={i * 0.05} effect={effects[i % effects.length]} key={p.title}>
+                  <div className="card-lift group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow">
                     <div className="flex items-start gap-4">
                       <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-bamboo text-primary-foreground shadow-sm">
                         <Icon size={24} />

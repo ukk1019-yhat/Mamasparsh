@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Camera, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 
 const photos = [
   { id: "1U6CssoC60zYuKM4nfh6wXAfWcvUI-AR3" },
@@ -34,7 +34,7 @@ export function Gallery() {
               <Camera size={16} /> Photo Gallery
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-              Moments Worth Framing
+              <GradientText text="Moments Worth Framing" />
             </h2>
           </Reveal>
         </div>

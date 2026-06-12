@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowLeft, Loader2, Play } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import { getVideos, type VideoItem } from "@/lib/api/video.functions";
 
 function embedUrl(id: string) {
@@ -35,10 +35,10 @@ export function AdventuresPage() {
             <ArrowLeft size={20} />
           </Link>
           <h1 className="font-display text-3xl font-extrabold text-foreground">
-            MamaSparsh Adventures
+            <GradientText text="MamaSparsh Adventures" />
           </h1>
         </div>
-        <Reveal>
+        <Reveal effect="scale">
           <p className="mb-8 text-muted-foreground">
             A Day in the Life of Our Little Pandas
           </p>

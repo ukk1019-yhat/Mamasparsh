@@ -2,7 +2,7 @@ import {
   Baby, Users, Sparkles, BookOpen, ChevronRight,
   ArrowLeft, ArrowRight, Image as ImageIcon,
 } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import { MagneticButton } from "./MagneticButton";
 import logoSrc from "@/assets/logo.png";
 
@@ -60,7 +60,7 @@ const programs: Program[] = [
 function ProgramCard({ program, index }: { program: Program; index: number }) {
   const Icon = program.icon;
   return (
-    <Reveal delay={index * 0.04}>
+    <Reveal delay={index * 0.04} effect={index % 2 === 0 ? "scale" : "flip"}>
       <div className="group rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-glow md:p-8">
         <div className="flex items-start gap-4">
           <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground shadow-soft">
@@ -153,12 +153,12 @@ export function ProgramsPage() {
         <section className="relative overflow-hidden pb-8 pt-16 md:pt-24">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
           <div className="mx-auto max-w-4xl px-5 text-center">
-            <Reveal>
+            <Reveal effect="scale">
               <span className="inline-flex items-center gap-2 rounded-full bg-muted px-4 py-1.5 font-display text-sm font-bold text-primary">
                 <Baby size={16} /> Our Programs
               </span>
               <h1 className="mt-4 font-display text-5xl font-extrabold leading-tight text-foreground md:text-7xl">
-                Early Years & Beyond
+                <GradientText text="Early Years & Beyond" />
               </h1>
               <p className="mx-auto mt-4 max-w-3xl font-body text-lg text-foreground/70 leading-relaxed md:text-xl">
                 At an age where children are ever enthusiastic and inquisitive, early childhood education helps channelise their energy in the right direction and provides them a safe platform for self-expression. Research suggests a strong early childhood education moulds a child's academic success by introducing them to various academic facets such as basic numeracy and literacy along with preparing them for later school life.
@@ -183,10 +183,10 @@ export function ProgramsPage() {
         {/* CTA */}
         <section className="py-16">
           <div className="mx-auto max-w-3xl px-5 text-center">
-            <Reveal>
+            <Reveal effect="clip">
               <div className="rounded-3xl bg-muted/50 p-8 md:p-12">
                 <h2 className="font-display text-3xl font-extrabold text-foreground md:text-4xl">
-                  Ready to Begin the Journey?
+                  <GradientText text="Ready to Begin the Journey?" />
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl font-body text-foreground/70 leading-relaxed">
                   Schedule a campus visit and see firsthand how Mamasparsh nurtures young minds.

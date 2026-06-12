@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { BookOpen, Pencil, Palette, Music, FlaskConical, PawPrint, ArrowRight } from "lucide-react";
-import { Reveal, TextReveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 import reads from "@/assets/panda-reads.png";
 import writes from "@/assets/panda-writes.png";
 import paints from "@/assets/panda-paints.png";
@@ -29,7 +29,7 @@ export function LearnDifferently() {
             </span>
           </Reveal>
           <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-            <TextReveal text="Our Little Pandas Learn Differently" />
+            <GradientText text="Our Little Pandas Learn Differently" />
           </h2>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-4 max-w-2xl font-body text-lg text-foreground/70">

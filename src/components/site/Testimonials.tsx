@@ -1,5 +1,5 @@
 import { MessageCircle, User } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { Reveal, GradientText } from "./Reveal";
 
 const testimonials = [
   { name: "Akula Praveen Kumar", child: "Parent", text: "The teachers are caring, the classrooms are very colourful, and my child loves going to school. The curriculum is well balanced, focusing on both fun and learning. Dr. Lavanya Mam is highly experienced." },
@@ -41,7 +41,7 @@ export function Testimonials() {
             <MessageCircle size={16} /> Parent Testimonials
           </span>
           <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-            What MamaSparsh Means to Our Families
+            <GradientText text="What MamaSparsh Means to Our Families" />
           </h2>
         </Reveal>
       </div>
