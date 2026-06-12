@@ -1,0 +1,17 @@
+{
+  "name": "Mama Sparsh School",
+  "short_name": "MamaSparsh",
+  "description": "A Mother's Touch for Every Little Dream — Premium, nature-inspired early learning in Kakinada.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4e9c9",
+  "theme_color": "#f4e9c9",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

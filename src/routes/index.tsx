@@ -13,7 +13,7 @@ import { Testimonials } from "@/components/site/Testimonials";
 import { Admissions } from "@/components/site/Admissions";
 import { Contact } from "@/components/site/Contact";
 import { FooterNight } from "@/components/site/FooterNight";
-import { canonical } from "@/lib/seo";
+import { canonical, OG_IMAGE, OG_IMAGE_ALT } from "@/lib/seo";
 
 const routeMeta = {
   path: "/",
@@ -29,8 +29,13 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: routeMeta.title },
       { property: "og:description", content: routeMeta.desc },
       { property: "og:url", content: canonical(routeMeta.path) },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:alt", content: OG_IMAGE_ALT },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: routeMeta.title },
       { name: "twitter:description", content: routeMeta.desc },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: OG_IMAGE_ALT },
     ],
     links: [{ rel: "canonical", href: canonical(routeMeta.path) }],
   }),

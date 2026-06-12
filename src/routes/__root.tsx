@@ -13,7 +13,7 @@ import { motion, useScroll } from "motion/react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingDecorations } from "@/components/site/FloatingDecorations";
-import { SITE, OG_IMAGE, canonical, jsonLdScripts } from "@/lib/seo";
+import { SITE, OG_IMAGE, OG_IMAGE_ALT, canonical, jsonLdScripts } from "@/lib/seo";
 
 const GLOBAL_SCRIPTS = jsonLdScripts("/");
 
@@ -105,11 +105,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:alt", content: OG_IMAGE_ALT },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: SITE.twitter },
+      { name: "twitter:site", content: SITE.social.twitter },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: OG_IMAGE_ALT },
+      { name: "msapplication-TileColor", content: "#f4e9c9" },
+      { name: "msapplication-TileImage", content: "/favicon.png" },
     ],
     links: [
-      { rel: "icon", href: "/favicon.png" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "canonical", href: canonical("/") },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },

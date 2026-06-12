@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GalleryPage } from "@/components/site/GalleryPage";
-import { SITE, OG_IMAGE, canonical, jsonLdScripts } from "@/lib/seo";
+import { OG_IMAGE, OG_IMAGE_ALT, canonical } from "@/lib/seo";
 
 const routeMeta = {
   path: "/gallery",
@@ -19,6 +19,9 @@ export const Route = createFileRoute("/gallery")({
       { property: "og:description", content: routeMeta.desc },
       { property: "og:url", content: canonical(routeMeta.path) },
       { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:alt", content: OG_IMAGE_ALT },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: OG_IMAGE_ALT },
       { name: "twitter:title", content: routeMeta.title },
       { name: "twitter:description", content: routeMeta.desc },
     ],
