@@ -1,5 +1,5 @@
 import {
-  Baby, Users, Sparkles, BookOpen, GraduationCap, ChevronRight,
+  Baby, Users, Sparkles, BookOpen, ChevronRight,
   ArrowLeft, ArrowRight, Image as ImageIcon,
 } from "lucide-react";
 import { Reveal } from "./Reveal";
@@ -53,23 +53,6 @@ const programs: Program[] = [
     body: [
       "Through our Early Years 4 program, we help bridge your child's educational needs to help them enter into any mainstream curriculum from grade 1 onwards.",
       "With a focus on experiential learning along with other co-curriculum activities that introduce the child to various facets of school life, we are one of the best preschools for 5-year-olds in Kakinada. Practising an interdisciplinary approach, we make learning engaging and allow your little one to discover their interests and develop an open-minded approach towards challenges.",
-    ],
-  },
-  {
-    icon: GraduationCap,
-    title: "Grades (IGCSE)",
-    age: "Grade 1 onwards",
-    schedule: "Cambridge Primary + Reggio Emilia",
-    body: [
-      "At our school, from Grade 1 onwards, we offer a thoughtfully designed curriculum that blends the child-led, inquiry-driven philosophy of Reggio Emilia with the academic structure of the Cambridge Primary Curriculum (IGCSE). This approach not only nurtures curiosity and creativity but also provides a clear academic pathway leading up to the internationally recognized Cambridge IGCSE in the higher grades.",
-      "While Cambridge Primary ensures a solid grounding in core subjects like English, Mathematics, and Science, the Reggio-inspired environment encourages students to explore, question, and collaborate — making learning both meaningful and joyful.",
-    ],
-    bullets: [
-      "Develop strong academic skills alongside independent thinking",
-      "Engage in projects and real-world problem-solving",
-      "Foster academic strength alongside creativity",
-      "Cultivate skills like problem-solving, research, and teamwork",
-      "Build a seamless and natural progression from early years into Cambridge IGCSE",
     ],
   },
 ];
