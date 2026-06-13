@@ -129,6 +129,10 @@ CREATE POLICY "Users can update own profile"
   ON profiles FOR UPDATE
   USING (auth.uid() = id);
 
+CREATE POLICY "Admins can update all profiles"
+  ON profiles FOR UPDATE
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
+
 -- STUDENTS RLS
 CREATE POLICY "Admins can CRUD all students"
   ON students FOR ALL
@@ -186,6 +190,10 @@ CREATE POLICY "Users can read own notifications"
 CREATE POLICY "Users can update own notifications"
   ON notifications FOR UPDATE
   USING (user_id = auth.uid());
+
+CREATE POLICY "Admins can manage notifications"
+  ON notifications FOR ALL
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 -- FILES RLS
 CREATE POLICY "Admins can CRUD files"
