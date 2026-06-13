@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { supabase } from "@/lib/supabase";
 import { signIn } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth/login")({
@@ -23,8 +22,8 @@ function LoginPage() {
     setLoading(true);
     try {
       const { user } = await signIn(email, password);
-      const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-      if (profile?.role === "admin") {
+      const role = user?.user_metadata?.role;
+      if (role === "admin") {
         navigate({ to: "/admin/dashboard" });
       } else {
         navigate({ to: "/parent/dashboard" });

@@ -43,9 +43,11 @@ function AdminLayout() {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (!session) { navigate({ to: "/auth/login" }); return; }
+        const role = session.user?.user_metadata?.role;
+        if (role !== "admin") { navigate({ to: "/auth/login" }); return; }
         const { data: p, error } = await supabase
           .from("profiles").select("*").eq("id", session.user.id).single();
-        if (error || !p || p.role !== "admin") { navigate({ to: "/auth/login" }); return; }
+        if (error || !p) { navigate({ to: "/auth/login" }); return; }
         if (!cancelled) { setProfile(p as Profile); setChecking(false); }
       } catch { navigate({ to: "/auth/login" }); }
     })();

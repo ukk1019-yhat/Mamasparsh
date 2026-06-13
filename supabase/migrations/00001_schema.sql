@@ -119,7 +119,7 @@ ALTER TABLE files ENABLE ROW LEVEL SECURITY;
 -- PROFILES RLS
 CREATE POLICY "Admins can read all profiles"
   ON profiles FOR SELECT
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Users can read own profile"
   ON profiles FOR SELECT
@@ -132,7 +132,7 @@ CREATE POLICY "Users can update own profile"
 -- STUDENTS RLS
 CREATE POLICY "Admins can CRUD all students"
   ON students FOR ALL
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Parents can read own students"
   ON students FOR SELECT
@@ -145,7 +145,7 @@ CREATE POLICY "Parents can insert own students"
 -- ATTENDANCE RLS
 CREATE POLICY "Admins can CRUD attendance"
   ON attendance FOR ALL
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Parents can read own students attendance"
   ON attendance FOR SELECT
@@ -154,7 +154,7 @@ CREATE POLICY "Parents can read own students attendance"
 -- DAILY RHYTHM RLS
 CREATE POLICY "Admins can CRUD daily rhythm"
   ON daily_rhythm FOR ALL
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Everyone can read daily rhythm"
   ON daily_rhythm FOR SELECT
@@ -163,7 +163,7 @@ CREATE POLICY "Everyone can read daily rhythm"
 -- REPORT CARDS RLS
 CREATE POLICY "Admins can CRUD report cards"
   ON report_cards FOR ALL
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Parents can read own students report cards"
   ON report_cards FOR SELECT
@@ -172,7 +172,7 @@ CREATE POLICY "Parents can read own students report cards"
 -- ANNOUNCEMENTS RLS
 CREATE POLICY "Admins can CRUD announcements"
   ON announcements FOR ALL
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Everyone can read announcements"
   ON announcements FOR SELECT
@@ -190,7 +190,7 @@ CREATE POLICY "Users can update own notifications"
 -- FILES RLS
 CREATE POLICY "Admins can CRUD files"
   ON files FOR ALL
-  USING (auth.uid() IN (SELECT id FROM profiles WHERE role = 'admin'));
+  USING ((auth.jwt() -> 'user_metadata' ->> 'role') = 'admin');
 
 CREATE POLICY "Parents can read own students files"
   ON files FOR SELECT
