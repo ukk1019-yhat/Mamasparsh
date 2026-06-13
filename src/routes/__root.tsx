@@ -9,11 +9,14 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { motion, useScroll } from "motion/react";
+import { ClerkProvider } from "@clerk/clerk-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingDecorations } from "@/components/site/FloatingDecorations";
 import { SITE, OG_IMAGE, OG_IMAGE_ALT, canonical, jsonLdScripts } from "@/lib/seo";
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 const GLOBAL_SCRIPTS = jsonLdScripts("/");
 
@@ -170,11 +173,17 @@ function ScrollProgress() {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  if (!PUBLISHABLE_KEY) {
+    throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY in .env.local");
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
-      <ScrollProgress />
-      <FloatingDecorations />
-      <Outlet />
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+        <ScrollProgress />
+        <FloatingDecorations />
+        <Outlet />
+      </ClerkProvider>
     </QueryClientProvider>
   );
 }

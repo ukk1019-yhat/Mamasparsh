@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sprout } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
 import { scrollToSection } from "./SmoothScroll";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import logoSrc from "@/assets/logo.png";
 
 const links = [
@@ -65,10 +66,28 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden lg:block">
-          <MagneticButton as="a" href="https://calendly.com/umakrishnakanthchokkapu15/30min" target="_blank" variant="primary" className="px-6 py-2.5 text-sm">
-            <Sprout size={16} /> Book a Tour
-          </MagneticButton>
+        <div className="hidden items-center gap-3 lg:flex">
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-colors">
+                Sign In
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <MagneticButton variant="primary" className="px-5 py-2.5 text-sm">
+                <Sprout size={16} /> Sign Up
+              </MagneticButton>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "h-9 w-9",
+                },
+              }}
+            />
+          </SignedIn>
         </div>
 
         <button
@@ -111,14 +130,24 @@ export function Navbar() {
                 </li>
               ))}
               <li className="pt-2">
-                <a
-                  href="https://calendly.com/umakrishnakanthchokkapu15/30min"
-                  target="_blank"
-                  onClick={() => setOpen(false)}
-                  className="block rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground"
-                >
-                  <Sprout size={16} /> Book a Tour
-                </a>
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <button className="block w-full rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground">
+                      Sign In
+                    </button>
+                  </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                  <div className="flex justify-center">
+                    <UserButton
+                      appearance={{
+                        elements: {
+                          avatarBox: "h-9 w-9",
+                        },
+                      }}
+                    />
+                  </div>
+                </SignedIn>
               </li>
             </ul>
           </motion.div>
