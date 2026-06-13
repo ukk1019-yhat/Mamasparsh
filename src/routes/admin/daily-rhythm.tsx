@@ -77,7 +77,8 @@ function AdminDailyRhythm() {
       <Card>
         <CardHeader><CardTitle>Schedule</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Time</TableHead>
@@ -103,6 +104,7 @@ function AdminDailyRhythm() {
               )}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

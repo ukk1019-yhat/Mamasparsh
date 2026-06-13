@@ -40,7 +40,8 @@ function AdminParents() {
       <Card>
         <CardHeader><CardTitle>Registered Parents</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
@@ -85,6 +86,7 @@ function AdminParents() {
               ))}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

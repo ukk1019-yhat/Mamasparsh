@@ -76,7 +76,8 @@ function AdminAttendance() {
       <Card>
         <CardHeader><CardTitle>Attendance for {date}</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Student</TableHead>
@@ -117,6 +118,7 @@ function AdminAttendance() {
               )}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

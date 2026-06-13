@@ -92,7 +92,8 @@ function AdminStudents() {
       <Card>
         <CardHeader><CardTitle>All Students</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
@@ -124,6 +125,7 @@ function AdminStudents() {
               ))}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

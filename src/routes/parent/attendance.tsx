@@ -44,7 +44,8 @@ function ParentAttendance() {
       <Card>
         <CardHeader><CardTitle>Recent History</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
@@ -73,6 +74,7 @@ function ParentAttendance() {
               ))}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

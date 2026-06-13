@@ -54,7 +54,8 @@ function AdminFiles() {
       <Card>
         <CardHeader><CardTitle>All Files</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
@@ -82,6 +83,7 @@ function AdminFiles() {
               {files.length === 0 && <TableRow><TableCell colSpan={5} className="text-center">No files uploaded.</TableCell></TableRow>}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

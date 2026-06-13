@@ -24,7 +24,8 @@ function ParentDailyRhythm() {
       <Card>
         <CardHeader><CardTitle>Today&apos;s Schedule</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Time</TableHead>
@@ -45,6 +46,7 @@ function ParentDailyRhythm() {
               )}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

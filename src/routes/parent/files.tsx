@@ -44,7 +44,8 @@ function ParentFiles() {
       <Card>
         <CardHeader><CardTitle>Shared Files</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
@@ -71,6 +72,7 @@ function ParentFiles() {
               {files.length === 0 && <TableRow><TableCell colSpan={5} className="text-center">No files shared yet.</TableCell></TableRow>}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

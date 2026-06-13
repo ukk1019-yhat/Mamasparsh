@@ -126,7 +126,8 @@ function AdminReportCards() {
       <Card>
         <CardHeader><CardTitle>Generated Report Cards</CardTitle></CardHeader>
         <CardContent>
-          <Table>
+          <div className="overflow-x-auto">
+            <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Student</TableHead>
@@ -149,6 +150,7 @@ function AdminReportCards() {
               {reports.length === 0 && <TableRow><TableCell colSpan={5} className="text-center">No report cards yet.</TableCell></TableRow>}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
