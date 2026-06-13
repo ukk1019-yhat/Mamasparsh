@@ -25,7 +25,9 @@ import { Route as ParentDailyRhythmRouteImport } from './routes/parent/daily-rhy
 import { Route as ParentAttendanceRouteImport } from './routes/parent/attendance'
 import { Route as ParentAnnouncementsRouteImport } from './routes/parent/announcements'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
+import { Route as AuthParentLoginRouteImport } from './routes/auth/parent-login'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthAdminLoginRouteImport } from './routes/auth/admin-login'
 import { Route as AdminStudentsRouteImport } from './routes/admin/students'
 import { Route as AdminReportCardsRouteImport } from './routes/admin/report-cards'
 import { Route as AdminParentsRouteImport } from './routes/admin/parents'
@@ -115,9 +117,19 @@ const AuthRegisterRoute = AuthRegisterRouteImport.update({
   path: '/auth/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthParentLoginRoute = AuthParentLoginRouteImport.update({
+  id: '/auth/parent-login',
+  path: '/auth/parent-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/auth/login',
   path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthAdminLoginRoute = AuthAdminLoginRouteImport.update({
+  id: '/auth/admin-login',
+  path: '/auth/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminStudentsRoute = AdminStudentsRouteImport.update({
@@ -177,7 +189,9 @@ export interface FileRoutesByFullPath {
   '/admin/parents': typeof AdminParentsRoute
   '/admin/report-cards': typeof AdminReportCardsRoute
   '/admin/students': typeof AdminStudentsRoute
+  '/auth/admin-login': typeof AuthAdminLoginRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/parent-login': typeof AuthParentLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
@@ -204,7 +218,9 @@ export interface FileRoutesByTo {
   '/admin/parents': typeof AdminParentsRoute
   '/admin/report-cards': typeof AdminReportCardsRoute
   '/admin/students': typeof AdminStudentsRoute
+  '/auth/admin-login': typeof AuthAdminLoginRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/parent-login': typeof AuthParentLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
@@ -232,7 +248,9 @@ export interface FileRoutesById {
   '/admin/parents': typeof AdminParentsRoute
   '/admin/report-cards': typeof AdminReportCardsRoute
   '/admin/students': typeof AdminStudentsRoute
+  '/auth/admin-login': typeof AuthAdminLoginRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/parent-login': typeof AuthParentLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
@@ -261,7 +279,9 @@ export interface FileRouteTypes {
     | '/admin/parents'
     | '/admin/report-cards'
     | '/admin/students'
+    | '/auth/admin-login'
     | '/auth/login'
+    | '/auth/parent-login'
     | '/auth/register'
     | '/parent/announcements'
     | '/parent/attendance'
@@ -288,7 +308,9 @@ export interface FileRouteTypes {
     | '/admin/parents'
     | '/admin/report-cards'
     | '/admin/students'
+    | '/auth/admin-login'
     | '/auth/login'
+    | '/auth/parent-login'
     | '/auth/register'
     | '/parent/announcements'
     | '/parent/attendance'
@@ -315,7 +337,9 @@ export interface FileRouteTypes {
     | '/admin/parents'
     | '/admin/report-cards'
     | '/admin/students'
+    | '/auth/admin-login'
     | '/auth/login'
+    | '/auth/parent-login'
     | '/auth/register'
     | '/parent/announcements'
     | '/parent/attendance'
@@ -335,7 +359,9 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   ParentRoute: typeof ParentRouteWithChildren
   ProgramsRoute: typeof ProgramsRoute
+  AuthAdminLoginRoute: typeof AuthAdminLoginRoute
   AuthLoginRoute: typeof AuthLoginRoute
+  AuthParentLoginRoute: typeof AuthParentLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
@@ -453,11 +479,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/parent-login': {
+      id: '/auth/parent-login'
+      path: '/auth/parent-login'
+      fullPath: '/auth/parent-login'
+      preLoaderRoute: typeof AuthParentLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/login': {
       id: '/auth/login'
       path: '/auth/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/admin-login': {
+      id: '/auth/admin-login'
+      path: '/auth/admin-login'
+      fullPath: '/auth/admin-login'
+      preLoaderRoute: typeof AuthAdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/students': {
@@ -576,7 +616,9 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   ParentRoute: ParentRouteWithChildren,
   ProgramsRoute: ProgramsRoute,
+  AuthAdminLoginRoute: AuthAdminLoginRoute,
   AuthLoginRoute: AuthLoginRoute,
+  AuthParentLoginRoute: AuthParentLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
 }
 export const routeTree = rootRouteImport

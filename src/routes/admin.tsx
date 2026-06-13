@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/lib/supabase";
-import { signOut, getCurrentProfile } from "@/lib/auth";
+import { signOut } from "@/lib/auth";
 import type { Profile } from "@/types/database";
 
 export const Route = createFileRoute("/admin")({
@@ -34,17 +34,29 @@ function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [checking, setChecking] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    getCurrentProfile().then((p) => {
-      if (!p || p.role !== "admin") {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        navigate({ to: "/auth/login" });
+        return null;
+      }
+      return supabase.from("profiles").select("*").eq("id", session.user.id).single();
+    }).then((res) => {
+      if (!res || res.error || res.data.role !== "admin") {
         navigate({ to: "/auth/login" });
         return;
       }
-      setProfile(p as Profile);
+      setProfile(res.data as Profile);
+      setChecking(false);
+    }).catch(() => {
+      navigate({ to: "/auth/login" });
     });
   }, []);
+
+  if (checking) return <div className="flex h-screen items-center justify-center">Loading...</div>;
 
   async function handleSignOut() {
     await signOut();

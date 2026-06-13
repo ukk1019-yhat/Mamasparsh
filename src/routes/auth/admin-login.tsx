@@ -1,16 +1,15 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { supabase } from "@/lib/supabase";
 import { signIn } from "@/lib/auth";
 
-export const Route = createFileRoute("/auth/login")({
-  component: LoginPage,
+export const Route = createFileRoute("/auth/admin-login")({
+  component: AdminLoginPage,
 });
 
-function LoginPage() {
+function AdminLoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,13 +21,8 @@ function LoginPage() {
     setError("");
     setLoading(true);
     try {
-      const { user } = await signIn(email, password);
-      const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-      if (profile?.role === "admin") {
-        navigate({ to: "/admin/dashboard" });
-      } else {
-        navigate({ to: "/parent/dashboard" });
-      }
+      await signIn(email, password);
+      navigate({ to: "/admin/dashboard" });
     } catch (err: any) {
       setError(err.message || "Login failed");
     } finally {
@@ -40,8 +34,8 @@ function LoginPage() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle>Sign In</CardTitle>
-          <CardDescription>Preschool Management System</CardDescription>
+          <CardTitle>Admin Sign In</CardTitle>
+          <CardDescription>Authorized personnel only</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -58,9 +52,8 @@ function LoginPage() {
               {loading ? "Signing in..." : "Sign In"}
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
-              <Link to="/auth/register" className="text-primary underline underline-offset-4">
-                Register
+              <Link to="/auth/parent-login" className="text-primary underline underline-offset-4">
+                Parent Login
               </Link>
             </p>
           </form>

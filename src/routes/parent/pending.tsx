@@ -13,8 +13,8 @@ function PendingApproval() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (!user) navigate({ to: "/auth/login" });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) navigate({ to: "/auth/login" });
     });
   }, []);
 
