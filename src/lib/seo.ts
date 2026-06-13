@@ -3,12 +3,13 @@ export const SITE = {
   shortName: "MamaSparsh",
   domain: "https://www.mamasparshschool.in",
   tagline: "A Mother's Touch for Every Little Dream",
-  email: "umakrishnakanthchokkapu15@gmail.com",
-  phone: "+91-1234567890",
+  email: "mamaischoolkakinada@gmail.com",
+  phone: "+91 83092 36742",
   address: {
-    street: "MamaSparsh Preschool & Early Learning Centre",
+    street: "69722A, Opposite Boat Club Park Road, Srinivasa Nagar, Vegella Pappaya Street, Nagamallithota Junction",
     locality: "Kakinada",
     region: "Andhra Pradesh",
+    postalCode: "533003",
     country: "IN",
   },
   social: {
@@ -58,6 +59,7 @@ function orgSchema() {
       streetAddress: SITE.address.street,
       addressLocality: SITE.address.locality,
       addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
       addressCountry: SITE.address.country,
     },
     sameAs: Object.values(SITE.social),
@@ -104,6 +106,7 @@ function localBusinessSchema() {
       streetAddress: SITE.address.street,
       addressLocality: SITE.address.locality,
       addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
       addressCountry: SITE.address.country,
     },
     openingHoursSpecification: [
