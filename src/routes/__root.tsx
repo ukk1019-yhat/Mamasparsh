@@ -17,6 +17,11 @@ import { SITE, OG_IMAGE, OG_IMAGE_ALT, canonical, jsonLdScripts } from "@/lib/se
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+const clerkKey =
+  PUBLISHABLE_KEY && PUBLISHABLE_KEY.startsWith("pk_")
+    ? PUBLISHABLE_KEY
+    : null;
+
 const GLOBAL_SCRIPTS = jsonLdScripts("/");
 
 function NotFoundComponent() {
@@ -172,17 +177,21 @@ function ScrollProgress() {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  if (!PUBLISHABLE_KEY) {
-    throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY in .env.local");
-  }
+  const content = (
+    <>
+      <ScrollProgress />
+      <FloatingDecorations />
+      <Outlet />
+    </>
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-        <ScrollProgress />
-        <FloatingDecorations />
-        <Outlet />
-      </ClerkProvider>
+      {clerkKey ? (
+        <ClerkProvider publishableKey={clerkKey}>{content}</ClerkProvider>
+      ) : (
+        content
+      )}
     </QueryClientProvider>
   );
 }
