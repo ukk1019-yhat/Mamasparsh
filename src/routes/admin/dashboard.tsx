@@ -84,7 +84,7 @@ function AdminDashboard() {
           <GradientText text="Admin Dashboard" />
         </h1>
         <p className="mt-1 font-body text-muted-foreground">
-          Welcome back! Here&apos;s your preschool overview.
+          Welcome back! Here&apos;s your preschool overview at a glance.
         </p>
       </div>
 
