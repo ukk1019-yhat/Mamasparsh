@@ -11,7 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut, getCurrentProfile } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
+import { signOut } from "@/lib/auth";
 import type { Profile } from "@/types/database";
 
 export const Route = createFileRoute("/parent")({
@@ -32,22 +33,32 @@ function ParentLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    getCurrentProfile().then((p) => {
-      if (!p || p.role !== "parent") {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        navigate({ to: "/auth/login" });
+        return null;
+      }
+      return supabase.from("profiles").select("*").eq("id", session.user.id).single();
+    }).then((res) => {
+      if (!res || res.error || res.data.role !== "parent") {
         navigate({ to: "/auth/login" });
         return;
       }
-      if (p.status !== "approved") {
+      if (res.data.status !== "approved") {
         navigate({ to: "/parent/pending" });
         return;
       }
-      setProfile(p as Profile);
+      setProfile(res.data as Profile);
+      setChecking(false);
+    }).catch(() => {
+      navigate({ to: "/auth/login" });
     });
   }, []);
 
-  if (!profile) return null;
+  if (checking) return <div className="flex h-screen items-center justify-center">Loading...</div>;
 
   async function handleSignOut() {
     await signOut();

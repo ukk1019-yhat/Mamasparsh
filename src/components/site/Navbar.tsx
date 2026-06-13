@@ -68,16 +68,10 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <Link
-            to="/auth/parent-login"
+            to="/auth/login"
             className="font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
           >
-            Parent Login
-          </Link>
-          <Link
-            to="/auth/admin-login"
-            className="font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
-          >
-            Admin Login
+            Login
           </Link>
           <Link to="/auth/register">
             <MagneticButton variant="primary" className="px-5 py-2.5 text-sm">
@@ -127,18 +121,11 @@ export function Navbar() {
               ))}
               <li className="pt-2 flex flex-col gap-2">
                 <Link
-                  to="/auth/parent-login"
+                  to="/auth/login"
                   onClick={() => setOpen(false)}
                   className="block w-full rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground"
                 >
-                  Parent Login
-                </Link>
-                <Link
-                  to="/auth/admin-login"
-                  onClick={() => setOpen(false)}
-                  className="block w-full rounded-xl px-3 py-2.5 text-center font-display font-semibold text-foreground/85 hover:bg-muted"
-                >
-                  Admin Login
+                  Login
                 </Link>
                 <Link
                   to="/auth/register"

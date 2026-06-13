@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 import { motion, useScroll } from "motion/react";
 import { ClerkProvider } from "@clerk/clerk-react";
-
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingDecorations } from "@/components/site/FloatingDecorations";

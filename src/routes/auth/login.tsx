@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,9 +59,9 @@ function LoginPage() {
             </Button>
             <p className="text-center text-sm text-muted-foreground">
               Don&apos;t have an account?{" "}
-              <a href="/auth/register" className="text-primary underline underline-offset-4">
+              <Link to="/auth/register" className="text-primary underline underline-offset-4">
                 Register
-              </a>
+              </Link>
             </p>
           </form>
         </CardContent>
