@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sprout } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
 import { scrollToSection } from "./SmoothScroll";
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { Link } from "@tanstack/react-router";
 import logoSrc from "@/assets/logo.png";
 
 const links = [
@@ -67,27 +67,23 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <SignedOut>
-            <SignInButton mode="modal">
-              <button className="font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-colors">
-                Sign In
-              </button>
-            </SignInButton>
-            <SignUpButton mode="modal">
-              <MagneticButton variant="primary" className="px-5 py-2.5 text-sm">
-                <Sprout size={16} /> Sign Up
-              </MagneticButton>
-            </SignUpButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: "h-9 w-9",
-                },
-              }}
-            />
-          </SignedIn>
+          <Link
+            to="/auth/parent-login"
+            className="font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
+          >
+            Parent Login
+          </Link>
+          <Link
+            to="/auth/admin-login"
+            className="font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
+          >
+            Admin Login
+          </Link>
+          <Link to="/auth/register">
+            <MagneticButton variant="primary" className="px-5 py-2.5 text-sm">
+              <Sprout size={16} /> Register
+            </MagneticButton>
+          </Link>
         </div>
 
         <button
@@ -129,25 +125,28 @@ export function Navbar() {
                   )}
                 </li>
               ))}
-              <li className="pt-2">
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <button className="block w-full rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground">
-                      Sign In
-                    </button>
-                  </SignInButton>
-                </SignedOut>
-                <SignedIn>
-                  <div className="flex justify-center">
-                    <UserButton
-                      appearance={{
-                        elements: {
-                          avatarBox: "h-9 w-9",
-                        },
-                      }}
-                    />
-                  </div>
-                </SignedIn>
+              <li className="pt-2 flex flex-col gap-2">
+                <Link
+                  to="/auth/parent-login"
+                  onClick={() => setOpen(false)}
+                  className="block w-full rounded-full bg-gradient-bamboo px-5 py-3 text-center font-display font-bold text-primary-foreground"
+                >
+                  Parent Login
+                </Link>
+                <Link
+                  to="/auth/admin-login"
+                  onClick={() => setOpen(false)}
+                  className="block w-full rounded-xl px-3 py-2.5 text-center font-display font-semibold text-foreground/85 hover:bg-muted"
+                >
+                  Admin Login
+                </Link>
+                <Link
+                  to="/auth/register"
+                  onClick={() => setOpen(false)}
+                  className="block w-full rounded-xl px-3 py-2.5 text-center font-display font-semibold text-foreground/85 hover:bg-muted"
+                >
+                  Register
+                </Link>
               </li>
             </ul>
           </motion.div>
