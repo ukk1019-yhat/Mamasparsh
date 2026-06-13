@@ -36,26 +36,19 @@ function ParentLayout() {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) {
-        navigate({ to: "/auth/login" });
-        return null;
-      }
-      return supabase.from("profiles").select("*").eq("id", session.user.id).single();
-    }).then((res) => {
-      if (!res || res.error || res.data.role !== "parent") {
-        navigate({ to: "/auth/login" });
-        return;
-      }
-      if (res.data.status !== "approved") {
-        navigate({ to: "/parent/pending" });
-        return;
-      }
-      setProfile(res.data as Profile);
-      setChecking(false);
-    }).catch(() => {
-      navigate({ to: "/auth/login" });
-    });
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) { navigate({ to: "/auth/login" }); return; }
+        const { data: p, error } = await supabase
+          .from("profiles").select("*").eq("id", session.user.id).single();
+        if (error || !p || p.role !== "parent") { navigate({ to: "/auth/login" }); return; }
+        if (p.status !== "approved") { navigate({ to: "/parent/pending" }); return; }
+        if (!cancelled) { setProfile(p as Profile); setChecking(false); }
+      } catch { navigate({ to: "/auth/login" }); }
+    })();
+    return () => { cancelled = true; };
   }, []);
 
   if (checking) return <div className="flex h-screen items-center justify-center">Loading...</div>;
