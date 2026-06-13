@@ -50,9 +50,9 @@ export function Contact() {
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-bamboo text-primary-foreground"><Phone size={20} /></span>
                   +91 83092 36742
                 </a>
-                <a href="mailto:mamaischoolkakinada@gmail.com" className="flex items-center gap-3 font-body text-foreground/80 hover:text-primary">
+                <a href="mailto:mamasparshschool@gmail.com" className="flex items-center gap-3 font-body text-foreground/80 hover:text-primary">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-blush text-secondary-foreground"><Mail size={20} /></span>
-                  mamaischoolkakinada@gmail.com
+                  mamasparshschool@gmail.com
                 </a>
                 <div className="flex items-center gap-3 font-body text-foreground/80">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-accent text-accent-foreground"><MapPin size={20} /></span>
