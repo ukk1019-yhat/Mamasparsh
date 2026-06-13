@@ -10,14 +10,39 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProgramsRouteImport } from './routes/programs'
+import { Route as ParentRouteImport } from './routes/parent'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as AdventuresRouteImport } from './routes/adventures'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ParentReportCardsRouteImport } from './routes/parent/report-cards'
+import { Route as ParentProfileRouteImport } from './routes/parent/profile'
+import { Route as ParentPendingRouteImport } from './routes/parent/pending'
+import { Route as ParentFilesRouteImport } from './routes/parent/files'
+import { Route as ParentDashboardRouteImport } from './routes/parent/dashboard'
+import { Route as ParentDailyRhythmRouteImport } from './routes/parent/daily-rhythm'
+import { Route as ParentAttendanceRouteImport } from './routes/parent/attendance'
+import { Route as ParentAnnouncementsRouteImport } from './routes/parent/announcements'
+import { Route as AuthRegisterRouteImport } from './routes/auth/register'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AdminStudentsRouteImport } from './routes/admin/students'
+import { Route as AdminReportCardsRouteImport } from './routes/admin/report-cards'
+import { Route as AdminParentsRouteImport } from './routes/admin/parents'
+import { Route as AdminFilesRouteImport } from './routes/admin/files'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminDailyRhythmRouteImport } from './routes/admin/daily-rhythm'
+import { Route as AdminAttendanceRouteImport } from './routes/admin/attendance'
+import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcements'
 
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
   path: '/programs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentRoute = ParentRouteImport.update({
+  id: '/parent',
+  path: '/parent',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -35,54 +60,283 @@ const AdventuresRoute = AdventuresRouteImport.update({
   path: '/adventures',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ParentReportCardsRoute = ParentReportCardsRouteImport.update({
+  id: '/report-cards',
+  path: '/report-cards',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentProfileRoute = ParentProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentPendingRoute = ParentPendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentFilesRoute = ParentFilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentDashboardRoute = ParentDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentDailyRhythmRoute = ParentDailyRhythmRouteImport.update({
+  id: '/daily-rhythm',
+  path: '/daily-rhythm',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentAttendanceRoute = ParentAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentAnnouncementsRoute = ParentAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => ParentRoute,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportCardsRoute = AdminReportCardsRouteImport.update({
+  id: '/report-cards',
+  path: '/report-cards',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminParentsRoute = AdminParentsRouteImport.update({
+  id: '/parents',
+  path: '/parents',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFilesRoute = AdminFilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDailyRhythmRoute = AdminDailyRhythmRouteImport.update({
+  id: '/daily-rhythm',
+  path: '/daily-rhythm',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAttendanceRoute = AdminAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
+  '/parent': typeof ParentRouteWithChildren
   '/programs': typeof ProgramsRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/files': typeof AdminFilesRoute
+  '/admin/parents': typeof AdminParentsRoute
+  '/admin/report-cards': typeof AdminReportCardsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/parent/announcements': typeof ParentAnnouncementsRoute
+  '/parent/attendance': typeof ParentAttendanceRoute
+  '/parent/daily-rhythm': typeof ParentDailyRhythmRoute
+  '/parent/dashboard': typeof ParentDashboardRoute
+  '/parent/files': typeof ParentFilesRoute
+  '/parent/pending': typeof ParentPendingRoute
+  '/parent/profile': typeof ParentProfileRoute
+  '/parent/report-cards': typeof ParentReportCardsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
+  '/parent': typeof ParentRouteWithChildren
   '/programs': typeof ProgramsRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/files': typeof AdminFilesRoute
+  '/admin/parents': typeof AdminParentsRoute
+  '/admin/report-cards': typeof AdminReportCardsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/parent/announcements': typeof ParentAnnouncementsRoute
+  '/parent/attendance': typeof ParentAttendanceRoute
+  '/parent/daily-rhythm': typeof ParentDailyRhythmRoute
+  '/parent/dashboard': typeof ParentDashboardRoute
+  '/parent/files': typeof ParentFilesRoute
+  '/parent/pending': typeof ParentPendingRoute
+  '/parent/profile': typeof ParentProfileRoute
+  '/parent/report-cards': typeof ParentReportCardsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/adventures': typeof AdventuresRoute
   '/curriculum': typeof CurriculumRoute
   '/gallery': typeof GalleryRoute
+  '/parent': typeof ParentRouteWithChildren
   '/programs': typeof ProgramsRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
+  '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/files': typeof AdminFilesRoute
+  '/admin/parents': typeof AdminParentsRoute
+  '/admin/report-cards': typeof AdminReportCardsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/parent/announcements': typeof ParentAnnouncementsRoute
+  '/parent/attendance': typeof ParentAttendanceRoute
+  '/parent/daily-rhythm': typeof ParentDailyRhythmRoute
+  '/parent/dashboard': typeof ParentDashboardRoute
+  '/parent/files': typeof ParentFilesRoute
+  '/parent/pending': typeof ParentPendingRoute
+  '/parent/profile': typeof ParentProfileRoute
+  '/parent/report-cards': typeof ParentReportCardsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adventures' | '/curriculum' | '/gallery' | '/programs'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/adventures' | '/curriculum' | '/gallery' | '/programs'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
+    | '/admin'
     | '/adventures'
     | '/curriculum'
     | '/gallery'
+    | '/parent'
     | '/programs'
+    | '/admin/announcements'
+    | '/admin/attendance'
+    | '/admin/daily-rhythm'
+    | '/admin/dashboard'
+    | '/admin/files'
+    | '/admin/parents'
+    | '/admin/report-cards'
+    | '/admin/students'
+    | '/auth/login'
+    | '/auth/register'
+    | '/parent/announcements'
+    | '/parent/attendance'
+    | '/parent/daily-rhythm'
+    | '/parent/dashboard'
+    | '/parent/files'
+    | '/parent/pending'
+    | '/parent/profile'
+    | '/parent/report-cards'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/admin'
+    | '/adventures'
+    | '/curriculum'
+    | '/gallery'
+    | '/parent'
+    | '/programs'
+    | '/admin/announcements'
+    | '/admin/attendance'
+    | '/admin/daily-rhythm'
+    | '/admin/dashboard'
+    | '/admin/files'
+    | '/admin/parents'
+    | '/admin/report-cards'
+    | '/admin/students'
+    | '/auth/login'
+    | '/auth/register'
+    | '/parent/announcements'
+    | '/parent/attendance'
+    | '/parent/daily-rhythm'
+    | '/parent/dashboard'
+    | '/parent/files'
+    | '/parent/pending'
+    | '/parent/profile'
+    | '/parent/report-cards'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/adventures'
+    | '/curriculum'
+    | '/gallery'
+    | '/parent'
+    | '/programs'
+    | '/admin/announcements'
+    | '/admin/attendance'
+    | '/admin/daily-rhythm'
+    | '/admin/dashboard'
+    | '/admin/files'
+    | '/admin/parents'
+    | '/admin/report-cards'
+    | '/admin/students'
+    | '/auth/login'
+    | '/auth/register'
+    | '/parent/announcements'
+    | '/parent/attendance'
+    | '/parent/daily-rhythm'
+    | '/parent/dashboard'
+    | '/parent/files'
+    | '/parent/pending'
+    | '/parent/profile'
+    | '/parent/report-cards'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AdventuresRoute: typeof AdventuresRoute
   CurriculumRoute: typeof CurriculumRoute
   GalleryRoute: typeof GalleryRoute
+  ParentRoute: typeof ParentRouteWithChildren
   ProgramsRoute: typeof ProgramsRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +346,13 @@ declare module '@tanstack/react-router' {
       path: '/programs'
       fullPath: '/programs'
       preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent': {
+      id: '/parent'
+      path: '/parent'
+      fullPath: '/parent'
+      preLoaderRoute: typeof ParentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -115,6 +376,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdventuresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -122,15 +390,194 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/parent/report-cards': {
+      id: '/parent/report-cards'
+      path: '/report-cards'
+      fullPath: '/parent/report-cards'
+      preLoaderRoute: typeof ParentReportCardsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/profile': {
+      id: '/parent/profile'
+      path: '/profile'
+      fullPath: '/parent/profile'
+      preLoaderRoute: typeof ParentProfileRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/pending': {
+      id: '/parent/pending'
+      path: '/pending'
+      fullPath: '/parent/pending'
+      preLoaderRoute: typeof ParentPendingRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/files': {
+      id: '/parent/files'
+      path: '/files'
+      fullPath: '/parent/files'
+      preLoaderRoute: typeof ParentFilesRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/dashboard': {
+      id: '/parent/dashboard'
+      path: '/dashboard'
+      fullPath: '/parent/dashboard'
+      preLoaderRoute: typeof ParentDashboardRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/daily-rhythm': {
+      id: '/parent/daily-rhythm'
+      path: '/daily-rhythm'
+      fullPath: '/parent/daily-rhythm'
+      preLoaderRoute: typeof ParentDailyRhythmRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/attendance': {
+      id: '/parent/attendance'
+      path: '/attendance'
+      fullPath: '/parent/attendance'
+      preLoaderRoute: typeof ParentAttendanceRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/announcements': {
+      id: '/parent/announcements'
+      path: '/announcements'
+      fullPath: '/parent/announcements'
+      preLoaderRoute: typeof ParentAnnouncementsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/report-cards': {
+      id: '/admin/report-cards'
+      path: '/report-cards'
+      fullPath: '/admin/report-cards'
+      preLoaderRoute: typeof AdminReportCardsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/parents': {
+      id: '/admin/parents'
+      path: '/parents'
+      fullPath: '/admin/parents'
+      preLoaderRoute: typeof AdminParentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/files': {
+      id: '/admin/files'
+      path: '/files'
+      fullPath: '/admin/files'
+      preLoaderRoute: typeof AdminFilesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/daily-rhythm': {
+      id: '/admin/daily-rhythm'
+      path: '/daily-rhythm'
+      fullPath: '/admin/daily-rhythm'
+      preLoaderRoute: typeof AdminDailyRhythmRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/attendance': {
+      id: '/admin/attendance'
+      path: '/attendance'
+      fullPath: '/admin/attendance'
+      preLoaderRoute: typeof AdminAttendanceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/announcements': {
+      id: '/admin/announcements'
+      path: '/announcements'
+      fullPath: '/admin/announcements'
+      preLoaderRoute: typeof AdminAnnouncementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
+  AdminAttendanceRoute: typeof AdminAttendanceRoute
+  AdminDailyRhythmRoute: typeof AdminDailyRhythmRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminFilesRoute: typeof AdminFilesRoute
+  AdminParentsRoute: typeof AdminParentsRoute
+  AdminReportCardsRoute: typeof AdminReportCardsRoute
+  AdminStudentsRoute: typeof AdminStudentsRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnnouncementsRoute: AdminAnnouncementsRoute,
+  AdminAttendanceRoute: AdminAttendanceRoute,
+  AdminDailyRhythmRoute: AdminDailyRhythmRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminFilesRoute: AdminFilesRoute,
+  AdminParentsRoute: AdminParentsRoute,
+  AdminReportCardsRoute: AdminReportCardsRoute,
+  AdminStudentsRoute: AdminStudentsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface ParentRouteChildren {
+  ParentAnnouncementsRoute: typeof ParentAnnouncementsRoute
+  ParentAttendanceRoute: typeof ParentAttendanceRoute
+  ParentDailyRhythmRoute: typeof ParentDailyRhythmRoute
+  ParentDashboardRoute: typeof ParentDashboardRoute
+  ParentFilesRoute: typeof ParentFilesRoute
+  ParentPendingRoute: typeof ParentPendingRoute
+  ParentProfileRoute: typeof ParentProfileRoute
+  ParentReportCardsRoute: typeof ParentReportCardsRoute
+}
+
+const ParentRouteChildren: ParentRouteChildren = {
+  ParentAnnouncementsRoute: ParentAnnouncementsRoute,
+  ParentAttendanceRoute: ParentAttendanceRoute,
+  ParentDailyRhythmRoute: ParentDailyRhythmRoute,
+  ParentDashboardRoute: ParentDashboardRoute,
+  ParentFilesRoute: ParentFilesRoute,
+  ParentPendingRoute: ParentPendingRoute,
+  ParentProfileRoute: ParentProfileRoute,
+  ParentReportCardsRoute: ParentReportCardsRoute,
+}
+
+const ParentRouteWithChildren =
+  ParentRoute._addFileChildren(ParentRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AdventuresRoute: AdventuresRoute,
   CurriculumRoute: CurriculumRoute,
   GalleryRoute: GalleryRoute,
+  ParentRoute: ParentRouteWithChildren,
   ProgramsRoute: ProgramsRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
