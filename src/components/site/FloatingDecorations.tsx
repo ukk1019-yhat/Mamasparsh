@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import sings from "@/assets/panda-sings.png";
 import grows from "@/assets/panda-grows.png";
 import plays from "@/assets/panda-plays.png";
+import { Butterfly } from "./Butterfly";
 
 const pandas = [
   { src: sings, left: "3%", top: "15%", delay: 0, duration: 6, w: "w-16 md:w-24", opacity: "opacity-20 md:opacity-25" },
@@ -62,6 +63,17 @@ export function FloatingDecorations() {
           transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
         />
       ))}
+
+      {/* Flying butterflies */}
+      <Butterfly variant="drift" size={18} color="text-primary/40" style={{ top: "12%", left: "0%" }} />
+      <Butterfly variant="drift" size={14} color="text-accent/35" style={{ top: "38%", left: "0%", animationDelay: "5s" }} />
+      <Butterfly variant="drift" size={16} color="text-sky/35" style={{ top: "62%", left: "0%", animationDelay: "10s" }} />
+      <Butterfly variant="drift" size={12} color="text-primary/30" style={{ top: "82%", left: "0%", animationDelay: "3s" }} />
+      <Butterfly variant="figure8" size={20} color="text-accent/30" style={{ top: "18%", right: "8%" }} />
+      <Butterfly variant="hover" size={16} color="text-sky/30" style={{ top: "48%", right: "12%" }} />
+      <Butterfly variant="figure8" size={14} color="text-primary/25" style={{ top: "74%", right: "5%" }} />
+      <Butterfly variant="hover" size={18} color="text-accent/25" style={{ top: "30%", left: "15%" }} />
+      <Butterfly variant="figure8" size={12} color="text-sky/25" style={{ top: "58%", left: "12%" }} />
     </div>
   );
 }
