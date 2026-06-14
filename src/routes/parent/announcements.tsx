@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { GradientText } from "@/components/site/Reveal";
+import { BambooBackground } from "@/components/admin/BambooBackground";
 import { supabase } from "@/lib/supabase";
 import type { Announcement } from "@/types/database";
 
@@ -21,23 +24,41 @@ function ParentAnnouncements() {
   }, []);
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Announcements</h1>
+    <div className="relative space-y-6">
+      <BambooBackground />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <h1 className="font-display text-3xl font-extrabold md:text-4xl">
+          <GradientText text="Announcements" />
+        </h1>
+        <p className="mt-1 font-body text-muted-foreground">Stay updated with school news and events.</p>
+      </motion.div>
       {announcements.length === 0 ? (
-        <Card><CardContent className="py-8 text-center text-muted-foreground">No announcements yet.</CardContent></Card>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Card className="rounded-2xl border border-primary/5 shadow-soft">
+            <CardContent className="py-12 text-center font-display text-muted-foreground">
+              No announcements yet.
+            </CardContent>
+          </Card>
+        </motion.div>
       ) : (
         <div className="space-y-4">
-          {announcements.map((a) => (
-            <Card key={a.id}>
-              <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">{a.title}</CardTitle>
-                  <Badge variant={typeColors[a.type] as any}>{a.type}</Badge>
-                </div>
-                <p className="text-xs text-muted-foreground">{new Date(a.created_at).toLocaleString()}</p>
-              </CardHeader>
-              <CardContent><p className="whitespace-pre-wrap">{a.content}</p></CardContent>
-            </Card>
+          {announcements.map((a, idx) => (
+            <motion.div key={a.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * idx }}>
+              <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft transition-shadow hover:shadow-lift">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="font-display text-lg font-bold">{a.title}</CardTitle>
+                    <Badge variant={typeColors[a.type] as any} className="rounded-full font-body text-xs uppercase tracking-wider">{a.type}</Badge>
+                  </div>
+                  <p className="font-body text-xs text-muted-foreground">
+                    {new Date(a.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <p className="font-body whitespace-pre-wrap text-muted-foreground">{a.content}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       )}
