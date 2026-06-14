@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -9,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { GradientText } from "@/components/site/Reveal";
+import { BambooBackground } from "@/components/admin/BambooBackground";
 import { supabase } from "@/lib/supabase";
 
 export const Route = createFileRoute("/admin/report-cards")({
@@ -59,100 +62,127 @@ function AdminReportCards() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Report Cards</h1>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild><Button>Generate Report Card</Button></DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-            <DialogHeader><DialogTitle>Generate Report Card</DialogTitle></DialogHeader>
-            <div className="space-y-4">
-              <div><Label>Student</Label>
-                <Select value={selectedStudentId} onValueChange={setSelectedStudentId}>
-                  <SelectTrigger><SelectValue placeholder="Select student" /></SelectTrigger>
-                  <SelectContent>
-                    {students.map((s) => <SelectItem key={s.id} value={s.id}>{s.full_name} ({s.class})</SelectItem>)}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div><Label>Academic Year</Label>
-                  <Select value={form.academic_year} onValueChange={(v) => setForm({ ...form, academic_year: v })}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
+    <div className="relative space-y-6">
+      <BambooBackground />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="font-display text-3xl font-extrabold md:text-4xl">
+              <GradientText text="Report Cards" />
+            </h1>
+            <p className="mt-1 font-body text-muted-foreground">Generate and manage student report cards.</p>
+          </div>
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <Button className="rounded-xl bg-gradient-bamboo font-display text-sm font-bold text-white shadow-soft hover:shadow-lift">
+                Generate Report Card
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl rounded-2xl border-primary/10">
+              <DialogHeader>
+                <DialogTitle className="font-display text-xl font-extrabold">
+                  <GradientText text="Generate Report Card" />
+                </DialogTitle>
+              </DialogHeader>
+              <div className="max-h-[60vh] space-y-4 overflow-y-auto">
+                <div className="space-y-1.5">
+                  <Label className="font-body text-sm font-semibold">Student</Label>
+                  <Select value={selectedStudentId} onValueChange={setSelectedStudentId}>
+                    <SelectTrigger className="rounded-xl border-primary/20"><SelectValue placeholder="Select student" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="2025-2026">2025-2026</SelectItem>
-                      <SelectItem value="2026-2027">2026-2027</SelectItem>
+                      {students.map((s) => <SelectItem key={s.id} value={s.id}>{s.full_name} ({s.class})</SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>
-                <div><Label>Term</Label>
-                  <Select value={form.term} onValueChange={(v) => setForm({ ...form, term: v })}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Term 1">Term 1</SelectItem>
-                      <SelectItem value="Term 2">Term 2</SelectItem>
-                      <SelectItem value="Term 3">Term 3</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              {domains.map((d) => (
-                <div key={d.key} className="space-y-2">
-                  <Label className="font-medium">{d.label}</Label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {ratings.map((r) => (
-                      <Button
-                        key={r}
-                        type="button"
-                        variant={domainScores[d.key]?.skill1 === r ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => {
-                          const key = prompt(`Enter skill name for ${d.label} (e.g. "Problem Solving"):`);
-                          if (key) domainScores[d.key][key] = r;
-                        }}
-                      >
-                        {r}
-                      </Button>
-                    ))}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <Label className="font-body text-sm font-semibold">Academic Year</Label>
+                    <Select value={form.academic_year} onValueChange={(v) => setForm({ ...form, academic_year: v })}>
+                      <SelectTrigger className="rounded-xl border-primary/20"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="2025-2026">2025-2026</SelectItem>
+                        <SelectItem value="2026-2027">2026-2027</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="font-body text-sm font-semibold">Term</Label>
+                    <Select value={form.term} onValueChange={(v) => setForm({ ...form, term: v })}>
+                      <SelectTrigger className="rounded-xl border-primary/20"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Term 1">Term 1</SelectItem>
+                        <SelectItem value="Term 2">Term 2</SelectItem>
+                        <SelectItem value="Term 3">Term 3</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
-              ))}
-              <div><Label>Teacher Remarks</Label><Textarea rows={3} value={form.teacher_remarks} onChange={(e) => setForm({ ...form, teacher_remarks: e.target.value })} /></div>
-              <Button onClick={save} className="w-full">Generate</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
-      <Card>
-        <CardHeader><CardTitle>Generated Report Cards</CardTitle></CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Student</TableHead>
-                <TableHead>Class</TableHead>
-                <TableHead>Year</TableHead>
-                <TableHead>Term</TableHead>
-                <TableHead>Generated</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {reports.map((r) => (
-                <TableRow key={r.id}>
-                  <TableCell className="font-medium">{r.students?.full_name}</TableCell>
-                  <TableCell>{r.students?.class}</TableCell>
-                  <TableCell>{r.academic_year}</TableCell>
-                  <TableCell><Badge variant="secondary">{r.term}</Badge></TableCell>
-                  <TableCell>{new Date(r.created_at).toLocaleDateString()}</TableCell>
+                {domains.map((d) => (
+                  <div key={d.key} className="space-y-2 rounded-xl border border-primary/5 bg-muted/30 p-3">
+                    <Label className="font-body text-sm font-bold">{d.label}</Label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {ratings.map((r) => (
+                        <Button
+                          key={r}
+                          type="button"
+                          variant={domainScores[d.key]?.skill1 === r ? "default" : "outline"}
+                          size="sm"
+                          className="rounded-lg text-xs"
+                          onClick={() => {
+                            const key = prompt(`Enter skill name for ${d.label} (e.g. "Problem Solving"):`);
+                            if (key) domainScores[d.key][key] = r;
+                          }}
+                        >
+                          {r}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="space-y-1.5">
+                  <Label className="font-body text-sm font-semibold">Teacher Remarks</Label>
+                  <Textarea rows={3} value={form.teacher_remarks} onChange={(e) => setForm({ ...form, teacher_remarks: e.target.value })} className="rounded-xl border-primary/20" />
+                </div>
+                <Button onClick={save} className="w-full rounded-xl bg-gradient-bamboo font-display font-bold text-white shadow-soft">Generate</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </motion.div>
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
+        <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft">
+          <CardHeader className="bg-gradient-to-r from-purple-400/10 to-transparent">
+            <CardTitle className="font-display text-lg font-bold">Generated Report Cards</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead className="font-body font-semibold">Student</TableHead>
+                  <TableHead className="font-body font-semibold">Class</TableHead>
+                  <TableHead className="font-body font-semibold">Year</TableHead>
+                  <TableHead className="font-body font-semibold">Term</TableHead>
+                  <TableHead className="font-body font-semibold">Generated</TableHead>
                 </TableRow>
-              ))}
-              {reports.length === 0 && <TableRow><TableCell colSpan={5} className="text-center">No report cards yet.</TableCell></TableRow>}
-            </TableBody>
-          </Table>
-          </div>
-        </CardContent>
-      </Card>
+              </TableHeader>
+              <TableBody>
+                {reports.map((r) => (
+                  <TableRow key={r.id} className="border-b border-primary/5 transition-colors hover:bg-primary/[0.02]">
+                    <TableCell className="font-body font-medium">{r.students?.full_name}</TableCell>
+                    <TableCell className="font-body text-muted-foreground">{r.students?.class}</TableCell>
+                    <TableCell className="font-body text-muted-foreground">{r.academic_year}</TableCell>
+                    <TableCell><Badge variant="secondary" className="rounded-full font-body text-xs">{r.term}</Badge></TableCell>
+                    <TableCell className="font-body text-muted-foreground">{new Date(r.created_at).toLocaleDateString()}</TableCell>
+                  </TableRow>
+                ))}
+                {reports.length === 0 && <TableRow><TableCell colSpan={5} className="py-12 text-center"><p className="font-display text-muted-foreground">No report cards yet.</p></TableCell></TableRow>}
+              </TableBody>
+            </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }
