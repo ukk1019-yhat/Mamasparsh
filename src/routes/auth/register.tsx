@@ -2,9 +2,11 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MagneticButton } from "@/components/site/MagneticButton";
 import { GradientText } from "@/components/site/Reveal";
 import { signUp } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 import pandaPlays from "@/assets/panda-plays.png";
 import pandaGrows from "@/assets/panda-grows.png";
 import pandaMascot from "@/assets/panda-mascot.png";
@@ -37,7 +39,10 @@ function BambooStalk({ left, height, delay }: { left: string; height: string; de
 
 function RegisterPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ fullName: "", email: "", phone: "", password: "", confirm: "" });
+  const [form, setForm] = useState({
+    fullName: "", email: "", phone: "", password: "", confirm: "",
+    childName: "", childClass: "", childDob: "", childGender: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -51,7 +56,18 @@ function RegisterPage() {
     }
     setLoading(true);
     try {
-      await signUp(form.email, form.password, form.fullName, form.phone);
+      const data = await signUp(form.email, form.password, form.fullName, form.phone);
+      if (form.childName && data.user) {
+        await supabase.from("students").insert({
+          full_name: form.childName,
+          class: form.childClass || "Playgroup",
+          parent_id: data.user.id,
+          date_of_birth: form.childDob || new Date().toISOString().split("T")[0],
+          gender: form.childGender || "male",
+          admission_date: new Date().toISOString().split("T")[0],
+          status: "pending",
+        });
+      }
       setDone(true);
     } catch (err: any) {
       setError(err.message || "Registration failed");
@@ -135,64 +151,129 @@ function RegisterPage() {
             <h1 className="font-display text-3xl font-extrabold">
               <GradientText text="Parent Registration" />
             </h1>
-            <p className="mt-1 font-body text-sm text-muted-foreground">
-              Register to manage your child&apos;s preschool journey
-            </p>
-          </div>
+              <p className="mt-1 font-body text-sm text-muted-foreground">
+                Register to manage your child&apos;s preschool journey
+              </p>
+            </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <label className="font-body text-sm font-semibold text-foreground/80">Full Name</label>
-              <Input
-                value={form.fullName}
-                onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                required
-                className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
-                placeholder="Your full name"
-              />
+            <form onSubmit={handleSubmit} className="space-y-4">
+
+            <div className="rounded-xl border border-primary/10 bg-primary/[0.02] p-4">
+              <p className="mb-3 font-body text-xs font-semibold text-foreground/60 uppercase tracking-wider">Parent Details</p>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Full Name</label>
+                  <Input
+                    value={form.fullName}
+                    onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+                    required
+                    className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Email</label>
+                  <Input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    required
+                    className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Phone</label>
+                  <Input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    placeholder="Your phone number"
+                  />
+                </div>
+              </div>
             </div>
-            <div className="space-y-2">
-              <label className="font-body text-sm font-semibold text-foreground/80">Email</label>
-              <Input
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                required
-                className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
-                placeholder="you@example.com"
-              />
+
+            <div className="rounded-xl border border-accent/10 bg-accent/[0.02] p-4">
+              <p className="mb-3 font-body text-xs font-semibold text-foreground/60 uppercase tracking-wider">Child Details</p>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Child&apos;s Full Name</label>
+                  <Input
+                    value={form.childName}
+                    onChange={(e) => setForm({ ...form, childName: e.target.value })}
+                    required
+                    className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    placeholder="Your child's name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Class</label>
+                  <Select value={form.childClass} onValueChange={(v) => setForm({ ...form, childClass: v })}>
+                    <SelectTrigger className="rounded-xl border-primary/20 bg-background/50 font-body text-sm">
+                      <SelectValue placeholder="Select class" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {["Playgroup", "Nursery", "LKG", "UKG"].map((c) => (
+                        <SelectItem key={c} value={c}>{c}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-2">
+                    <label className="font-body text-sm font-semibold text-foreground/80">Date of Birth</label>
+                    <Input
+                      type="date"
+                      value={form.childDob}
+                      onChange={(e) => setForm({ ...form, childDob: e.target.value })}
+                      required
+                      className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="font-body text-sm font-semibold text-foreground/80">Gender</label>
+                    <Select value={form.childGender} onValueChange={(v) => setForm({ ...form, childGender: v })}>
+                      <SelectTrigger className="rounded-xl border-primary/20 bg-background/50 font-body text-sm">
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="male">Male</SelectItem>
+                        <SelectItem value="female">Female</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="space-y-2">
-              <label className="font-body text-sm font-semibold text-foreground/80">Phone</label>
-              <Input
-                type="tel"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
-                placeholder="Your phone number"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="font-body text-sm font-semibold text-foreground/80">Password</label>
-              <Input
-                type="password"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                required
-                className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
-                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="font-body text-sm font-semibold text-foreground/80">Confirm Password</label>
-              <Input
-                type="password"
-                value={form.confirm}
-                onChange={(e) => setForm({ ...form, confirm: e.target.value })}
-                required
-                className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
-                placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-              />
+
+            <div className="rounded-xl border border-destructive/10 bg-destructive/[0.02] p-4">
+              <p className="mb-3 font-body text-xs font-semibold text-foreground/60 uppercase tracking-wider">Account Security</p>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Password</label>
+                  <Input
+                    type="password"
+                    value={form.password}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    required
+                    className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="font-body text-sm font-semibold text-foreground/80">Confirm Password</label>
+                  <Input
+                    type="password"
+                    value={form.confirm}
+                    onChange={(e) => setForm({ ...form, confirm: e.target.value })}
+                    required
+                    className="rounded-xl border-primary/20 bg-background/50 font-body text-sm focus-visible:ring-primary/40"
+                    placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                  />
+                </div>
+              </div>
             </div>
 
             {error && (

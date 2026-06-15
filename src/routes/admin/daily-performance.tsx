@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/lib/supabase";
 
@@ -27,6 +28,10 @@ function AdminDailyPerformance() {
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [date, setDate] = useState(today);
   const [saving, setSaving] = useState(false);
+  const [classFilter, setClassFilter] = useState("all");
+
+  const classes = [...new Set(students.map((s) => s.class))].sort();
+  const filteredStudents = classFilter === "all" ? students : students.filter((s) => s.class === classFilter);
 
   async function load() {
     const { data: studentsData } = await supabase
@@ -65,7 +70,7 @@ function AdminDailyPerformance() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    for (const student of students) {
+    for (const student of filteredStudents) {
       const perf = performances[student.id];
       if (!perf) continue;
       const hasRating = domains.some((d) => perf[d.key]);
@@ -113,6 +118,20 @@ function AdminDailyPerformance() {
         </div>
         <div className="flex items-center gap-3">
           <div>
+            <Label>Class</Label>
+            <Select value={classFilter} onValueChange={setClassFilter}>
+              <SelectTrigger className="w-36">
+                <SelectValue placeholder="All Classes" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Classes</SelectItem>
+                {classes.map((c) => (
+                  <SelectItem key={c} value={c}>{c}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
             <Label>Date</Label>
             <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-44" />
           </div>
@@ -122,11 +141,11 @@ function AdminDailyPerformance() {
         </div>
       </div>
 
-      {students.length === 0 ? (
+      {filteredStudents.length === 0 ? (
         <Card><CardContent className="py-8 text-center text-muted-foreground">No active students found.</CardContent></Card>
       ) : (
         <div className="space-y-4">
-          {students.map((student) => (
+          {filteredStudents.map((student) => (
             <Card key={student.id}>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
