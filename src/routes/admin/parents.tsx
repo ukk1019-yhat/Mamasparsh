@@ -16,11 +16,23 @@ export const Route = createFileRoute("/admin/parents")({
 
 function AdminParents() {
   const [parents, setParents] = useState<Profile[]>([]);
+  const [childrenMap, setChildrenMap] = useState<Record<string, { full_name: string; class: string }[]>>({});
   const [loading, setLoading] = useState(true);
 
   async function loadParents() {
     const { data } = await supabase.from("profiles").select("*").eq("role", "parent").order("created_at", { ascending: false });
     if (data) setParents(data as Profile[]);
+
+    const { data: students } = await supabase.from("students").select("parent_id, full_name, class");
+    if (students) {
+      const map: Record<string, { full_name: string; class: string }[]> = {};
+      students.forEach((s: any) => {
+        if (!map[s.parent_id]) map[s.parent_id] = [];
+        map[s.parent_id].push({ full_name: s.full_name, class: s.class });
+      });
+      setChildrenMap(map);
+    }
+
     setLoading(false);
   }
 
@@ -59,6 +71,7 @@ function AdminParents() {
                   <TableHead className="font-body font-semibold">Name</TableHead>
                   <TableHead className="font-body font-semibold">Email</TableHead>
                   <TableHead className="font-body font-semibold">Phone</TableHead>
+                  <TableHead className="font-body font-semibold">Children</TableHead>
                   <TableHead className="font-body font-semibold">Status</TableHead>
                   <TableHead className="font-body font-semibold">Registered</TableHead>
                   <TableHead className="font-body font-semibold">Actions</TableHead>
@@ -66,14 +79,29 @@ function AdminParents() {
               </TableHeader>
               <TableBody>
                 {loading ? (
-                  <TableRow><TableCell colSpan={6} className="py-12 text-center"><p className="font-display text-muted-foreground">Loading parents...</p></TableCell></TableRow>
+                  <TableRow><TableCell colSpan={7} className="py-12 text-center"><p className="font-display text-muted-foreground">Loading parents...</p></TableCell></TableRow>
                 ) : parents.length === 0 ? (
-                  <TableRow><TableCell colSpan={6} className="py-12 text-center"><p className="font-display text-muted-foreground">No parents registered yet.</p></TableCell></TableRow>
-                ) : parents.map((p) => (
+                  <TableRow><TableCell colSpan={7} className="py-12 text-center"><p className="font-display text-muted-foreground">No parents registered yet.</p></TableCell></TableRow>
+                ) : parents.map((p) => {
+                  const kids = childrenMap[p.id] || [];
+                  return (
                   <TableRow key={p.id} className="border-b border-primary/5 transition-colors hover:bg-primary/[0.02]">
                     <TableCell className="font-body font-medium">{p.full_name}</TableCell>
                     <TableCell className="font-body text-muted-foreground">{p.email}</TableCell>
                     <TableCell className="font-body text-muted-foreground">{p.phone || "-"}</TableCell>
+                    <TableCell className="font-body text-muted-foreground">
+                      {kids.length === 0 ? (
+                        <span className="text-xs italic">None</span>
+                      ) : (
+                        <div className="flex flex-col gap-0.5">
+                          {kids.map((k, i) => (
+                            <span key={i} className="text-xs">
+                              {k.full_name} <span className="text-muted-foreground/60">({k.class})</span>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </TableCell>
                     <TableCell>
                       <Badge variant={p.status === "approved" ? "default" : p.status === "rejected" ? "destructive" : "secondary"} className="rounded-full font-body text-xs">
                         {p.status}
@@ -97,7 +125,8 @@ function AdminParents() {
                       </div>
                     </TableCell>
                   </TableRow>
-                ))}
+                );
+              })}
               </TableBody>
             </Table>
             </div>
