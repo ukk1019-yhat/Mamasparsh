@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { GradientText } from "@/components/site/Reveal";
+import { BambooBackground } from "@/components/admin/BambooBackground";
 import { supabase } from "@/lib/supabase";
 import type { Student, Attendance } from "@/types/database";
 
@@ -65,62 +68,74 @@ function AdminAttendance() {
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Attendance</h1>
-      <div className="flex items-center gap-4">
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="border rounded-md px-3 py-2 text-sm bg-background" />
-        <Button size="sm" variant="outline" onClick={() => markAll("present")}>Mark All Present</Button>
-        <Button size="sm" variant="outline" onClick={() => markAll("absent")}>Mark All Absent</Button>
-        <Button size="sm" variant="outline" onClick={() => markAll("leave")}>Mark All Leave</Button>
-      </div>
-      <Card>
-        <CardHeader><CardTitle>Attendance for {date}</CardTitle></CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Student</TableHead>
-                <TableHead>Class</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {students.map((s) => (
-                <TableRow key={s.id}>
-                  <TableCell className="font-medium">{s.full_name}</TableCell>
-                  <TableCell>{s.class}</TableCell>
-                  <TableCell>
-                    <Select
-                      value={attendance.get(s.id) || ""}
-                      onValueChange={(v) => markSingle(s.id, v)}
-                    >
-                      <SelectTrigger className="w-32">
-                        <SelectValue placeholder="Select" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="present">
-                          <Badge variant="default" className="bg-green-500">Present</Badge>
-                        </SelectItem>
-                        <SelectItem value="absent">
-                          <Badge variant="destructive">Absent</Badge>
-                        </SelectItem>
-                        <SelectItem value="leave">
-                          <Badge variant="secondary">Leave</Badge>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </TableCell>
+    <div className="relative space-y-6">
+      <BambooBackground />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <h1 className="font-display text-3xl font-extrabold md:text-4xl">
+          <GradientText text="Attendance" />
+        </h1>
+        <p className="mt-1 font-body text-muted-foreground">Mark and track daily student attendance.</p>
+      </motion.div>
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="flex flex-wrap items-center gap-3">
+        <div className="rounded-xl border border-primary/10 bg-card px-4 py-2 shadow-soft">
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="bg-transparent font-body text-sm outline-none" />
+        </div>
+        <Button size="sm" onClick={() => markAll("present")} className="rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 font-display text-xs font-bold text-white shadow-soft">Mark All Present</Button>
+        <Button size="sm" onClick={() => markAll("absent")} className="rounded-xl bg-gradient-to-r from-red-500 to-red-400 font-display text-xs font-bold text-white shadow-soft">Mark All Absent</Button>
+        <Button size="sm" onClick={() => markAll("leave")} className="rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 font-display text-xs font-bold text-white shadow-soft">Mark All Leave</Button>
+      </motion.div>
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+        <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft">
+          <CardHeader className="bg-gradient-to-r from-emerald-400/10 to-transparent">
+            <CardTitle className="font-display text-lg font-bold">Attendance for {date}</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead className="font-body font-semibold">Student</TableHead>
+                  <TableHead className="font-body font-semibold">Class</TableHead>
+                  <TableHead className="font-body font-semibold">Status</TableHead>
                 </TableRow>
-              ))}
-              {students.length === 0 && (
-                <TableRow><TableCell colSpan={3} className="text-center">No active students.</TableCell></TableRow>
-              )}
-            </TableBody>
-          </Table>
-          </div>
-        </CardContent>
-      </Card>
+              </TableHeader>
+              <TableBody>
+                {students.map((s) => (
+                  <TableRow key={s.id} className="border-b border-primary/5 transition-colors hover:bg-primary/[0.02]">
+                    <TableCell className="font-body font-medium">{s.full_name}</TableCell>
+                    <TableCell className="font-body text-muted-foreground">{s.class}</TableCell>
+                    <TableCell>
+                      <Select
+                        value={attendance.get(s.id) || ""}
+                        onValueChange={(v) => markSingle(s.id, v)}
+                      >
+                        <SelectTrigger className="w-36 rounded-xl border-primary/20">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="present">
+                            <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-green-500" /> Present</span>
+                          </SelectItem>
+                          <SelectItem value="absent">
+                            <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-red-500" /> Absent</span>
+                          </SelectItem>
+                          <SelectItem value="leave">
+                            <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-amber-500" /> Leave</span>
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {students.length === 0 && (
+                  <TableRow><TableCell colSpan={3} className="py-12 text-center"><p className="font-display text-muted-foreground">No active students.</p></TableCell></TableRow>
+                )}
+              </TableBody>
+            </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }

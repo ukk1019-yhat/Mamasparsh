@@ -1,22 +1,20 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "motion/react";
+import { Card, CardContent } from "@/components/ui/card";
+import { GradientText } from "@/components/site/Reveal";
+import { BambooBackground } from "@/components/admin/BambooBackground";
+import { Clock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { signOut } from "@/lib/auth";
+import { useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/parent/pending")({
-  component: PendingApproval,
+  component: ParentPending,
 });
 
-function PendingApproval() {
+function ParentPending() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) navigate({ to: "/auth/login" });
-    });
-  }, []);
 
   async function handleSignOut() {
     await signOut();
@@ -24,21 +22,39 @@ function PendingApproval() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <Card className="w-full max-w-md text-center">
-        <CardHeader>
-          <CardTitle>Pending Approval</CardTitle>
-          <CardDescription>
-            Your account is awaiting admin approval. You will be notified once approved. Please check back later.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground">
-            If you have any questions, please contact the school administration.
-          </p>
-          <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
-        </CardContent>
-      </Card>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background via-accent/[0.02] to-background p-4">
+      <BambooBackground />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className="relative z-10 w-full max-w-md"
+      >
+        <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft">
+          <CardContent className="space-y-6 p-8 text-center">
+            <motion.div
+              animate={{ y: [0, -8, 0], rotate: [0, -5, 0, 5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-bamboo shadow-soft"
+            >
+              <Clock className="h-10 w-10 text-white" />
+            </motion.div>
+            <h1 className="font-display text-3xl font-extrabold">
+              <GradientText text="Pending Approval" />
+            </h1>
+            <p className="font-body text-muted-foreground">
+              Your account is currently under review. An administrator will approve your registration shortly.
+            </p>
+            <div className="flex items-center justify-center gap-2 rounded-xl bg-accent/5 p-3 font-body text-xs text-muted-foreground">
+              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              You&apos;ll be able to access the parent portal once approved.
+            </div>
+            <Button onClick={handleSignOut} variant="outline" className="w-full rounded-xl font-body font-bold">
+              Sign Out
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }

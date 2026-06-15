@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { GradientText } from "@/components/site/Reveal";
+import { BambooBackground } from "@/components/admin/BambooBackground";
 import { supabase } from "@/lib/supabase";
 import type { Profile } from "@/types/database";
 
@@ -35,60 +38,72 @@ function AdminParents() {
   useEffect(() => { loadParents(); }, []);
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Parent Management</h1>
-      <Card>
-        <CardHeader><CardTitle>Registered Parents</CardTitle></CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Registered</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {loading ? (
-                <TableRow><TableCell colSpan={6} className="text-center">Loading...</TableCell></TableRow>
-              ) : parents.length === 0 ? (
-                <TableRow><TableCell colSpan={6} className="text-center">No parents registered yet.</TableCell></TableRow>
-              ) : parents.map((p) => (
-                <TableRow key={p.id}>
-                  <TableCell className="font-medium">{p.full_name}</TableCell>
-                  <TableCell>{p.email}</TableCell>
-                  <TableCell>{p.phone || "-"}</TableCell>
-                  <TableCell>
-                    <Badge variant={p.status === "approved" ? "default" : p.status === "rejected" ? "destructive" : "secondary"}>
-                      {p.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{new Date(p.created_at).toLocaleDateString()}</TableCell>
-                  <TableCell className="space-x-2">
-                    {p.status === "pending" && (
-                      <>
-                        <Button size="sm" onClick={() => updateStatus(p.id, "approved")}>Approve</Button>
-                        <Button size="sm" variant="destructive" onClick={() => updateStatus(p.id, "rejected")}>Reject</Button>
-                      </>
-                    )}
-                    {p.status === "approved" && (
-                      <Button size="sm" variant="destructive" onClick={() => updateStatus(p.id, "rejected")}>Reject</Button>
-                    )}
-                    {p.status === "rejected" && (
-                      <Button size="sm" onClick={() => updateStatus(p.id, "approved")}>Approve</Button>
-                    )}
-                  </TableCell>
+    <div className="relative space-y-6">
+      <BambooBackground />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <h1 className="font-display text-3xl font-extrabold md:text-4xl">
+          <GradientText text="Parent Management" />
+        </h1>
+        <p className="mt-1 font-body text-muted-foreground">Manage parent registrations and approvals.</p>
+      </motion.div>
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
+        <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft">
+          <CardHeader className="bg-gradient-to-r from-secondary/10 to-transparent">
+            <CardTitle className="font-display text-lg font-bold">Registered Parents</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead className="font-body font-semibold">Name</TableHead>
+                  <TableHead className="font-body font-semibold">Email</TableHead>
+                  <TableHead className="font-body font-semibold">Phone</TableHead>
+                  <TableHead className="font-body font-semibold">Status</TableHead>
+                  <TableHead className="font-body font-semibold">Registered</TableHead>
+                  <TableHead className="font-body font-semibold">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          </div>
-        </CardContent>
-      </Card>
+              </TableHeader>
+              <TableBody>
+                {loading ? (
+                  <TableRow><TableCell colSpan={6} className="py-12 text-center"><p className="font-display text-muted-foreground">Loading parents...</p></TableCell></TableRow>
+                ) : parents.length === 0 ? (
+                  <TableRow><TableCell colSpan={6} className="py-12 text-center"><p className="font-display text-muted-foreground">No parents registered yet.</p></TableCell></TableRow>
+                ) : parents.map((p) => (
+                  <TableRow key={p.id} className="border-b border-primary/5 transition-colors hover:bg-primary/[0.02]">
+                    <TableCell className="font-body font-medium">{p.full_name}</TableCell>
+                    <TableCell className="font-body text-muted-foreground">{p.email}</TableCell>
+                    <TableCell className="font-body text-muted-foreground">{p.phone || "-"}</TableCell>
+                    <TableCell>
+                      <Badge variant={p.status === "approved" ? "default" : p.status === "rejected" ? "destructive" : "secondary"} className="rounded-full font-body text-xs">
+                        {p.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-body text-muted-foreground">{new Date(p.created_at).toLocaleDateString()}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-1.5">
+                        {p.status === "pending" && (
+                          <>
+                            <Button size="sm" onClick={() => updateStatus(p.id, "approved")} className="rounded-lg bg-gradient-bamboo text-xs font-bold text-white shadow-soft hover:shadow-lift">Approve</Button>
+                            <Button size="sm" variant="destructive" onClick={() => updateStatus(p.id, "rejected")} className="rounded-lg text-xs font-bold">Reject</Button>
+                          </>
+                        )}
+                        {p.status === "approved" && (
+                          <Button size="sm" variant="destructive" onClick={() => updateStatus(p.id, "rejected")} className="rounded-lg text-xs font-bold">Reject</Button>
+                        )}
+                        {p.status === "rejected" && (
+                          <Button size="sm" onClick={() => updateStatus(p.id, "approved")} className="rounded-lg bg-gradient-bamboo text-xs font-bold text-white shadow-soft hover:shadow-lift">Approve</Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }

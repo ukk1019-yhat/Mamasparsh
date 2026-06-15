@@ -16,6 +16,7 @@ import { Menu, X, LayoutDashboard, GraduationCap, CheckSquare, ClipboardList, Fi
 import { supabase } from "@/lib/supabase";
 import { signOut } from "@/lib/auth";
 import type { Profile } from "@/types/database";
+import pandaMascot from "@/assets/panda-mascot.png";
 
 export const Route = createFileRoute("/parent")({
   component: ParentLayout,
@@ -152,7 +153,26 @@ function ParentLayout() {
     return () => { cancelled = true; };
   }, []);
 
-  if (checking) return <div className="flex h-screen items-center justify-center">Loading...</div>;
+  if (checking) return (
+    <div className="flex h-screen items-center justify-center bg-gradient-to-b from-background via-accent/[0.02] to-background">
+      <div className="text-center">
+        <motion.img
+          src={pandaMascot}
+          alt=""
+          className="mx-auto w-24 opacity-60 md:w-28"
+          animate={{ y: [0, -10, 0], rotate: [0, -3, 0, 3, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.p
+          className="mt-4 font-display text-lg font-bold text-muted-foreground"
+          animate={{ opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          Loading Panda World...
+        </motion.p>
+      </div>
+    </div>
+  );
 
   async function handleSignOut() {
     await signOut();
