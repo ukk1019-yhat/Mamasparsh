@@ -85,6 +85,22 @@ export type FileRecord = {
   created_at: string;
 };
 
+export type DailyPerformance = {
+  id: string;
+  student_id: string;
+  date: string;
+  cognitive: string | null;
+  language_literacy: string | null;
+  mathematics: string | null;
+  physical: string | null;
+  social_emotional: string | null;
+  aesthetic_cultural: string | null;
+  notes: string | null;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -96,6 +112,7 @@ export type Database = {
       announcements: { Row: Announcement };
       notifications: { Row: Notification };
       files: { Row: FileRecord };
+      daily_performance: { Row: DailyPerformance };
     };
   };
 };
