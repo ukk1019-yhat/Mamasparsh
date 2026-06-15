@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/lib/supabase";
 
@@ -21,16 +19,6 @@ const domains = [
   { key: "social_emotional", label: "Social & Emotional" },
   { key: "aesthetic_cultural", label: "Aesthetic & Cultural" },
 ];
-
-const ratings = ["Not Yet", "Emerging", "Developing", "Achieved", "Exceeding"];
-
-const colorMap: Record<string, string> = {
-  "Not Yet": "bg-red-100 text-red-700 hover:bg-red-200",
-  "Emerging": "bg-orange-100 text-orange-700 hover:bg-orange-200",
-  "Developing": "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
-  "Achieved": "bg-green-100 text-green-700 hover:bg-green-200",
-  "Exceeding": "bg-blue-100 text-blue-700 hover:bg-blue-200",
-};
 
 function AdminDailyPerformance() {
   const today = new Date().toISOString().split("T")[0];
@@ -61,11 +49,11 @@ function AdminDailyPerformance() {
 
   useEffect(() => { load(); }, [date]);
 
-  function getRating(studentId: string, domain: string): string {
-    return performances[studentId]?.[domain] || "";
+  function getRating(studentId: string, domain: string): number | null {
+    return performances[studentId]?.[domain] ?? null;
   }
 
-  function setRating(studentId: string, domain: string, rating: string) {
+  function setRating(studentId: string, domain: string, rating: number | null) {
     setPerformances((prev) => ({
       ...prev,
       [studentId]: { ...prev[studentId], [domain]: rating },
@@ -86,12 +74,12 @@ function AdminDailyPerformance() {
       const record = {
         student_id: student.id,
         date,
-        cognitive: perf.cognitive || null,
-        language_literacy: perf.language_literacy || null,
-        mathematics: perf.mathematics || null,
-        physical: perf.physical || null,
-        social_emotional: perf.social_emotional || null,
-        aesthetic_cultural: perf.aesthetic_cultural || null,
+        cognitive: perf.cognitive ?? null,
+        language_literacy: perf.language_literacy ?? null,
+        mathematics: perf.mathematics ?? null,
+        physical: perf.physical ?? null,
+        social_emotional: perf.social_emotional ?? null,
+        aesthetic_cultural: perf.aesthetic_cultural ?? null,
         notes: notes[student.id] || null,
         created_by: user.id,
       };
@@ -150,23 +138,23 @@ function AdminDailyPerformance() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                   {domains.map((d) => (
                     <div key={d.key}>
-                      <p className="text-xs font-medium mb-1 truncate">{d.label}</p>
-                      <div className="flex flex-col gap-1">
-                        {ratings.map((r) => (
+                      <p className="text-xs font-medium mb-1.5 truncate">{d.label}</p>
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 4, 5].map((n) => (
                           <button
-                            key={r}
+                            key={n}
                             type="button"
-                            className={`text-xs px-2 py-1 rounded-md border transition-colors text-left ${
-                              getRating(student.id, d.key) === r
-                                ? colorMap[r]
-                                : "bg-background hover:bg-muted"
+                            className={`w-8 h-8 rounded-md text-sm font-medium border transition-colors ${
+                              getRating(student.id, d.key) === n
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-background hover:bg-muted text-muted-foreground"
                             }`}
-                            onClick={() => setRating(student.id, d.key, r)}
+                            onClick={() => setRating(student.id, d.key, getRating(student.id, d.key) === n ? null : n)}
                           >
-                            {r}
+                            {n}
                           </button>
                         ))}
                       </div>

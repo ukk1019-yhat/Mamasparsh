@@ -19,12 +19,12 @@ const domains = [
   { key: "aesthetic_cultural", label: "Aesthetic & Cultural" },
 ];
 
-const colorMap: Record<string, string> = {
-  "Not Yet": "bg-red-100 text-red-700",
-  "Emerging": "bg-orange-100 text-orange-700",
-  "Developing": "bg-yellow-100 text-yellow-700",
-  "Achieved": "bg-green-100 text-green-700",
-  "Exceeding": "bg-blue-100 text-blue-700",
+const colorMap: Record<number, string> = {
+  1: "bg-red-100 text-red-700",
+  2: "bg-orange-100 text-orange-700",
+  3: "bg-yellow-100 text-yellow-700",
+  4: "bg-green-100 text-green-700",
+  5: "bg-blue-100 text-blue-700",
 };
 
 function ParentDailyPerformance() {
@@ -94,7 +94,7 @@ function ParentDailyPerformance() {
                           <div key={d.key}>
                             <p className="text-xs font-medium mb-1 text-muted-foreground">{d.label}</p>
                             {rating ? (
-                              <span className={`inline-block text-xs font-medium px-2 py-1 rounded-md ${colorMap[rating] || "bg-muted text-muted-foreground"}`}>
+                              <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${colorMap[rating as keyof typeof colorMap] || "bg-muted text-muted-foreground"}`}>
                                 {rating}
                               </span>
                             ) : (
