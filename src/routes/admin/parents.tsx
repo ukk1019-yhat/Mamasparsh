@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { GradientText } from "@/components/site/Reveal";
 import { BambooBackground } from "@/components/admin/BambooBackground";
 import { supabase } from "@/lib/supabase";
@@ -44,6 +47,13 @@ function AdminParents() {
       message: status === "approved" ? "Your account has been approved. You can now log in and manage your children." : "Your account has been rejected. Please contact the school for more information.",
       type: "approval",
     });
+    loadParents();
+  }
+
+  async function deleteParent(id: string) {
+    await supabase.from("notifications").delete().eq("user_id", id);
+    await supabase.from("students").delete().eq("parent_id", id);
+    await supabase.from("profiles").delete().eq("id", id);
     loadParents();
   }
 
@@ -123,6 +133,23 @@ function AdminParents() {
                           <Button size="sm" onClick={() => updateStatus(p.id, "approved")} className="rounded-lg bg-gradient-bamboo text-xs font-bold text-white shadow-soft hover:shadow-lift">Approve</Button>
                         )}
                       </div>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button size="sm" variant="outline" className="rounded-lg text-xs font-bold text-destructive border-destructive/30 hover:bg-destructive/10">Delete</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="rounded-2xl">
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete Parent?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This will permanently delete {p.full_name} and all their children&apos;s data (attendance, daily performance, etc.). This cannot be undone.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => deleteParent(p.id)} className="rounded-xl bg-destructive text-destructive-foreground hover:bg-destructive/90">Delete</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 );
