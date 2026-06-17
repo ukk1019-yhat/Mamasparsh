@@ -20,6 +20,10 @@ function AdminAttendance() {
   const [attendance, setAttendance] = useState<Map<string, string>>(new Map());
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [saving, setSaving] = useState(false);
+  const [classFilter, setClassFilter] = useState("all");
+
+  const classes = [...new Set(students.map((s) => s.class))].sort();
+  const filteredStudents = classFilter === "all" ? students : students.filter((s) => s.class === classFilter);
 
   useEffect(() => {
     supabase.from("students").select("*").eq("status", "active").then(({ data }) => {
@@ -41,7 +45,7 @@ function AdminAttendance() {
   async function markAll(status: string) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
-    const records = students.map((s) => ({
+    const records = filteredStudents.map((s) => ({
       student_id: s.id,
       date,
       status,
@@ -51,7 +55,7 @@ function AdminAttendance() {
       await supabase.from("attendance").upsert(r, { onConflict: "student_id, date" });
     }
     const map = new Map(attendance);
-    students.forEach((s) => map.set(s.id, status));
+    filteredStudents.forEach((s) => map.set(s.id, status));
     setAttendance(map);
   }
 
@@ -77,6 +81,17 @@ function AdminAttendance() {
         <p className="mt-1 font-body text-muted-foreground">Mark and track daily student attendance.</p>
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="flex flex-wrap items-center gap-3">
+        <Select value={classFilter} onValueChange={setClassFilter}>
+          <SelectTrigger className="w-36 rounded-xl border-primary/20">
+            <SelectValue placeholder="All Classes" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Classes</SelectItem>
+            {classes.map((c) => (
+              <SelectItem key={c} value={c}>{c}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <div className="rounded-xl border border-primary/10 bg-card px-4 py-2 shadow-soft">
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="bg-transparent font-body text-sm outline-none" />
         </div>
@@ -100,7 +115,7 @@ function AdminAttendance() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {students.map((s) => (
+                {filteredStudents.map((s) => (
                   <TableRow key={s.id} className="border-b border-primary/5 transition-colors hover:bg-primary/[0.02]">
                     <TableCell className="font-body font-medium">{s.full_name}</TableCell>
                     <TableCell className="font-body text-muted-foreground">{s.class}</TableCell>
@@ -127,7 +142,7 @@ function AdminAttendance() {
                     </TableCell>
                   </TableRow>
                 ))}
-                {students.length === 0 && (
+                {filteredStudents.length === 0 && (
                   <TableRow><TableCell colSpan={3} className="py-12 text-center"><p className="font-display text-muted-foreground">No active students.</p></TableCell></TableRow>
                 )}
               </TableBody>

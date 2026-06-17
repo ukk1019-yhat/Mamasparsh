@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, LayoutDashboard, Users, GraduationCap, CheckSquare, ClipboardList, FileText, Megaphone, FolderOpen, Star, Link2 } from "lucide-react";
+import { Menu, X, LayoutDashboard, Users, GraduationCap, CheckSquare, FileText, Megaphone, FolderOpen, Star, Link2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { signOut } from "@/lib/auth";
 import type { Profile } from "@/types/database";
@@ -27,7 +27,6 @@ const iconMap: Record<string, React.ReactNode> = {
   "Parents": <Users className="h-4 w-4" />,
   "Students": <GraduationCap className="h-4 w-4" />,
   "Attendance": <CheckSquare className="h-4 w-4" />,
-  "Daily Rhythm": <ClipboardList className="h-4 w-4" />,
   "Report Cards": <FileText className="h-4 w-4" />,
   "Announcements": <Megaphone className="h-4 w-4" />,
   "Files": <FolderOpen className="h-4 w-4" />,
@@ -40,7 +39,6 @@ const navItems = [
   { to: "/admin/parents", label: "Parents" },
   { to: "/admin/students", label: "Students" },
   { to: "/admin/attendance", label: "Attendance" },
-  { to: "/admin/daily-rhythm", label: "Daily Rhythm" },
   { to: "/admin/report-cards", label: "Report Cards" },
   { to: "/admin/announcements", label: "Announcements" },
   { to: "/admin/files", label: "Files" },
