@@ -4,6 +4,9 @@ import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -54,6 +57,11 @@ function AdminAnnouncements() {
     });
     setOpen(false);
     setForm({ title: "", content: "", type: "news", target_class: "", image_url: "" });
+    load();
+  }
+
+  async function deleteAnnouncement(id: string) {
+    await supabase.from("announcements").delete().eq("id", id);
     load();
   }
 
@@ -160,7 +168,24 @@ function AdminAnnouncements() {
                     <CardTitle className="font-display text-lg font-bold">{a.title}</CardTitle>
                     {a.target_class && <Badge variant="outline" className="rounded-full text-xs">{a.target_class}</Badge>}
                   </div>
-                  <Badge variant={typeColors[a.type] as any} className="rounded-full font-body text-xs uppercase tracking-wider">{a.type}</Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant={typeColors[a.type] as any} className="rounded-full font-body text-xs uppercase tracking-wider">{a.type}</Badge>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button size="sm" variant="ghost" className="h-7 w-7 rounded-full p-0 text-muted-foreground hover:text-destructive">✕</Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="rounded-2xl">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete Announcement?</AlertDialogTitle>
+                          <AlertDialogDescription>This will permanently delete "{a.title}". This cannot be undone.</AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => deleteAnnouncement(a.id)} className="rounded-xl bg-destructive text-destructive-foreground hover:bg-destructive/90">Delete</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
                 </div>
                 <p className="font-body text-xs text-muted-foreground">{new Date(a.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>
               </CardHeader>
