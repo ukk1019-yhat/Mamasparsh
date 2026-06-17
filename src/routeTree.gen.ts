@@ -37,6 +37,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminDailyRhythmRouteImport } from './routes/admin/daily-rhythm'
 import { Route as AdminAttendanceRouteImport } from './routes/admin/attendance'
 import { Route as AdminDailyPerformanceRouteImport } from './routes/admin/daily-performance'
+import { Route as AdminClassLinksRouteImport } from './routes/admin/class-links'
 import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcements'
 
 const ProgramsRoute = ProgramsRouteImport.update({
@@ -184,6 +185,11 @@ const AdminDailyPerformanceRoute = AdminDailyPerformanceRouteImport.update({
   path: '/daily-performance',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminClassLinksRoute = AdminClassLinksRouteImport.update({
+  id: '/class-links',
+  path: '/class-links',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/programs': typeof ProgramsRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
   '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -226,6 +233,7 @@ export interface FileRoutesByTo {
   '/programs': typeof ProgramsRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
   '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -258,6 +266,7 @@ export interface FileRoutesById {
   '/programs': typeof ProgramsRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
+  '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
   '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -291,6 +300,7 @@ export interface FileRouteTypes {
     | '/programs'
     | '/admin/announcements'
     | '/admin/attendance'
+    | '/admin/class-links'
     | '/admin/daily-performance'
     | '/admin/daily-rhythm'
     | '/admin/dashboard'
@@ -322,6 +332,7 @@ export interface FileRouteTypes {
     | '/programs'
     | '/admin/announcements'
     | '/admin/attendance'
+    | '/admin/class-links'
     | '/admin/daily-performance'
     | '/admin/daily-rhythm'
     | '/admin/dashboard'
@@ -353,6 +364,7 @@ export interface FileRouteTypes {
     | '/programs'
     | '/admin/announcements'
     | '/admin/attendance'
+    | '/admin/class-links'
     | '/admin/daily-performance'
     | '/admin/daily-rhythm'
     | '/admin/dashboard'
@@ -566,6 +578,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/class-links': {
+      id: '/admin/class-links'
+      path: '/class-links'
+      fullPath: '/admin/class-links'
+      preLoaderRoute: typeof AdminClassLinksRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/daily-performance': {
       id: '/admin/daily-performance'
       path: '/daily-performance'
@@ -600,6 +619,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
   AdminAttendanceRoute: typeof AdminAttendanceRoute
+  AdminClassLinksRoute: typeof AdminClassLinksRoute
   AdminDailyPerformanceRoute: typeof AdminDailyPerformanceRoute
   AdminDailyRhythmRoute: typeof AdminDailyRhythmRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
@@ -612,6 +632,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAnnouncementsRoute: AdminAnnouncementsRoute,
   AdminAttendanceRoute: AdminAttendanceRoute,
+  AdminClassLinksRoute: AdminClassLinksRoute,
   AdminDailyPerformanceRoute: AdminDailyPerformanceRoute,
   AdminDailyRhythmRoute: AdminDailyRhythmRoute,
   AdminDashboardRoute: AdminDashboardRoute,

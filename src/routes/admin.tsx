@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, LayoutDashboard, Users, GraduationCap, CheckSquare, ClipboardList, FileText, Megaphone, FolderOpen, Star } from "lucide-react";
+import { Menu, X, LayoutDashboard, Users, GraduationCap, CheckSquare, ClipboardList, FileText, Megaphone, FolderOpen, Star, Link } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { signOut } from "@/lib/auth";
 import type { Profile } from "@/types/database";
@@ -32,6 +32,7 @@ const iconMap: Record<string, React.ReactNode> = {
   "Announcements": <Megaphone className="h-4 w-4" />,
   "Files": <FolderOpen className="h-4 w-4" />,
   "Daily Perf.": <Star className="h-4 w-4" />,
+  "Class Links": <Link className="h-4 w-4" />,
 };
 
 const navItems = [
@@ -44,6 +45,7 @@ const navItems = [
   { to: "/admin/announcements", label: "Announcements" },
   { to: "/admin/files", label: "Files" },
   { to: "/admin/daily-performance", label: "Daily Perf." },
+  { to: "/admin/class-links", label: "Class Links" },
 ];
 
 function Sidebar({ open, onClose, profile, location, handleSignOut }: {

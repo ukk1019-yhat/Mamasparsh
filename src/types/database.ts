@@ -89,15 +89,23 @@ export type DailyPerformance = {
   id: string;
   student_id: string;
   date: string;
-  cognitive: string | null;
-  language_literacy: string | null;
-  mathematics: string | null;
-  physical: string | null;
-  social_emotional: string | null;
-  aesthetic_cultural: string | null;
+  cognitive: number | null;
+  language_literacy: number | null;
+  mathematics: number | null;
+  physical: number | null;
+  social_emotional: number | null;
+  aesthetic_cultural: number | null;
   notes: string | null;
   created_by: string;
   created_at: string;
+  updated_at: string;
+};
+
+export type ClassLink = {
+  id: string;
+  class: string;
+  title: string;
+  url: string;
   updated_at: string;
 };
 
@@ -113,6 +121,7 @@ export type Database = {
       notifications: { Row: Notification };
       files: { Row: FileRecord };
       daily_performance: { Row: DailyPerformance };
+      class_links: { Row: ClassLink };
     };
   };
 };

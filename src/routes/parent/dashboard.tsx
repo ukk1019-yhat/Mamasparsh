@@ -67,6 +67,7 @@ function ParentDashboard() {
   const [students, setStudents] = useState<any[]>([]);
   const [recentAnnouncements, setRecentAnnouncements] = useState<any[]>([]);
   const [todayAttendance, setTodayAttendance] = useState<any[]>([]);
+  const [classLinks, setClassLinks] = useState<Record<string, { title: string; url: string }>>({});
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -84,6 +85,13 @@ function ParentDashboard() {
     });
     supabase.from("announcements").select("*").order("created_at", { ascending: false }).limit(3).then(({ data }) => {
       if (data) setRecentAnnouncements(data);
+    });
+    supabase.from("class_links").select("*").then(({ data }) => {
+      if (data) {
+        const map: Record<string, { title: string; url: string }> = {};
+        data.forEach((l: any) => { map[l.class] = { title: l.title, url: l.url }; });
+        setClassLinks(map);
+      }
     });
   }, []);
 
@@ -223,6 +231,51 @@ function ParentDashboard() {
                       )}
                     </div>
                   </motion.div>
+                );
+              })}
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
+
+      {/* Class Resource Links */}
+      {students.length > 0 && Object.keys(classLinks).length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft">
+            <CardHeader className="bg-gradient-to-r from-emerald-500/10 to-transparent">
+              <CardTitle className="font-display text-lg font-bold">
+                <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">📚 Class Resources</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {students.map((s) => {
+                const link = classLinks[s.class];
+                if (!link) return null;
+                return (
+                  <a
+                    key={s.class}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-xl border border-primary/5 bg-gradient-to-r from-emerald-500/[0.03] to-transparent p-4 transition-all hover:from-emerald-500/10 hover:shadow-soft"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m9.86-2.06a4.5 4.5 0 0 0-6.364-6.364L4.5 8.688l1.757 1.757" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-display font-bold text-sm">{link.title}</p>
+                      <p className="font-body text-xs text-muted-foreground">{s.full_name} &middot; {s.class}</p>
+                    </div>
+                    <svg className="h-5 w-5 text-muted-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                  </a>
                 );
               })}
             </CardContent>
