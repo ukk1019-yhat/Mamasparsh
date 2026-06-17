@@ -61,6 +61,8 @@ export type Announcement = {
   title: string;
   content: string;
   type: "news" | "event" | "holiday" | "update";
+  image_url: string | null;
+  target_class: string | null;
   created_by: string;
   created_at: string;
 };

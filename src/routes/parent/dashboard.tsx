@@ -74,17 +74,20 @@ function ParentDashboard() {
       if (!user) return;
       setUser(user);
       supabase.from("students").select("*").eq("parent_id", user.id).then(({ data }) => {
-        if (data) {
-          setStudents(data);
-          const today = new Date().toISOString().split("T")[0];
-          supabase.from("attendance").select("*").in("student_id", data.map((s: any) => s.id)).eq("date", today).then(({ data: att }) => {
-            if (att) setTodayAttendance(att);
-          });
-        }
+        const kids = data || [];
+        setStudents(kids);
+        const today = new Date().toISOString().split("T")[0];
+        supabase.from("attendance").select("*").in("student_id", kids.map((s: any) => s.id)).eq("date", today).then(({ data: att }) => {
+          if (att) setTodayAttendance(att);
+        });
+        const myClasses = [...new Set(kids.map((s: any) => s.class))];
+        supabase.from("announcements").select("*").order("created_at", { ascending: false }).limit(3).then(({ data }) => {
+          if (data) {
+            const filtered = data.filter((a: any) => !a.target_class || myClasses.includes(a.target_class));
+            setRecentAnnouncements(filtered);
+          }
+        });
       });
-    });
-    supabase.from("announcements").select("*").order("created_at", { ascending: false }).limit(3).then(({ data }) => {
-      if (data) setRecentAnnouncements(data);
     });
     supabase.from("class_links").select("*").then(({ data }) => {
       if (data) {

@@ -16,10 +16,20 @@ const typeColors: Record<string, string> = { news: "default", event: "secondary"
 
 function ParentAnnouncements() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [classes, setClasses] = useState<string[]>([]);
 
   useEffect(() => {
-    supabase.from("announcements").select("*").order("created_at", { ascending: false }).then(({ data }) => {
-      if (data) setAnnouncements(data as Announcement[]);
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) return;
+      supabase.from("students").select("class").eq("parent_id", user.id).then(({ data }) => {
+        const myClasses = [...new Set((data || []).map((s: any) => s.class))];
+        setClasses(myClasses);
+        supabase.from("announcements").select("*").order("created_at", { ascending: false }).then(({ data }) => {
+          const all = (data || []) as Announcement[];
+          const filtered = all.filter((a) => !a.target_class || myClasses.includes(a.target_class));
+          setAnnouncements(filtered);
+        });
+      });
     });
   }, []);
 
@@ -47,7 +57,10 @@ function ParentAnnouncements() {
               <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft transition-shadow hover:shadow-lift">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="font-display text-lg font-bold">{a.title}</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <CardTitle className="font-display text-lg font-bold">{a.title}</CardTitle>
+                      {a.target_class && <Badge variant="outline" className="rounded-full text-xs">{a.target_class}</Badge>}
+                    </div>
                     <Badge variant={typeColors[a.type] as any} className="rounded-full font-body text-xs uppercase tracking-wider">{a.type}</Badge>
                   </div>
                   <p className="font-body text-xs text-muted-foreground">
@@ -55,6 +68,9 @@ function ParentAnnouncements() {
                   </p>
                 </CardHeader>
                 <CardContent>
+                  {a.image_url && (
+                    <img src={a.image_url} alt="" className="mb-3 max-h-60 w-full rounded-xl object-cover" />
+                  )}
                   <p className="font-body whitespace-pre-wrap text-muted-foreground">{a.content}</p>
                 </CardContent>
               </Card>
