@@ -111,14 +111,14 @@ function AdminDailyPerformance() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between flex-wrap gap-4">
+      <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Daily Performance</h1>
           <p className="text-muted-foreground">Rate each student's daily performance across learning domains</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-end gap-3 flex-wrap">
           <div>
-            <Label>Class</Label>
+            <Label className="text-xs">Class</Label>
             <Select value={classFilter} onValueChange={setClassFilter}>
               <SelectTrigger className="w-36">
                 <SelectValue placeholder="All Classes" />
@@ -132,10 +132,10 @@ function AdminDailyPerformance() {
             </Select>
           </div>
           <div>
-            <Label>Date</Label>
+            <Label className="text-xs">Date</Label>
             <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-44" />
           </div>
-          <Button onClick={saveAll} disabled={saving} className="mt-5">
+          <Button onClick={saveAll} disabled={saving}>
             {saving ? "Saving..." : "Save All Ratings"}
           </Button>
         </div>

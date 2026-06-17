@@ -65,7 +65,7 @@ function AdminReportCards() {
     <div className="relative space-y-6">
       <BambooBackground />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 className="font-display text-3xl font-extrabold md:text-4xl">
               <GradientText text="Report Cards" />
