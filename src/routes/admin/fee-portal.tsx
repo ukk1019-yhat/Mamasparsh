@@ -116,6 +116,10 @@ function AdminFeePortal() {
   }
 
   function openPaymentDialog(student: StudentWithFees, term: number) {
+    if (!student.total_fee) {
+      alert("Please set the annual fee first by clicking the Total Fee badge.");
+      return;
+    }
     setSelectedStudent(student);
     setSelectedTerm(term);
     setPaymentForm({ amount: "" });
@@ -124,8 +128,6 @@ function AdminFeePortal() {
 
   async function recordPayment() {
     if (!selectedStudent) return;
-    const existing = getFee(selectedStudent, selectedTerm);
-    if (!existing) return;
     const amount = parseFloat(paymentForm.amount);
     if (isNaN(amount) || amount <= 0) return;
     const totalPaid = selectedStudent.fees.reduce((s, f) => s + f.paid_amount, 0);
@@ -134,7 +136,20 @@ function AdminFeePortal() {
       alert(`Payment exceeds remaining ₹${pending.toLocaleString()}.`);
       return;
     }
-    await supabase.from("student_fees").update({ paid_amount: existing.paid_amount + amount }).eq("id", existing.id);
+    const existing = getFee(selectedStudent, selectedTerm);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    if (existing) {
+      await supabase.from("student_fees").update({ paid_amount: existing.paid_amount + amount }).eq("id", existing.id);
+    } else {
+      await supabase.from("student_fees").insert({
+        student_id: selectedStudent.id,
+        term: selectedTerm,
+        academic_year: "2026-27",
+        paid_amount: amount,
+        created_by: user.id,
+      });
+    }
     setPaymentDialogOpen(false);
     load();
   }
@@ -234,7 +249,7 @@ function AdminFeePortal() {
                           <Badge className={`rounded-full text-[10px] font-semibold ${st.color}`}>
                             {st.label}
                           </Badge>
-                          {totalPaid < (student.total_fee || 0) && (
+                          {(student.total_fee || 0) > 0 && totalPaid < (student.total_fee || 0) && (
                             <button
                               onClick={() => openPaymentDialog(student, t)}
                               className="rounded-full bg-primary/10 p-1 text-[10px] text-primary hover:bg-primary/20"
@@ -306,7 +321,6 @@ function AdminFeePortal() {
           </DialogHeader>
           {selectedStudent && (() => {
             const fee = getFee(selectedStudent, selectedTerm);
-            if (!fee) return null;
             const totalPaid = selectedStudent.fees.reduce((s, f) => s + f.paid_amount, 0);
             const pending = Math.max(0, (selectedStudent.total_fee || 0) - totalPaid);
             return (
@@ -319,10 +333,12 @@ function AdminFeePortal() {
                   <span className="font-body text-muted-foreground">Already Paid (All Terms)</span>
                   <span className="font-body font-semibold text-emerald-600">₹{totalPaid.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between rounded-xl bg-muted/30 p-3 text-sm">
-                  <span className="font-body text-muted-foreground">This Term Paid</span>
-                  <span className="font-body font-semibold text-emerald-600">₹{fee.paid_amount.toLocaleString()}</span>
-                </div>
+                {fee && (
+                  <div className="flex justify-between rounded-xl bg-muted/30 p-3 text-sm">
+                    <span className="font-body text-muted-foreground">This Term Paid</span>
+                    <span className="font-body font-semibold text-emerald-600">₹{fee.paid_amount.toLocaleString()}</span>
+                  </div>
+                )}
                 <div className="flex justify-between rounded-xl bg-red-50 p-3 text-sm">
                   <span className="font-body text-muted-foreground">Remaining</span>
                   <span className="font-body font-bold text-red-500">₹{pending.toLocaleString()}</span>
