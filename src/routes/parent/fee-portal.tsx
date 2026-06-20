@@ -14,7 +14,6 @@ type StudentFee = {
   student_id: string;
   term: number;
   academic_year: string;
-  total_fee: number;
   paid_amount: number;
   due_date: string | null;
   notes: string | null;
@@ -53,12 +52,9 @@ function ParentFeePortal() {
     })();
   }, []);
 
-  const feeStatus = (fee?: StudentFee) => {
-    if (!fee) return { label: "Not Set", color: "bg-gray-100 text-gray-600" as const };
-    const pending = fee.total_fee - fee.paid_amount;
-    if (pending <= 0) return { label: "Paid", color: "bg-emerald-100 text-emerald-700" as const };
-    if (fee.paid_amount > 0) return { label: `Partial – ₹${pending.toLocaleString()} left`, color: "bg-amber-100 text-amber-700" as const };
-    return { label: `₹${pending.toLocaleString()} Pending`, color: "bg-red-100 text-red-700" as const };
+  const termPaidStatus = (fee?: StudentFee) => {
+    if (!fee || fee.paid_amount <= 0) return { label: "Pending", color: "bg-red-100 text-red-700" as const };
+    return { label: `₹${fee.paid_amount.toLocaleString()} Paid`, color: "bg-emerald-100 text-emerald-700" as const };
   };
 
   if (loading) return (
@@ -85,7 +81,7 @@ function ParentFeePortal() {
         </Card>
       ) : (
         children.map((child) => {
-          const totalFee = child.fees.reduce((s, f) => s + f.total_fee, 0);
+          const totalFee = (child as any).total_fee || 0;
           const totalPaid = child.fees.reduce((s, f) => s + f.paid_amount, 0);
           const totalPending = totalFee - totalPaid;
           return (
@@ -105,6 +101,10 @@ function ParentFeePortal() {
                 </CardHeader>
                 <CardContent className="pt-4">
                   <div className="mb-4 grid grid-cols-3 gap-3">
+                    <div className="rounded-xl bg-blue-50 p-3 text-center">
+                      <p className="font-body text-xs text-muted-foreground">Annual Fee</p>
+                      <p className="font-display text-lg font-bold text-blue-600">₹{totalFee.toLocaleString()}</p>
+                    </div>
                     <div className="rounded-xl bg-emerald-50 p-3 text-center">
                       <p className="font-body text-xs text-muted-foreground">Paid</p>
                       <p className="font-display text-lg font-bold text-emerald-600">₹{totalPaid.toLocaleString()}</p>
@@ -113,33 +113,24 @@ function ParentFeePortal() {
                       <p className="font-body text-xs text-muted-foreground">Pending</p>
                       <p className="font-display text-lg font-bold text-red-500">₹{totalPending.toLocaleString()}</p>
                     </div>
-                    <div className="rounded-xl bg-amber-50 p-3 text-center">
-                      <p className="font-body text-xs text-muted-foreground">Terms</p>
-                      <p className="font-display text-lg font-bold text-amber-600">{child.fees.length}/3</p>
-                    </div>
                   </div>
 
                   <Table>
                     <TableHeader>
                       <TableRow className="bg-muted/20">
                         <TableHead className="font-display text-xs font-bold">Term</TableHead>
-                        <TableHead className="font-display text-xs font-bold text-right">Total Fee</TableHead>
                         <TableHead className="font-display text-xs font-bold text-right">Paid</TableHead>
-                        <TableHead className="font-display text-xs font-bold text-right">Pending</TableHead>
                         <TableHead className="font-display text-xs font-bold text-center">Status</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {[1, 2, 3].map((t) => {
                         const fee = child.fees.find((f) => f.term === t);
-                        const pending = fee ? fee.total_fee - fee.paid_amount : 0;
-                        const st = feeStatus(fee);
+                        const st = termPaidStatus(fee);
                         return (
                           <TableRow key={t}>
                             <TableCell className="font-body font-medium">Term {t}</TableCell>
-                            <TableCell className="font-body text-right">₹{fee?.total_fee?.toLocaleString() || "—"}</TableCell>
                             <TableCell className="font-body text-right text-emerald-600">₹{fee?.paid_amount?.toLocaleString() || "—"}</TableCell>
-                            <TableCell className="font-body text-right text-red-500">₹{fee ? pending.toLocaleString() : "—"}</TableCell>
                             <TableCell className="text-center">
                               <Badge className={`rounded-full text-[10px] font-semibold ${st.color}`}>{st.label}</Badge>
                             </TableCell>
@@ -147,10 +138,10 @@ function ParentFeePortal() {
                         );
                       })}
                       <TableRow className="border-t-2 border-primary/20 bg-muted/10 font-semibold">
-                        <TableCell className="font-display text-xs font-bold">Total</TableCell>
-                        <TableCell className="font-body text-right font-bold">₹{totalFee.toLocaleString()}</TableCell>
-                        <TableCell className="font-body text-right font-bold text-emerald-600">₹{totalPaid.toLocaleString()}</TableCell>
-                        <TableCell className="font-body text-right font-bold text-red-500">₹{totalPending.toLocaleString()}</TableCell>
+                        <TableCell className="font-display text-xs font-bold">Annual Total</TableCell>
+                        <TableCell className="font-body text-right font-bold text-emerald-600">
+                          ₹{totalPaid.toLocaleString()} <span className="text-muted-foreground font-normal">/ ₹{totalFee.toLocaleString()}</span>
+                        </TableCell>
                         <TableCell className="text-center">
                           <Badge className={`rounded-full text-[10px] font-semibold ${totalPending <= 0 ? "bg-emerald-100 text-emerald-700" : totalPaid > 0 ? "bg-amber-100 text-amber-700" : ""}`}>
                             {totalPending <= 0 ? "All Paid" : totalPaid > 0 ? "Partial" : "Pending"}
