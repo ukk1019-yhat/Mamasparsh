@@ -20,6 +20,7 @@ import { Route as ParentReportCardsRouteImport } from './routes/parent/report-ca
 import { Route as ParentProfileRouteImport } from './routes/parent/profile'
 import { Route as ParentPendingRouteImport } from './routes/parent/pending'
 import { Route as ParentFilesRouteImport } from './routes/parent/files'
+import { Route as ParentFeePortalRouteImport } from './routes/parent/fee-portal'
 import { Route as ParentDashboardRouteImport } from './routes/parent/dashboard'
 import { Route as ParentAttendanceRouteImport } from './routes/parent/attendance'
 import { Route as ParentDailyPerformanceRouteImport } from './routes/parent/daily-performance'
@@ -33,6 +34,7 @@ import { Route as AdminStudentsRouteImport } from './routes/admin/students'
 import { Route as AdminReportCardsRouteImport } from './routes/admin/report-cards'
 import { Route as AdminParentsRouteImport } from './routes/admin/parents'
 import { Route as AdminFilesRouteImport } from './routes/admin/files'
+import { Route as AdminFeePortalRouteImport } from './routes/admin/fee-portal'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminAttendanceRouteImport } from './routes/admin/attendance'
 import { Route as AdminDailyPerformanceRouteImport } from './routes/admin/daily-performance'
@@ -100,6 +102,11 @@ const ParentFilesRoute = ParentFilesRouteImport.update({
   path: '/files',
   getParentRoute: () => ParentRoute,
 } as any)
+const ParentFeePortalRoute = ParentFeePortalRouteImport.update({
+  id: '/fee-portal',
+  path: '/fee-portal',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentDashboardRoute = ParentDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -155,6 +162,11 @@ const AdminFilesRoute = AdminFilesRouteImport.update({
   path: '/files',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminFeePortalRoute = AdminFeePortalRouteImport.update({
+  id: '/fee-portal',
+  path: '/fee-portal',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -189,12 +201,13 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/parent': typeof ParentRouteWithChildren
   '/programs': typeof ProgramsRoute
+  '/admin/academic-planner': typeof AdminAcademicPlannerRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
-
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/fee-portal': typeof AdminFeePortalRoute
   '/admin/files': typeof AdminFilesRoute
   '/admin/parents': typeof AdminParentsRoute
   '/admin/report-cards': typeof AdminReportCardsRoute
@@ -203,11 +216,12 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
   '/auth/parent-login': typeof AuthParentLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/parent/academic-planner': typeof ParentAcademicPlannerRoute
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
   '/parent/daily-performance': typeof ParentDailyPerformanceRoute
-
   '/parent/dashboard': typeof ParentDashboardRoute
+  '/parent/fee-portal': typeof ParentFeePortalRoute
   '/parent/files': typeof ParentFilesRoute
   '/parent/pending': typeof ParentPendingRoute
   '/parent/profile': typeof ParentProfileRoute
@@ -221,12 +235,13 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/parent': typeof ParentRouteWithChildren
   '/programs': typeof ProgramsRoute
+  '/admin/academic-planner': typeof AdminAcademicPlannerRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
-
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/fee-portal': typeof AdminFeePortalRoute
   '/admin/files': typeof AdminFilesRoute
   '/admin/parents': typeof AdminParentsRoute
   '/admin/report-cards': typeof AdminReportCardsRoute
@@ -235,11 +250,12 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/auth/parent-login': typeof AuthParentLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/parent/academic-planner': typeof ParentAcademicPlannerRoute
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
   '/parent/daily-performance': typeof ParentDailyPerformanceRoute
-
   '/parent/dashboard': typeof ParentDashboardRoute
+  '/parent/fee-portal': typeof ParentFeePortalRoute
   '/parent/files': typeof ParentFilesRoute
   '/parent/pending': typeof ParentPendingRoute
   '/parent/profile': typeof ParentProfileRoute
@@ -254,12 +270,13 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/parent': typeof ParentRouteWithChildren
   '/programs': typeof ProgramsRoute
+  '/admin/academic-planner': typeof AdminAcademicPlannerRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
-
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/fee-portal': typeof AdminFeePortalRoute
   '/admin/files': typeof AdminFilesRoute
   '/admin/parents': typeof AdminParentsRoute
   '/admin/report-cards': typeof AdminReportCardsRoute
@@ -268,11 +285,12 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/auth/parent-login': typeof AuthParentLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/parent/academic-planner': typeof ParentAcademicPlannerRoute
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
   '/parent/daily-performance': typeof ParentDailyPerformanceRoute
-
   '/parent/dashboard': typeof ParentDashboardRoute
+  '/parent/fee-portal': typeof ParentFeePortalRoute
   '/parent/files': typeof ParentFilesRoute
   '/parent/pending': typeof ParentPendingRoute
   '/parent/profile': typeof ParentProfileRoute
@@ -288,12 +306,13 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/parent'
     | '/programs'
+    | '/admin/academic-planner'
     | '/admin/announcements'
     | '/admin/attendance'
     | '/admin/class-links'
     | '/admin/daily-performance'
-
     | '/admin/dashboard'
+    | '/admin/fee-portal'
     | '/admin/files'
     | '/admin/parents'
     | '/admin/report-cards'
@@ -302,11 +321,12 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/parent-login'
     | '/auth/register'
+    | '/parent/academic-planner'
     | '/parent/announcements'
     | '/parent/attendance'
     | '/parent/daily-performance'
-
     | '/parent/dashboard'
+    | '/parent/fee-portal'
     | '/parent/files'
     | '/parent/pending'
     | '/parent/profile'
@@ -320,12 +340,13 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/parent'
     | '/programs'
+    | '/admin/academic-planner'
     | '/admin/announcements'
     | '/admin/attendance'
     | '/admin/class-links'
     | '/admin/daily-performance'
-
     | '/admin/dashboard'
+    | '/admin/fee-portal'
     | '/admin/files'
     | '/admin/parents'
     | '/admin/report-cards'
@@ -334,11 +355,12 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/parent-login'
     | '/auth/register'
+    | '/parent/academic-planner'
     | '/parent/announcements'
     | '/parent/attendance'
     | '/parent/daily-performance'
-
     | '/parent/dashboard'
+    | '/parent/fee-portal'
     | '/parent/files'
     | '/parent/pending'
     | '/parent/profile'
@@ -352,12 +374,13 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/parent'
     | '/programs'
+    | '/admin/academic-planner'
     | '/admin/announcements'
     | '/admin/attendance'
     | '/admin/class-links'
     | '/admin/daily-performance'
-
     | '/admin/dashboard'
+    | '/admin/fee-portal'
     | '/admin/files'
     | '/admin/parents'
     | '/admin/report-cards'
@@ -366,11 +389,12 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/parent-login'
     | '/auth/register'
+    | '/parent/academic-planner'
     | '/parent/announcements'
     | '/parent/attendance'
     | '/parent/daily-performance'
-
     | '/parent/dashboard'
+    | '/parent/fee-portal'
     | '/parent/files'
     | '/parent/pending'
     | '/parent/profile'
@@ -470,6 +494,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentFilesRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/parent/fee-portal': {
+      id: '/parent/fee-portal'
+      path: '/fee-portal'
+      fullPath: '/parent/fee-portal'
+      preLoaderRoute: typeof ParentFeePortalRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/dashboard': {
       id: '/parent/dashboard'
       path: '/dashboard'
@@ -526,6 +557,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/academic-planner': {
+      id: '/admin/academic-planner'
+      path: '/academic-planner'
+      fullPath: '/admin/academic-planner'
+      preLoaderRoute: typeof AdminAcademicPlannerRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/students': {
       id: '/admin/students'
       path: '/students'
@@ -552,6 +590,13 @@ declare module '@tanstack/react-router' {
       path: '/files'
       fullPath: '/admin/files'
       preLoaderRoute: typeof AdminFilesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/fee-portal': {
+      id: '/admin/fee-portal'
+      path: '/fee-portal'
+      fullPath: '/admin/fee-portal'
+      preLoaderRoute: typeof AdminFeePortalRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/dashboard': {
@@ -593,11 +638,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminAcademicPlannerRoute: typeof AdminAcademicPlannerRoute
   AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
   AdminAttendanceRoute: typeof AdminAttendanceRoute
   AdminClassLinksRoute: typeof AdminClassLinksRoute
   AdminDailyPerformanceRoute: typeof AdminDailyPerformanceRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminFeePortalRoute: typeof AdminFeePortalRoute
   AdminFilesRoute: typeof AdminFilesRoute
   AdminParentsRoute: typeof AdminParentsRoute
   AdminReportCardsRoute: typeof AdminReportCardsRoute
@@ -605,11 +652,13 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAcademicPlannerRoute: AdminAcademicPlannerRoute,
   AdminAnnouncementsRoute: AdminAnnouncementsRoute,
   AdminAttendanceRoute: AdminAttendanceRoute,
   AdminClassLinksRoute: AdminClassLinksRoute,
   AdminDailyPerformanceRoute: AdminDailyPerformanceRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminFeePortalRoute: AdminFeePortalRoute,
   AdminFilesRoute: AdminFilesRoute,
   AdminParentsRoute: AdminParentsRoute,
   AdminReportCardsRoute: AdminReportCardsRoute,
@@ -619,10 +668,12 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface ParentRouteChildren {
+  ParentAcademicPlannerRoute: typeof ParentAcademicPlannerRoute
   ParentAnnouncementsRoute: typeof ParentAnnouncementsRoute
   ParentAttendanceRoute: typeof ParentAttendanceRoute
   ParentDailyPerformanceRoute: typeof ParentDailyPerformanceRoute
   ParentDashboardRoute: typeof ParentDashboardRoute
+  ParentFeePortalRoute: typeof ParentFeePortalRoute
   ParentFilesRoute: typeof ParentFilesRoute
   ParentPendingRoute: typeof ParentPendingRoute
   ParentProfileRoute: typeof ParentProfileRoute
@@ -630,10 +681,12 @@ interface ParentRouteChildren {
 }
 
 const ParentRouteChildren: ParentRouteChildren = {
+  ParentAcademicPlannerRoute: ParentAcademicPlannerRoute,
   ParentAnnouncementsRoute: ParentAnnouncementsRoute,
   ParentAttendanceRoute: ParentAttendanceRoute,
   ParentDailyPerformanceRoute: ParentDailyPerformanceRoute,
   ParentDashboardRoute: ParentDashboardRoute,
+  ParentFeePortalRoute: ParentFeePortalRoute,
   ParentFilesRoute: ParentFilesRoute,
   ParentPendingRoute: ParentPendingRoute,
   ParentProfileRoute: ParentProfileRoute,
