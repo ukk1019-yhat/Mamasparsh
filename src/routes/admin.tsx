@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, LayoutDashboard, Users, GraduationCap, CheckSquare, FileText, Megaphone, FolderOpen, Star, Link2, Calendar, Wallet } from "lucide-react";
+import { Menu, X, LayoutDashboard, Users, GraduationCap, CheckSquare, FileText, Megaphone, FolderOpen, Star, Link2, Calendar, Wallet, UserCheck } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { signOut } from "@/lib/auth";
 import type { Profile } from "@/types/database";
@@ -34,6 +34,7 @@ const iconMap: Record<string, React.ReactNode> = {
   "Class Links": <Link2 className="h-4 w-4" />,
   "Academic Planner": <Calendar className="h-4 w-4" />,
   "Fee Portal": <Wallet className="h-4 w-4" />,
+  "Staff Attendance": <UserCheck className="h-4 w-4" />,
 };
 
 const navItems = [
@@ -47,6 +48,7 @@ const navItems = [
   { to: "/admin/files", label: "Files" },
   { to: "/admin/daily-performance", label: "Daily Perf." },
   { to: "/admin/fee-portal", label: "Fee Portal" },
+  { to: "/admin/employee-attendance", label: "Staff Attendance" },
   { to: "/admin/class-links", label: "Class Links" },
 ];
 

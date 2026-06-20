@@ -111,6 +111,21 @@ export type ClassLink = {
   updated_at: string;
 };
 
+export type Employee = {
+  id: string;
+  full_name: string;
+  created_at: string;
+};
+
+export type EmployeeAttendance = {
+  id: string;
+  employee_id: string;
+  date: string;
+  status: "present" | "absent" | "leave";
+  marked_by: string;
+  created_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -124,6 +139,8 @@ export type Database = {
       files: { Row: FileRecord };
       daily_performance: { Row: DailyPerformance };
       class_links: { Row: ClassLink };
+      employees: { Row: Employee };
+      employee_attendance: { Row: EmployeeAttendance };
     };
   };
 };

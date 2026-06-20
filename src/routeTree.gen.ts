@@ -40,6 +40,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminDailyRhythmRouteImport } from './routes/admin/daily-rhythm'
 import { Route as AdminDailyPerformanceRouteImport } from './routes/admin/daily-performance'
 import { Route as AdminClassLinksRouteImport } from './routes/admin/class-links'
+import { Route as AdminEmployeeAttendanceRouteImport } from './routes/admin/employee-attendance'
 import { Route as AdminAttendanceRouteImport } from './routes/admin/attendance'
 import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcements'
 import { Route as AdminAcademicPlannerRouteImport } from './routes/admin/academic-planner'
@@ -209,6 +210,12 @@ const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
   path: '/announcements',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminEmployeeAttendanceRoute = AdminEmployeeAttendanceRouteImport.update({
+  id: '/employee-attendance',
+  path: '/employee-attendance',
+  getParentRoute: () => AdminRoute,
+} as any)
+
 const AdminAcademicPlannerRoute = AdminAcademicPlannerRouteImport.update({
   id: '/academic-planner',
   path: '/academic-planner',
@@ -227,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
+  '/admin/employee-attendance': typeof AdminEmployeeAttendanceRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
   '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -263,6 +271,7 @@ export interface FileRoutesByTo {
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
+  '/admin/employee-attendance': typeof AdminEmployeeAttendanceRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
   '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -300,6 +309,7 @@ export interface FileRoutesById {
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
+  '/admin/employee-attendance': typeof AdminEmployeeAttendanceRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
   '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -338,6 +348,7 @@ export interface FileRouteTypes {
     | '/admin/announcements'
     | '/admin/attendance'
     | '/admin/class-links'
+    | '/admin/employee-attendance'
     | '/admin/daily-performance'
     | '/admin/daily-rhythm'
     | '/admin/dashboard'
@@ -374,6 +385,7 @@ export interface FileRouteTypes {
     | '/admin/announcements'
     | '/admin/attendance'
     | '/admin/class-links'
+    | '/admin/employee-attendance'
     | '/admin/daily-performance'
     | '/admin/daily-rhythm'
     | '/admin/dashboard'
@@ -410,6 +422,7 @@ export interface FileRouteTypes {
     | '/admin/announcements'
     | '/admin/attendance'
     | '/admin/class-links'
+    | '/admin/employee-attendance'
     | '/admin/daily-performance'
     | '/admin/daily-rhythm'
     | '/admin/dashboard'
@@ -668,6 +681,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminClassLinksRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/employee-attendance': {
+      id: '/admin/employee-attendance'
+      path: '/employee-attendance'
+      fullPath: '/admin/employee-attendance'
+      preLoaderRoute: typeof AdminEmployeeAttendanceRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/attendance': {
       id: '/admin/attendance'
       path: '/attendance'
@@ -697,6 +717,7 @@ interface AdminRouteChildren {
   AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
   AdminAttendanceRoute: typeof AdminAttendanceRoute
   AdminClassLinksRoute: typeof AdminClassLinksRoute
+  AdminEmployeeAttendanceRoute: typeof AdminEmployeeAttendanceRoute
   AdminDailyPerformanceRoute: typeof AdminDailyPerformanceRoute
   AdminDailyRhythmRoute: typeof AdminDailyRhythmRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
@@ -712,6 +733,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminAnnouncementsRoute: AdminAnnouncementsRoute,
   AdminAttendanceRoute: AdminAttendanceRoute,
   AdminClassLinksRoute: AdminClassLinksRoute,
+  AdminEmployeeAttendanceRoute: AdminEmployeeAttendanceRoute,
   AdminDailyPerformanceRoute: AdminDailyPerformanceRoute,
   AdminDailyRhythmRoute: AdminDailyRhythmRoute,
   AdminDashboardRoute: AdminDashboardRoute,
