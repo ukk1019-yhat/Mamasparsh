@@ -146,6 +146,17 @@ function ParentFeePortal() {
                           </TableRow>
                         );
                       })}
+                      <TableRow className="border-t-2 border-primary/20 bg-muted/10 font-semibold">
+                        <TableCell className="font-display text-xs font-bold">Total</TableCell>
+                        <TableCell className="font-body text-right font-bold">₹{totalFee.toLocaleString()}</TableCell>
+                        <TableCell className="font-body text-right font-bold text-emerald-600">₹{totalPaid.toLocaleString()}</TableCell>
+                        <TableCell className="font-body text-right font-bold text-red-500">₹{totalPending.toLocaleString()}</TableCell>
+                        <TableCell className="text-center">
+                          <Badge className={`rounded-full text-[10px] font-semibold ${totalPending <= 0 ? "bg-emerald-100 text-emerald-700" : totalPaid > 0 ? "bg-amber-100 text-amber-700" : ""}`}>
+                            {totalPending <= 0 ? "All Paid" : totalPaid > 0 ? "Partial" : "Pending"}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
                     </TableBody>
                   </Table>
                 </CardContent>

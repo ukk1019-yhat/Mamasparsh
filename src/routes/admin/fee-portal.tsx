@@ -227,6 +227,7 @@ function AdminFeePortal() {
                 {terms.map((t) => (
                   <TableHead key={t} className="font-display text-xs font-bold text-center">Term {t}</TableHead>
                 ))}
+                <TableHead className="font-display text-xs font-bold text-center">Total</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -240,32 +241,48 @@ function AdminFeePortal() {
                     const st = feeStatus(fee);
                     return (
                       <TableCell key={t} className="text-center">
-                        <div className="flex items-center justify-center gap-1">
-                          <Badge className={`rounded-full text-[10px] font-semibold cursor-pointer ${st.color}`}
-                            onClick={() => openFeeDialog(student, t)}
-                            title="Set/edit fee">
-                            {st.label}
-                          </Badge>
-                          {fee && fee.paid_amount < fee.total_fee && (
-                            <button
-                              onClick={() => openPaymentDialog(student, t)}
-                              className="rounded-full bg-primary/10 p-1 text-[10px] text-primary hover:bg-primary/20"
-                              title="Record payment">+</button>
+                        <div className="flex flex-col items-center gap-0.5">
+                          {fee ? (
+                            <span className="font-body text-[11px] font-semibold whitespace-nowrap">
+                              ₹{fee.paid_amount.toLocaleString()} / ₹{fee.total_fee.toLocaleString()}
+                            </span>
+                          ) : (
+                            <span className="font-body text-[11px] text-muted-foreground">—</span>
                           )}
-                          {fee && fee.paid_amount > 0 && (
-                            <button
-                              onClick={() => reversePayment(student.id, t)}
-                              className="rounded-full bg-red-100 p-1 text-[10px] text-red-600 hover:bg-red-200"
-                              title="Reverse payment">−</button>
-                          )}
+                          <div className="flex items-center gap-1">
+                            <Badge className={`rounded-full text-[10px] font-semibold cursor-pointer ${st.color}`}
+                              onClick={() => openFeeDialog(student, t)}
+                              title="Set/edit fee">
+                              {st.label}
+                            </Badge>
+                            {fee && fee.paid_amount < fee.total_fee && (
+                              <button
+                                onClick={() => openPaymentDialog(student, t)}
+                                className="rounded-full bg-primary/10 p-1 text-[10px] text-primary hover:bg-primary/20"
+                                title="Record payment">+</button>
+                            )}
+                            {fee && fee.paid_amount > 0 && (
+                              <button
+                                onClick={() => reversePayment(student.id, t)}
+                                className="rounded-full bg-red-100 p-1 text-[10px] text-red-600 hover:bg-red-200"
+                                title="Reverse payment">−</button>
+                            )}
+                          </div>
                         </div>
                       </TableCell>
                     );
                   })}
+                  <TableCell className="text-center">
+                    <span className="font-body text-xs font-bold whitespace-nowrap">
+                      ₹{student.fees.reduce((s, f) => s + f.paid_amount, 0).toLocaleString()}
+                      <span className="text-muted-foreground"> / </span>
+                      ₹{student.fees.reduce((s, f) => s + f.total_fee, 0).toLocaleString()}
+                    </span>
+                  </TableCell>
                 </TableRow>
               ))}
               {filtered.length === 0 && (
-                <TableRow><TableCell colSpan={6} className="py-8 text-center font-body text-muted-foreground">No students found.</TableCell></TableRow>
+                <TableRow><TableCell colSpan={7} className="py-8 text-center font-body text-muted-foreground">No students found.</TableCell></TableRow>
               )}
             </TableBody>
           </Table>
