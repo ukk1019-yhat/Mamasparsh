@@ -61,11 +61,13 @@ function AdminFeePortal() {
       .from("student_fees")
       .select("*")
       .order("term");
-    if (studentsData && feesData) {
+    if (studentsData) {
       const sMap = new Map<string, StudentFee[]>();
-      for (const f of feesData as StudentFee[]) {
-        if (!sMap.has(f.student_id)) sMap.set(f.student_id, []);
-        sMap.get(f.student_id)!.push(f);
+      if (feesData) {
+        for (const f of feesData as StudentFee[]) {
+          if (!sMap.has(f.student_id)) sMap.set(f.student_id, []);
+          sMap.get(f.student_id)!.push(f);
+        }
       }
       setStudents((studentsData as any[]).map((s) => ({
         ...s,
@@ -92,7 +94,7 @@ function AdminFeePortal() {
     sum + s.fees.reduce((t, f) => t + f.total_fee, 0), 0);
 
   function getFee(student: StudentWithFees, term: number) {
-    return student.fees.find((f) => f.term === term);
+    return (student.fees || []).find((f) => f.term === term);
   }
 
   function openFeeDialog(student: StudentWithFees, term: number) {
