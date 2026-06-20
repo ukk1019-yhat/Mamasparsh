@@ -93,8 +93,8 @@ function AdminFeePortal() {
   const totalFee = students.reduce((sum, s) =>
     sum + s.fees.reduce((t, f) => t + f.total_fee, 0), 0);
 
-  function getFee(student: StudentWithFees, term: number) {
-    return (student.fees || []).find((f) => f.term === term);
+  function getFee(student: StudentWithFees | null, term: number) {
+    return student?.fees?.find((f) => f.term === term);
   }
 
   function openFeeDialog(student: StudentWithFees, term: number) {

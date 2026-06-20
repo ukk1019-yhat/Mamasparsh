@@ -36,11 +36,13 @@ function ParentFeePortal() {
         .from("students").select("*").eq("parent_id", user.id).order("full_name");
       const { data: feesData } = await supabase
         .from("student_fees").select("*").order("term");
-      if (studentsData && feesData) {
+      if (studentsData) {
         const fMap = new Map<string, StudentFee[]>();
-        for (const f of feesData as StudentFee[]) {
-          if (!fMap.has(f.student_id)) fMap.set(f.student_id, []);
-          fMap.get(f.student_id)!.push(f);
+        if (feesData) {
+          for (const f of feesData as StudentFee[]) {
+            if (!fMap.has(f.student_id)) fMap.set(f.student_id, []);
+            fMap.get(f.student_id)!.push(f);
+          }
         }
         setChildren((studentsData as Student[]).map((s) => ({
           ...s,

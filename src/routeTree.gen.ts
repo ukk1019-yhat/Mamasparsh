@@ -22,10 +22,11 @@ import { Route as ParentPendingRouteImport } from './routes/parent/pending'
 import { Route as ParentFilesRouteImport } from './routes/parent/files'
 import { Route as ParentFeePortalRouteImport } from './routes/parent/fee-portal'
 import { Route as ParentDashboardRouteImport } from './routes/parent/dashboard'
-import { Route as ParentAttendanceRouteImport } from './routes/parent/attendance'
+import { Route as ParentDailyRhythmRouteImport } from './routes/parent/daily-rhythm'
 import { Route as ParentDailyPerformanceRouteImport } from './routes/parent/daily-performance'
-import { Route as ParentAcademicPlannerRouteImport } from './routes/parent/academic-planner'
+import { Route as ParentAttendanceRouteImport } from './routes/parent/attendance'
 import { Route as ParentAnnouncementsRouteImport } from './routes/parent/announcements'
+import { Route as ParentAcademicPlannerRouteImport } from './routes/parent/academic-planner'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthParentLoginRouteImport } from './routes/auth/parent-login'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
@@ -36,11 +37,12 @@ import { Route as AdminParentsRouteImport } from './routes/admin/parents'
 import { Route as AdminFilesRouteImport } from './routes/admin/files'
 import { Route as AdminFeePortalRouteImport } from './routes/admin/fee-portal'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
-import { Route as AdminAttendanceRouteImport } from './routes/admin/attendance'
+import { Route as AdminDailyRhythmRouteImport } from './routes/admin/daily-rhythm'
 import { Route as AdminDailyPerformanceRouteImport } from './routes/admin/daily-performance'
 import { Route as AdminClassLinksRouteImport } from './routes/admin/class-links'
-import { Route as AdminAcademicPlannerRouteImport } from './routes/admin/academic-planner'
+import { Route as AdminAttendanceRouteImport } from './routes/admin/attendance'
 import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcements'
+import { Route as AdminAcademicPlannerRouteImport } from './routes/admin/academic-planner'
 
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
@@ -82,11 +84,6 @@ const ParentReportCardsRoute = ParentReportCardsRouteImport.update({
   path: '/report-cards',
   getParentRoute: () => ParentRoute,
 } as any)
-const ParentDailyPerformanceRoute = ParentDailyPerformanceRouteImport.update({
-  id: '/daily-performance',
-  path: '/daily-performance',
-  getParentRoute: () => ParentRoute,
-} as any)
 const ParentProfileRoute = ParentProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -112,6 +109,16 @@ const ParentDashboardRoute = ParentDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => ParentRoute,
 } as any)
+const ParentDailyRhythmRoute = ParentDailyRhythmRouteImport.update({
+  id: '/daily-rhythm',
+  path: '/daily-rhythm',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentDailyPerformanceRoute = ParentDailyPerformanceRouteImport.update({
+  id: '/daily-performance',
+  path: '/daily-performance',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentAttendanceRoute = ParentAttendanceRouteImport.update({
   id: '/attendance',
   path: '/attendance',
@@ -120,6 +127,11 @@ const ParentAttendanceRoute = ParentAttendanceRouteImport.update({
 const ParentAnnouncementsRoute = ParentAnnouncementsRouteImport.update({
   id: '/announcements',
   path: '/announcements',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentAcademicPlannerRoute = ParentAcademicPlannerRouteImport.update({
+  id: '/academic-planner',
+  path: '/academic-planner',
   getParentRoute: () => ParentRoute,
 } as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
@@ -172,14 +184,9 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminAttendanceRoute = AdminAttendanceRouteImport.update({
-  id: '/attendance',
-  path: '/attendance',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
-  id: '/announcements',
-  path: '/announcements',
+const AdminDailyRhythmRoute = AdminDailyRhythmRouteImport.update({
+  id: '/daily-rhythm',
+  path: '/daily-rhythm',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminDailyPerformanceRoute = AdminDailyPerformanceRouteImport.update({
@@ -190,6 +197,21 @@ const AdminDailyPerformanceRoute = AdminDailyPerformanceRouteImport.update({
 const AdminClassLinksRoute = AdminClassLinksRouteImport.update({
   id: '/class-links',
   path: '/class-links',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAttendanceRoute = AdminAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAcademicPlannerRoute = AdminAcademicPlannerRouteImport.update({
+  id: '/academic-planner',
+  path: '/academic-planner',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -206,6 +228,7 @@ export interface FileRoutesByFullPath {
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
+  '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/fee-portal': typeof AdminFeePortalRoute
   '/admin/files': typeof AdminFilesRoute
@@ -220,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
   '/parent/daily-performance': typeof ParentDailyPerformanceRoute
+  '/parent/daily-rhythm': typeof ParentDailyRhythmRoute
   '/parent/dashboard': typeof ParentDashboardRoute
   '/parent/fee-portal': typeof ParentFeePortalRoute
   '/parent/files': typeof ParentFilesRoute
@@ -240,6 +264,7 @@ export interface FileRoutesByTo {
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
+  '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/fee-portal': typeof AdminFeePortalRoute
   '/admin/files': typeof AdminFilesRoute
@@ -254,6 +279,7 @@ export interface FileRoutesByTo {
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
   '/parent/daily-performance': typeof ParentDailyPerformanceRoute
+  '/parent/daily-rhythm': typeof ParentDailyRhythmRoute
   '/parent/dashboard': typeof ParentDashboardRoute
   '/parent/fee-portal': typeof ParentFeePortalRoute
   '/parent/files': typeof ParentFilesRoute
@@ -275,6 +301,7 @@ export interface FileRoutesById {
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/class-links': typeof AdminClassLinksRoute
   '/admin/daily-performance': typeof AdminDailyPerformanceRoute
+  '/admin/daily-rhythm': typeof AdminDailyRhythmRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/fee-portal': typeof AdminFeePortalRoute
   '/admin/files': typeof AdminFilesRoute
@@ -289,6 +316,7 @@ export interface FileRoutesById {
   '/parent/announcements': typeof ParentAnnouncementsRoute
   '/parent/attendance': typeof ParentAttendanceRoute
   '/parent/daily-performance': typeof ParentDailyPerformanceRoute
+  '/parent/daily-rhythm': typeof ParentDailyRhythmRoute
   '/parent/dashboard': typeof ParentDashboardRoute
   '/parent/fee-portal': typeof ParentFeePortalRoute
   '/parent/files': typeof ParentFilesRoute
@@ -311,6 +339,7 @@ export interface FileRouteTypes {
     | '/admin/attendance'
     | '/admin/class-links'
     | '/admin/daily-performance'
+    | '/admin/daily-rhythm'
     | '/admin/dashboard'
     | '/admin/fee-portal'
     | '/admin/files'
@@ -325,6 +354,7 @@ export interface FileRouteTypes {
     | '/parent/announcements'
     | '/parent/attendance'
     | '/parent/daily-performance'
+    | '/parent/daily-rhythm'
     | '/parent/dashboard'
     | '/parent/fee-portal'
     | '/parent/files'
@@ -345,6 +375,7 @@ export interface FileRouteTypes {
     | '/admin/attendance'
     | '/admin/class-links'
     | '/admin/daily-performance'
+    | '/admin/daily-rhythm'
     | '/admin/dashboard'
     | '/admin/fee-portal'
     | '/admin/files'
@@ -359,6 +390,7 @@ export interface FileRouteTypes {
     | '/parent/announcements'
     | '/parent/attendance'
     | '/parent/daily-performance'
+    | '/parent/daily-rhythm'
     | '/parent/dashboard'
     | '/parent/fee-portal'
     | '/parent/files'
@@ -379,6 +411,7 @@ export interface FileRouteTypes {
     | '/admin/attendance'
     | '/admin/class-links'
     | '/admin/daily-performance'
+    | '/admin/daily-rhythm'
     | '/admin/dashboard'
     | '/admin/fee-portal'
     | '/admin/files'
@@ -393,6 +426,7 @@ export interface FileRouteTypes {
     | '/parent/announcements'
     | '/parent/attendance'
     | '/parent/daily-performance'
+    | '/parent/daily-rhythm'
     | '/parent/dashboard'
     | '/parent/fee-portal'
     | '/parent/files'
@@ -508,6 +542,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentDashboardRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/parent/daily-rhythm': {
+      id: '/parent/daily-rhythm'
+      path: '/daily-rhythm'
+      fullPath: '/parent/daily-rhythm'
+      preLoaderRoute: typeof ParentDailyRhythmRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/daily-performance': {
       id: '/parent/daily-performance'
       path: '/daily-performance'
@@ -527,6 +568,13 @@ declare module '@tanstack/react-router' {
       path: '/announcements'
       fullPath: '/parent/announcements'
       preLoaderRoute: typeof ParentAnnouncementsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/academic-planner': {
+      id: '/parent/academic-planner'
+      path: '/academic-planner'
+      fullPath: '/parent/academic-planner'
+      preLoaderRoute: typeof ParentAcademicPlannerRouteImport
       parentRoute: typeof ParentRoute
     }
     '/auth/register': {
@@ -556,13 +604,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth/admin-login'
       preLoaderRoute: typeof AuthAdminLoginRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/admin/academic-planner': {
-      id: '/admin/academic-planner'
-      path: '/academic-planner'
-      fullPath: '/admin/academic-planner'
-      preLoaderRoute: typeof AdminAcademicPlannerRouteImport
-      parentRoute: typeof AdminRoute
     }
     '/admin/students': {
       id: '/admin/students'
@@ -606,11 +647,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/class-links': {
-      id: '/admin/class-links'
-      path: '/class-links'
-      fullPath: '/admin/class-links'
-      preLoaderRoute: typeof AdminClassLinksRouteImport
+    '/admin/daily-rhythm': {
+      id: '/admin/daily-rhythm'
+      path: '/daily-rhythm'
+      fullPath: '/admin/daily-rhythm'
+      preLoaderRoute: typeof AdminDailyRhythmRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/daily-performance': {
@@ -618,6 +659,13 @@ declare module '@tanstack/react-router' {
       path: '/daily-performance'
       fullPath: '/admin/daily-performance'
       preLoaderRoute: typeof AdminDailyPerformanceRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/class-links': {
+      id: '/admin/class-links'
+      path: '/class-links'
+      fullPath: '/admin/class-links'
+      preLoaderRoute: typeof AdminClassLinksRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/attendance': {
@@ -634,6 +682,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAnnouncementsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/academic-planner': {
+      id: '/admin/academic-planner'
+      path: '/academic-planner'
+      fullPath: '/admin/academic-planner'
+      preLoaderRoute: typeof AdminAcademicPlannerRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
@@ -643,6 +698,7 @@ interface AdminRouteChildren {
   AdminAttendanceRoute: typeof AdminAttendanceRoute
   AdminClassLinksRoute: typeof AdminClassLinksRoute
   AdminDailyPerformanceRoute: typeof AdminDailyPerformanceRoute
+  AdminDailyRhythmRoute: typeof AdminDailyRhythmRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminFeePortalRoute: typeof AdminFeePortalRoute
   AdminFilesRoute: typeof AdminFilesRoute
@@ -657,6 +713,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminAttendanceRoute: AdminAttendanceRoute,
   AdminClassLinksRoute: AdminClassLinksRoute,
   AdminDailyPerformanceRoute: AdminDailyPerformanceRoute,
+  AdminDailyRhythmRoute: AdminDailyRhythmRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminFeePortalRoute: AdminFeePortalRoute,
   AdminFilesRoute: AdminFilesRoute,
@@ -672,6 +729,7 @@ interface ParentRouteChildren {
   ParentAnnouncementsRoute: typeof ParentAnnouncementsRoute
   ParentAttendanceRoute: typeof ParentAttendanceRoute
   ParentDailyPerformanceRoute: typeof ParentDailyPerformanceRoute
+  ParentDailyRhythmRoute: typeof ParentDailyRhythmRoute
   ParentDashboardRoute: typeof ParentDashboardRoute
   ParentFeePortalRoute: typeof ParentFeePortalRoute
   ParentFilesRoute: typeof ParentFilesRoute
@@ -685,6 +743,7 @@ const ParentRouteChildren: ParentRouteChildren = {
   ParentAnnouncementsRoute: ParentAnnouncementsRoute,
   ParentAttendanceRoute: ParentAttendanceRoute,
   ParentDailyPerformanceRoute: ParentDailyPerformanceRoute,
+  ParentDailyRhythmRoute: ParentDailyRhythmRoute,
   ParentDashboardRoute: ParentDashboardRoute,
   ParentFeePortalRoute: ParentFeePortalRoute,
   ParentFilesRoute: ParentFilesRoute,
