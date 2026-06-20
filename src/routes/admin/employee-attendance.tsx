@@ -9,13 +9,17 @@ import { Badge } from "@/components/ui/badge";
 import { GradientText } from "@/components/site/Reveal";
 import { BambooBackground } from "@/components/admin/BambooBackground";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { supabase } from "@/lib/supabase";
 
 const PASSCODE = "360643";
+const classOptions = ["Playgroup", "Nursery", "LKG", "UKG", "Daycare", "General"];
 
 type Employee = {
   id: string;
   full_name: string;
+  class: string;
 };
 
 type EmpAttendance = {
@@ -37,6 +41,8 @@ function EmployeeAttendance() {
   const [attendance, setAttendance] = useState<Map<string, string>>(new Map());
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [loading, setLoading] = useState(true);
+  const [addOpen, setAddOpen] = useState(false);
+  const [addForm, setAddForm] = useState({ full_name: "", class: "General" });
 
   function handleUnlock() {
     if (passcode === PASSCODE) {
@@ -101,6 +107,24 @@ function EmployeeAttendance() {
     setAttendance(map);
   }
 
+  async function addEmployee() {
+    if (!addForm.full_name.trim()) return;
+    await supabase.from("employees").insert({
+      full_name: addForm.full_name.trim(),
+      class: addForm.class,
+    });
+    setAddOpen(false);
+    setAddForm({ full_name: "", class: "General" });
+    const { data } = await supabase.from("employees").select("*").order("full_name");
+    if (data) setEmployees(data as Employee[]);
+  }
+
+  async function deleteEmployee(id: string) {
+    if (!confirm("Remove this employee?")) return;
+    await supabase.from("employees").delete().eq("id", id);
+    setEmployees((prev) => prev.filter((e) => e.id !== id));
+  }
+
   if (!unlocked) {
     return (
       <div className="relative flex min-h-[60vh] items-center justify-center">
@@ -145,6 +169,7 @@ function EmployeeAttendance() {
   }
 
   return (
+    <>
     <div className="relative space-y-6">
       <BambooBackground />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -170,8 +195,9 @@ function EmployeeAttendance() {
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <Card className="overflow-hidden rounded-2xl border border-primary/5 shadow-soft">
-          <CardHeader className="bg-gradient-to-r from-emerald-400/10 to-transparent">
+          <CardHeader className="bg-gradient-to-r from-emerald-400/10 to-transparent flex flex-row items-center justify-between">
             <CardTitle className="font-display text-lg font-bold">Attendance for {date}</CardTitle>
+            <Button size="sm" variant="outline" onClick={() => setAddOpen(true)} className="rounded-xl border-primary/20 font-body text-xs">+ Add Employee</Button>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
@@ -179,13 +205,16 @@ function EmployeeAttendance() {
                 <TableHeader>
                   <TableRow className="bg-muted/50">
                     <TableHead className="font-body font-semibold">Employee</TableHead>
+                    <TableHead className="font-body font-semibold">Class</TableHead>
                     <TableHead className="font-body font-semibold">Status</TableHead>
+                    <TableHead className="font-body font-semibold text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {employees.map((e) => (
                     <TableRow key={e.id} className="border-b border-primary/5 transition-colors hover:bg-primary/[0.02]">
                       <TableCell className="font-body font-medium">{e.full_name}</TableCell>
+                      <TableCell><Badge variant="outline" className="rounded-full text-[10px]">{e.class || "General"}</Badge></TableCell>
                       <TableCell>
                         <Select value={attendance.get(e.id) || ""} onValueChange={(v) => markSingle(e.id, v)}>
                           <SelectTrigger className="w-36 rounded-xl border-primary/20">
@@ -204,10 +233,13 @@ function EmployeeAttendance() {
                           </SelectContent>
                         </Select>
                       </TableCell>
+                      <TableCell className="text-right">
+                        <button onClick={() => deleteEmployee(e.id)} className="font-body text-[11px] text-red-400 hover:text-red-600" title="Remove employee">✕</button>
+                      </TableCell>
                     </TableRow>
                   ))}
                   {employees.length === 0 && (
-                    <TableRow><TableCell colSpan={2} className="py-12 text-center"><p className="font-display text-muted-foreground">No employees found.</p></TableCell></TableRow>
+                    <TableRow><TableCell colSpan={4} className="py-12 text-center"><p className="font-display text-muted-foreground">No employees found.</p></TableCell></TableRow>
                   )}
                 </TableBody>
               </Table>
@@ -216,5 +248,39 @@ function EmployeeAttendance() {
         </Card>
       </motion.div>
     </div>
-  );
+
+      <Dialog open={addOpen} onOpenChange={setAddOpen}>
+        <DialogContent className="rounded-2xl border-primary/10">
+          <DialogHeader>
+            <DialogTitle className="font-display text-xl font-extrabold">
+              <GradientText text="Add Employee" />
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label className="font-body text-sm font-semibold">Full Name</Label>
+              <Input value={addForm.full_name} onChange={(e) => setAddForm({ ...addForm, full_name: e.target.value })}
+                placeholder="Enter name" className="rounded-xl border-primary/20" />
+            </div>
+            <div className="space-y-1.5">
+              <Label className="font-body text-sm font-semibold">Class</Label>
+              <Select value={addForm.class} onValueChange={(v) => setAddForm({ ...addForm, class: v })}>
+                <SelectTrigger className="rounded-xl border-primary/20">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {classOptions.map((c) => (
+                    <SelectItem key={c} value={c}>{c}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <Button onClick={addEmployee} disabled={!addForm.full_name.trim()}
+              className="w-full rounded-xl bg-gradient-bamboo font-display font-bold text-white shadow-soft">
+              Add
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>);
 }
