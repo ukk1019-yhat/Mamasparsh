@@ -61,10 +61,7 @@ function EmployeeAttendance() {
 
   useEffect(() => {
     if (!unlocked) return;
-    supabase.from("employees").select("*").order("full_name").then(({ data }) => {
-      if (data) setEmployees(data as Employee[]);
-      setLoading(false);
-    });
+    loadEmployees();
   }, [unlocked]);
 
   useEffect(() => {
@@ -109,14 +106,23 @@ function EmployeeAttendance() {
 
   async function addEmployee() {
     if (!addForm.full_name.trim()) return;
-    await supabase.from("employees").insert({
+    const { error } = await supabase.from("employees").insert({
       full_name: addForm.full_name.trim(),
       class: addForm.class,
     });
+    if (error) {
+      alert("Failed to add employee: " + error.message);
+      return;
+    }
     setAddOpen(false);
     setAddForm({ full_name: "", class: "General" });
+    loadEmployees();
+  }
+
+  async function loadEmployees() {
     const { data } = await supabase.from("employees").select("*").order("full_name");
     if (data) setEmployees(data as Employee[]);
+    setLoading(false);
   }
 
   async function deleteEmployee(id: string) {
