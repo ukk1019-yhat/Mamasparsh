@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Moon, Heart } from "lucide-react";
+import { Moon } from "lucide-react";
 import { GradientText } from "./Reveal";
 import sleeping from "@/assets/panda-sleeping.png";
 
@@ -50,7 +50,7 @@ export function FooterNight() {
         </div>
 
         <div className="mt-10 border-t border-star/15 py-6 font-body text-sm text-star/60">
-          © {new Date().getFullYear()} MamaSparsh Preschool · Made with <Heart size={14} className="inline-block mx-0.5 text-red-400" /> by Edu Alt Tech
+          © {new Date().getFullYear()} MamaSparsh Preschool · Designed by <a href="https://www.edualttech.com" target="_blank" rel="noopener noreferrer" className="text-star/80 hover:text-star underline underline-offset-2">Edu Alt Tech</a>
         </div>
       </div>
     </footer>
