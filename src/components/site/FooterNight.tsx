@@ -50,7 +50,7 @@ export function FooterNight() {
         </div>
 
         <div className="mt-10 border-t border-star/15 py-6 font-body text-sm text-star/60">
-          © {new Date().getFullYear()} MamaSparsh Preschool · Designed by <a href="https://www.edualttech.com" target="_blank" rel="noopener noreferrer" className="text-star/80 hover:text-star underline underline-offset-2">Edu Alt Tech</a>
+          © {new Date().getFullYear()} MamaSparsh Preschool · Designed by <a href="https://www.edualttech.com" target="_blank" rel="noopener noreferrer" className="text-star/80 hover:text-star underline underline-offset-2">Setsuzoku</a>
         </div>
       </div>
     </footer>
